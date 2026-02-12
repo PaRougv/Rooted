@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import "./Login.css"
 
 const Login = () => {
   const [email , setEmail] = useState("");
@@ -29,30 +30,43 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h2>Login Page</h2>
+    <div className="login-page">
+      <div className="login-blur login-blur--one" />
+      <div className="login-blur login-blur--two" />
 
-      <form onSubmit={handleLogin}>
-        <input 
-          type="email"
-          placeholder='Enter Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <section className="login-card">
+        <header className="login-header">
+          <p className="login-kicker">Rooted</p>
+          <h2>Welcome Back</h2>
+          <p className="login-subtitle">Sign in and continue your plant care routine.</p>
+        </header>
 
-        <br /><br />
+        <form onSubmit={handleLogin} className="login-form">
+          <label className="login-field">
+            <span>Email</span>
+            <input
+              type="email"
+              placeholder='Enter Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
 
-        <input 
-          type="password"
-          placeholder='Enter Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <label className="login-field">
+            <span>Password</span>
+            <input
+              type="password"
+              placeholder='Enter Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
 
-        <br /><br />
+          <button type="submit" className="login-button">Login</button>
+        </form>
 
-        <button type="submit">Login</button>
-      </form>
+        <p className="login-note">Your account session is protected and secure.</p>
+      </section>
     </div>
   )
 }
