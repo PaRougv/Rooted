@@ -1,10 +1,22 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 import "./Login.css"
+import FlashCard from "../helpers/FlashCard.jsx";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
+  const [flashMessage, setFlashMessage] = useState("");
+  const [flashType, setFlashType] = useState("success");
+  const [showFlash, setShowFlash] = useState(false);
+
+  const triggerFlash = (message, type) => {
+    setFlashMessage(message);
+    setFlashType(type);
+    setShowFlash(true);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,15 +34,22 @@ const Login = () => {
       )
 
       console.log(response.data);
-      alert("Login Successfull")
+      triggerFlash("Login successful", "success");
+      setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {
       console.error(error.response?.data || error.message);
-      alert("Login failed");
+      triggerFlash(error.response?.data?.message || "Login failed", "error");
     }
   }
 
   return (
     <div className="login-page">
+      <FlashCard
+        message={flashMessage}
+        type={flashType}
+        visible={showFlash}
+        onClose={() => setShowFlash(false)}
+      />
       <div className="login-blur login-blur--one" />
       <div className="login-blur login-blur--two" />
 

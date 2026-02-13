@@ -1,0 +1,60 @@
+.flash-card {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  min-width: 260px;
+  max-width: min(92vw, 420px);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  animation: flash-slide-in 0.25s ease;
+}
+
+.flash-card--success {
+  background: linear-gradient(140deg, #ecfbf0 0%, #ddf6e6 100%);
+  border-color: #8ad4a2;
+  color: #12432a;
+}
+
+.flash-card--error {
+  background: linear-gradient(140deg, #fff1f1 0%, #ffe4e4 100%);
+  border-color: #f1a5a5;
+  color: #742727;
+}
+
+.flash-card__close {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0;
+}
+
+@keyframes flash-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .flash-card {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    min-width: 0;
+  }
+}

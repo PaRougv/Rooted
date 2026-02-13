@@ -9,7 +9,7 @@ const HomePage = () => {
       <div className="home-overlay home-overlay--bottom" />
 
       <section className="home-hero">
-        <p className="home-kicker">Rooted</p>
+        <p className="home-kicker">Rooted: Your Smart Plant Companion</p>
         <h1>Grow Better, Care Smarter</h1>
         <p className="home-subtitle">
           Track your plants, capture health snapshots, and build a greener routine in one calm space.

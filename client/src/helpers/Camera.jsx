@@ -1,11 +1,19 @@
 import React , { useEffect, useRef , useState } from 'react'
 import "./Camera.css"
+import FlashCard from "./FlashCard.jsx";
 
 const Camera = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const streamRef = useRef(null);
     const [image , setImage] = useState(null);
+    const [flashMessage, setFlashMessage] = useState("");
+    const [showFlash, setShowFlash] = useState(false);
+
+    const triggerFlash = (message) => {
+        setFlashMessage(message);
+        setShowFlash(true);
+    }
 
     const stopCamera = () => {
         if (streamRef.current) {
@@ -29,7 +37,7 @@ const Camera = () => {
             videoRef.current.srcObject = stream;
         } catch (error) {
             console.log(error)
-            alert(`Camera Access Failed`)
+            triggerFlash("Camera access failed");
         }
     }
 
@@ -61,6 +69,12 @@ const Camera = () => {
 
   return (
     <div className="camera-page">
+        <FlashCard
+            message={flashMessage}
+            type="error"
+            visible={showFlash}
+            onClose={() => setShowFlash(false)}
+        />
         <div className="camera-shell">
             <header className="camera-header">
                 <p className="camera-kicker">Studio Mode</p>
