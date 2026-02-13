@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+.home-page,
+.home-page * {
+  box-sizing: border-box;
+}
+
+.home-page {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: clamp(20px, 4vw, 42px);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(196, 244, 210, 0.32) 0%, rgba(196, 244, 210, 0) 42%),
+    radial-gradient(circle at 90% 86%, rgba(129, 207, 154, 0.26) 0%, rgba(129, 207, 154, 0) 44%),
+    linear-gradient(135deg, #0d2f21 0%, #1b553d 50%, #2f7f57 100%);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+.home-overlay {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.home-overlay--top {
+  width: min(50vw, 560px);
+  aspect-ratio: 1;
+  top: -22%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(214, 255, 227, 0.22) 0%, rgba(214, 255, 227, 0) 72%);
+}
+
+.home-overlay--bottom {
+  width: min(52vw, 600px);
+  aspect-ratio: 1;
+  bottom: -32%;
+  left: -12%;
+  background: radial-gradient(circle, rgba(148, 233, 177, 0.22) 0%, rgba(148, 233, 177, 0) 72%);
+}
+
+.home-hero {
+  width: min(100%, 880px);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: clamp(28px, 4vw, 54px);
+  border-radius: 28px;
+  border: 1px solid rgba(230, 255, 237, 0.36);
+  background: linear-gradient(160deg, rgba(245, 255, 247, 0.94) 0%, rgba(224, 244, 230, 0.88) 100%);
+  box-shadow:
+    0 28px 70px rgba(4, 33, 19, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.home-kicker {
+  margin: 0;
+  color: #2f7853;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.home-hero h1 {
+  margin: 12px 0 12px;
+  color: #173b2a;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.1;
+}
+
+.home-subtitle {
+  margin: 0 auto;
+  max-width: 52ch;
+  color: #3f6650;
+  font-size: clamp(0.98rem, 2vw, 1.12rem);
+  line-height: 1.6;
+}
+
+.home-actions {
+  margin-top: clamp(22px, 4vw, 32px);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.home-btn {
+  min-width: 150px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.home-btn:hover {
+  transform: translateY(-2px);
+}
+
+.home-btn--primary {
+  color: #f5fff8;
+  background: linear-gradient(120deg, #256f4c 0%, #38a56e 100%);
+  box-shadow: 0 14px 24px rgba(24, 100, 63, 0.35);
+}
+
+.home-btn--secondary {
+  color: #1f5038;
+  background: #e6f8eb;
+  border: 1px solid #b7e4c5;
+  box-shadow: 0 12px 22px rgba(38, 118, 76, 0.2);
+}
+
+@media (max-width: 600px) {
+  .home-hero {
+    border-radius: 22px;
+  }
+
+  .home-btn {
+    width: 100%;
+  }
+}

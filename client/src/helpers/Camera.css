@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
+.camera-page,
+.camera-page * {
+  box-sizing: border-box;
+}
+
+.camera-page {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: clamp(20px, 4vw, 42px);
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(192, 245, 206, 0.35) 0%, rgba(192, 245, 206, 0) 44%),
+    radial-gradient(circle at 87% 84%, rgba(143, 214, 167, 0.28) 0%, rgba(143, 214, 167, 0) 46%),
+    linear-gradient(135deg, #0d2b20 0%, #174735 50%, #27684a 100%);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+.camera-shell {
+  width: min(100%, 980px);
+  position: relative;
+  border-radius: 26px;
+  padding: clamp(20px, 3.3vw, 34px);
+  border: 1px solid rgba(213, 244, 223, 0.24);
+  background:
+    linear-gradient(155deg, rgba(14, 49, 34, 0.92) 0%, rgba(20, 65, 47, 0.86) 100%);
+  box-shadow:
+    0 30px 70px rgba(4, 25, 12, 0.5),
+    inset 0 1px 0 rgba(242, 255, 247, 0.1);
+  backdrop-filter: blur(3px);
+}
+
+.camera-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 50% at 12% 14%, rgba(171, 236, 194, 0.09) 0%, rgba(171, 236, 194, 0) 100%),
+    radial-gradient(58% 42% at 90% 88%, rgba(169, 236, 193, 0.08) 0%, rgba(169, 236, 193, 0) 100%);
+}
+
+.camera-header {
+  text-align: center;
+  margin-bottom: clamp(16px, 3vw, 24px);
+}
+
+.camera-kicker {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #9ae7b8;
+}
+
+.camera-header h2 {
+  margin: 0;
+  color: #f1fff6;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.camera-header p {
+  margin: 10px auto 0;
+  max-width: 48ch;
+  color: #c3e5d0;
+  line-height: 1.5;
+}
+
+.camera-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: clamp(14px, 2.2vw, 18px);
+}
+
+.camera-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  min-width: 160px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.camera-button:hover {
+  transform: translateY(-2px);
+}
+
+.camera-button:active {
+  transform: translateY(0);
+}
+
+.camera-button--primary {
+  color: #0b2f1d;
+  background: linear-gradient(120deg, #b7f1cb 0%, #7cd6a0 100%);
+  box-shadow: 0 14px 24px rgba(30, 125, 72, 0.4);
+}
+
+.camera-button--secondary {
+  color: #f1fff6;
+  background: linear-gradient(120deg, #2f7c53 0%, #3da568 100%);
+  box-shadow: 0 14px 24px rgba(15, 63, 38, 0.4);
+}
+
+.camera-preview,
+.camera-captured {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 244, 215, 0.2);
+  background: rgba(8, 27, 16, 0.42);
+}
+
+.camera-preview {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  box-shadow: inset 0 0 0 1px rgba(225, 252, 233, 0.08);
+}
+
+.camera-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.camera-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.camera-captured-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.camera-captured {
+  margin-top: 16px;
+  padding: 12px;
+  text-align: center;
+}
+
+.camera-captured h3 {
+  margin: 2px 0 10px;
+  color: #dcf8e6;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.camera-captured img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+@media (max-width: 640px) {
+  .camera-shell {
+    border-radius: 20px;
+    padding: 16px;
+  }
+
+  .camera-button,
+  .camera-captured-actions .camera-button {
+    width: 100%;
+  }
+}

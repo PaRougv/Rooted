@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+.register-page {
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #103224 0%, #1e5a40 52%, #2f8057 100%);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+.register-card {
+  width: min(100%, 460px);
+  padding: 30px 26px;
+  text-align: center;
+  border-radius: 22px;
+  border: 1px solid rgba(225, 255, 234, 0.42);
+  background: linear-gradient(160deg, rgba(245, 255, 248, 0.96) 0%, rgba(231, 248, 236, 0.92) 100%);
+  box-shadow: 0 24px 48px rgba(3, 26, 14, 0.35);
+}
+
+.register-kicker {
+  margin: 0;
+  color: #2c7a52;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.register-card h2 {
+  margin: 10px 0;
+  color: #183f2d;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 2rem;
+}
+
+.register-copy {
+  margin: 0;
+  color: #456a54;
+}
+
+.register-link {
+  margin-top: 18px;
+  display: inline-block;
+  text-decoration: none;
+  color: #f5fff8;
+  background: linear-gradient(120deg, #296f4b 0%, #37a66f 100%);
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+}
