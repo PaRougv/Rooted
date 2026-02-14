@@ -5,6 +5,7 @@ import HomePage from './components/HomePage.jsx';
 import Register from './components/Register.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Camera from './helpers/Camera.jsx';
+import ProtectedRoutes from './Security/ProtectedRoutes.jsx';
 
 const App = () => {
   return (
@@ -13,8 +14,12 @@ const App = () => {
         <Route path="/" element={<HomePage />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
-        <Route path="/dashboard" element={<Dashboard />}/>
-        <Route path="/camera" element={<Camera />}/>
+        <Route path="/dashboard" element={<ProtectedRoutes>
+          <Dashboard />
+        </ProtectedRoutes>}/>
+        <Route path="/camera" element={<ProtectedRoutes>
+          <Camera />
+        </ProtectedRoutes>}/>
       </Routes>
     </BrowserRouter>
   )

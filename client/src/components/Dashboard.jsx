@@ -7,9 +7,11 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [showInfoForm, setShowInfoForm] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bloodpressure, setBloodPressure] = useState("");
+  const [heartrate, setHeartRate] = useState("");
+  const [anyothercondition, setAnyOtherCondition] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [flashType, setFlashType] = useState("success");
   const [showFlash, setShowFlash] = useState(false);
@@ -88,32 +90,52 @@ const Dashboard = () => {
         {showInfoForm && (
           <form className="dashboard-form" onSubmit={handleSaveInfo}>
             <label className="dashboard-field">
-              <span>Full Name</span>
+              <span>Weight</span>
               <input
                 type="text"
-                placeholder="Enter your full name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Enter your Weight"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
               />
             </label>
 
             <label className="dashboard-field">
-              <span>Phone</span>
+              <span>Height</span>
               <input
-                type="tel"
-                placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                type="text"
+                placeholder="Enter Height"
+                value={height}
+                onChange={(e) => setHeight(e.target.value)}
               />
             </label>
 
             <label className="dashboard-field">
-              <span>City</span>
+              <span>BloodPressure</span>
               <input
                 type="text"
-                placeholder="Enter your city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
+                placeholder="Enter your BloodPressure"
+                value={bloodpressure}
+                onChange={(e) => setBloodPressure(e.target.value)}
+              />
+            </label>
+
+            <label className="dashboard-field">
+              <span>HeartRate</span>
+              <input
+                type="text"
+                placeholder="Enter your HeartRate"
+                value={heartrate}
+                onChange={(e) => setHeartRate(e.target.value)}
+              />
+            </label>
+
+            <label className="dashboard-field">
+              <span>AnyOtherCondition</span>
+              <input
+                type="text"
+                placeholder="AnyOtherCondition ? Eg: Pregnancy , Dibeties "
+                value={anyothercondition}
+                onChange={(e) => setAnyOtherCondition(e.target.value)}
               />
             </label>
 
