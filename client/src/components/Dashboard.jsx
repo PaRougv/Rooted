@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FlashCard from "../helpers/FlashCard.jsx";
@@ -15,6 +15,37 @@ const Dashboard = () => {
   const [flashMessage, setFlashMessage] = useState("");
   const [flashType, setFlashType] = useState("success");
   const [showFlash, setShowFlash] = useState(false);
+  const [isLoadingHealth, setIsLoadingHealth] = useState(true);
+
+  useEffect(() => {
+    const loadHealthData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/input/takeuser", {
+          withCredentials: true
+        });
+
+        const data = response.data?.data;
+
+        if (!data) {
+          setIsLoadingHealth(false);
+          return;
+        }
+
+        setWeight(data.weight ?? "");
+        setHeight(data.height ?? "");
+        setBloodPressure(data.bloodPressure ?? "");
+        setHeartRate(data.heartRate ?? "");
+        setAnyOtherCondition(data.anyOtherCondition ?? "");
+        setShowInfoForm(true);
+      } catch (error) {
+        console.error(error.response?.data || error.message);
+      } finally {
+        setIsLoadingHealth(false);
+      }
+    };
+
+    loadHealthData();
+  }, []);
 
   const handleSaveInfo = async (e) => {
     e.preventDefault();
@@ -92,7 +123,7 @@ const Dashboard = () => {
             className="dashboard-btn dashboard-btn--primary"
             onClick={() => setShowInfoForm((prev) => !prev)}
           >
-            {showInfoForm ? "Close Personal Information" : "Add Personal Information"}
+            {showInfoForm ? "Close Additional Information" : "Add Additional Information"}
           </button>
 
           <button
@@ -108,7 +139,7 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {showInfoForm && (
+        {showInfoForm && !isLoadingHealth && (
           <form className="dashboard-form" onSubmit={handleSaveInfo}>
             <label className="dashboard-field">
               <span>Weight</span>
