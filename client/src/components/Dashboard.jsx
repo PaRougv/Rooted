@@ -16,11 +16,32 @@ const Dashboard = () => {
   const [flashType, setFlashType] = useState("success");
   const [showFlash, setShowFlash] = useState(false);
 
-  const handleSaveInfo = (e) => {
+  const handleSaveInfo = async (e) => {
     e.preventDefault();
-    setFlashMessage("Personal information saved locally");
-    setFlashType("success");
-    setShowFlash(true);
+    
+    try {
+      const response = await axios.post("http://localhost:5000/api/input/takeuser" , {
+        weight , 
+        height,
+        bloodpressure,
+        heartrate,
+        anyothercondition
+      } , {
+        withCredentials : true
+      })
+
+      console.log(response.data)
+      setFlashMessage(response.data.message || 'Information saved Successfully')
+      setFlashType("success")
+      setShowFlash(true)
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+
+      setFlashMessage(error.response?.data?.message || "Failed to save info");
+      setFlashType("error");
+      setShowFlash(true);
+
+    }
   };
 
   const handleLogout = async () => {
