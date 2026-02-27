@@ -1,6 +1,7 @@
 import React , { useEffect, useRef , useState } from 'react'
 import "./Camera.css"
 import FlashCard from "./FlashCard.jsx";
+import axios from 'axios'
 
 const Camera = () => {
     const videoRef = useRef(null);
@@ -23,6 +24,20 @@ const Camera = () => {
 
         if (videoRef.current) {
             videoRef.current.srcObject = null;
+        }
+    }
+
+    const handleConfirm = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/camera/uploadphoto' , {
+                image: image
+            })
+
+            triggerFlash("Image uploaded successfully")
+            console.log(response.data)
+        } catch (error) {
+            console.error(error)
+            triggerFlash("Image upload Failed")
         }
     }
 
@@ -98,7 +113,7 @@ const Camera = () => {
                 {image ? (
                     <div className="camera-captured-actions">
                         <button className="camera-button camera-button--primary" onClick={handleRetake}>Retake</button>
-                        <button className="camera-button camera-button--secondary" type="button">Confirm</button>
+                        <button className="camera-button camera-button--secondary" type="button" onClick={handleConfirm}>Confirm</button>
                     </div>
                 ) : (
                     <>
