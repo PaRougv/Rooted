@@ -168,14 +168,267 @@
   border-radius: 12px;
 }
 
+.camera-results {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(154, 231, 184, 0.25);
+  background: rgba(14, 49, 34, 0.6);
+}
+
+.camera-results-title {
+  margin: 0 0 12px;
+  color: #9ae7b8;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.camera-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.camera-result-card {
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(24, 78, 52, 0.5);
+  border: 1px solid rgba(154, 231, 184, 0.2);
+}
+
+.camera-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.camera-result-name {
+  color: #f1fff6;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.camera-result-prob {
+  color: #9ae7b8;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.camera-result-scientific {
+  margin: 6px 0 4px;
+  color: #b8e8cd;
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.camera-result-taxonomy {
+  margin: 4px 0;
+  color: #a3dfbf;
+  font-size: 0.82rem;
+}
+
+.camera-result-desc {
+  margin: 10px 0 8px;
+  color: #d4f5e1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.camera-result-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #9ae7b8;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.camera-result-link:hover {
+  text-decoration: underline;
+}
+
+.camera-result-view-btn {
+  display: block;
+  margin-top: 14px;
+  padding: 10px 16px;
+  border: 1px solid rgba(154, 231, 184, 0.4);
+  border-radius: 10px;
+  background: rgba(40, 111, 75, 0.25);
+  color: #9ae7b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.camera-result-view-btn:hover {
+  background: rgba(40, 111, 75, 0.4);
+  border-color: rgba(154, 231, 184, 0.6);
+}
+
+.camera-results-empty {
+  margin: 0;
+  color: #c3e5d0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.camera-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 @media (max-width: 640px) {
+  .camera-page {
+    padding: 16px;
+    padding-top: 70px;
+    align-items: start;
+  }
+
   .camera-shell {
     border-radius: 20px;
-    padding: 16px;
+    padding: 20px 16px;
+  }
+
+  .camera-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .camera-header p {
+    font-size: 0.9rem;
+  }
+
+  .camera-kicker {
+    font-size: 0.65rem;
+  }
+
+  .camera-preview {
+    aspect-ratio: 4 / 3;
+  }
+
+  .camera-actions {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .camera-button,
   .camera-captured-actions .camera-button {
     width: 100%;
+    min-width: unset;
+    padding: 14px 16px;
+    font-size: 1rem;
   }
+
+  .camera-captured {
+    padding: 14px;
+  }
+
+  .camera-results {
+    padding: 14px;
+  }
+
+  .camera-results-title {
+    font-size: 0.9rem;
+  }
+
+  .camera-result-card {
+    padding: 14px;
+  }
+
+  .camera-result-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .camera-result-name {
+    font-size: 1rem;
+  }
+
+  .camera-result-prob {
+    font-size: 0.8rem;
+  }
+
+  .camera-result-scientific {
+    font-size: 0.85rem;
+  }
+
+  .camera-result-taxonomy {
+    font-size: 0.8rem;
+  }
+
+  .camera-result-desc {
+    font-size: 0.9rem;
+  }
+
+  .camera-result-view-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .camera-page {
+    padding: 12px;
+    padding-top: 65px;
+  }
+
+  .camera-shell {
+    padding: 16px 12px;
+    border-radius: 18px;
+  }
+
+  .camera-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .camera-preview {
+    aspect-ratio: 1 / 1;
+  }
+}
+.camera-selected-member {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #e8f5ee 0%, #d1f0df 100%);
+  border-radius: 10px;
+  border: 1px solid #2f7a55;
+}
+
+.camera-member-badge {
+  font-size: 0.9rem;
+  color: #0f3324;
+}
+
+.camera-member-badge strong {
+  color: #205d40;
+}
+
+.camera-member-condition {
+  color: #547464;
+  font-size: 0.8rem;
+}
+
+.camera-selected-member {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #e8f5ee 0%, #d1f0df 100%);
+  border-radius: 10px;
+  border: 1px solid #2f7a55;
+}
+
+.camera-member-badge {
+  font-size: 0.9rem;
+  color: #0f3324;
+}
+
+.camera-member-badge strong {
+  color: #205d40;
+}
+
+.camera-member-condition {
+  color: #547464;
+  font-size: 0.8rem;
 }

@@ -1,0 +1,60 @@
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-2px);
+}
+
+.back-button__arrow {
+  font-size: 1.1rem;
+}
+
+.back-button--fixed {
+  position: fixed;
+  top: clamp(16px, 3vw, 24px);
+  left: clamp(16px, 3vw, 24px);
+  z-index: 100;
+}
+
+@media (max-width: 560px) {
+  .back-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .back-button--fixed {
+    top: 12px;
+    left: 12px;
+  }
+
+  .back-button__arrow {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .back-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .back-button--fixed {
+    top: 10px;
+    left: 10px;
+  }
+}

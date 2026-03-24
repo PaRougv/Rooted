@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import BackButton from "./BackButton.jsx";
 import "./HomePage.css"
 
 const HomePage = () => {
   return (
     <main className="home-page">
+      <BackButton className="back-button--fixed" />
       <div className="home-overlay home-overlay--top" />
       <div className="home-overlay home-overlay--bottom" />
 

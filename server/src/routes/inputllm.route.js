@@ -1,10 +1,12 @@
 import express from "express";
-import { takeUser , llmOutput, getUserHealth } from "../controllers/health.controller.js";
+import { createProfile, updateProfile, deleteProfile, getProfiles, llmOutput } from "../controllers/health.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.post('/takeuser' , authMiddleware , takeUser)
-router.get('/takeuser' , authMiddleware , getUserHealth)
+router.get('/takeuser', authMiddleware, getProfiles);
+router.post('/takeuser', authMiddleware, createProfile);
+router.put('/takeuser/:id', authMiddleware, updateProfile);
+router.delete('/takeuser/:id', authMiddleware, deleteProfile);
 
 export default router;

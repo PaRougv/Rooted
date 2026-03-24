@@ -147,6 +147,42 @@ body {
   transform: translateY(-1px);
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--login-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: var(--login-forest-500);
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: var(--login-forest-500);
+}
+
 .login-button {
   margin-top: 4px;
   width: 100%;
@@ -182,13 +218,101 @@ body {
   font-size: 0.8rem;
 }
 
+.login-link {
+  color: var(--login-forest-500);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-link:hover {
+  color: var(--login-forest-700);
+  text-decoration: underline;
+}
+
+.forgot-password-wrapper {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+
+.forgot-password-link {
+  font-size: 0.85rem;
+  color: var(--login-forest-500);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+  color: var(--login-forest-700);
+  text-decoration: underline;
+}
+
 @media (max-width: 560px) {
   .login-page {
     align-items: start;
-    padding-top: 30px;
+    padding: 16px;
+    padding-top: 70px;
   }
 
   .login-card {
-    border-radius: 22px;
+    border-radius: 20px;
+    padding: 24px 20px;
+  }
+
+  .login-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .login-field input {
+    height: 48px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .login-button {
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .password-toggle-btn {
+    right: 10px;
+  }
+
+  .password-toggle-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-page {
+    padding: 12px;
+    padding-top: 65px;
+  }
+
+  .login-card {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .login-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .login-kicker {
+    font-size: 0.65rem;
+  }
+
+  .login-field input {
+    height: 44px;
+    padding: 10px 12px;
+  }
+
+  .login-button {
+    height: 44px;
   }
 }

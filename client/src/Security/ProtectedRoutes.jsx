@@ -8,7 +8,7 @@ const ProtectedRoutes = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                await axios.get("http://localhost:5000/api/verification/me" , {
+                await axios.get("/api/verification/me" , {
                     withCredentials: true
                 })
 

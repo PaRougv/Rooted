@@ -6,6 +6,10 @@ const healthDataSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
+    name: {
+        type: String,
+        trim: true
+    },
     weight: {
         type: Number,
     },
