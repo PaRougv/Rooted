@@ -32,6 +32,8 @@ const Dashboard = () => {
   const [showFlash, setShowFlash] = useState(false);
   const [isLoadingHealth, setIsLoadingHealth] = useState(true);
   const [showFamily, setShowFamily] = useState(false);
+  const [recentScans, setRecentScans] = useState([]);
+  const userName = localStorage.getItem("userName") || "";
 
   const loadProfiles = async () => {
     try {
@@ -47,7 +49,15 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => { loadProfiles(); }, []);
+  const loadRecentScans = async () => {
+    try {
+      const res = await axios.get("/api/safety/history", { withCredentials: true });
+      const scans = res.data?.data || [];
+      setRecentScans(scans.slice(0, 3));
+    } catch { /* silent */ }
+  };
+
+  useEffect(() => { loadProfiles(); loadRecentScans(); }, []);
 
   const selectedProfile = profiles.find((p) => (p.id || p._id) === selectedId) || profiles[0];
 
@@ -113,12 +123,22 @@ const Dashboard = () => {
     try {
       await axios.get("/api/auth/logout", { withCredentials: true });
       localStorage.removeItem("token");
+      localStorage.removeItem("userName");
       flash("Logged out");
       setTimeout(() => navigate("/login"), 400);
     } catch (error) {
       flash(error.response?.data?.message || "Logout failed", "error");
     }
   };
+
+  const getGreeting = () => {
+    const h = new Date().getHours();
+    if (h < 12) return "Good morning";
+    if (h < 17) return "Good afternoon";
+    return "Good evening";
+  };
+
+  const SAFETY_COLOR = { Safe: "var(--color-safe)", Caution: "var(--color-caution)", Avoid: "var(--color-avoid)" };
 
   // Navigation items grouped by category
   const NAV_GROUPS = [
@@ -163,6 +183,14 @@ const Dashboard = () => {
         <button className="dash-logout" onClick={handleLogout}>
           <LogOut size={15} /> {t("nav.logout")}
         </button>
+      </div>
+
+      {/* ── Greeting ── */}
+      <div className="dash-greeting">
+        <p className="dash-greeting-text">
+          {getGreeting()}{userName ? `, ${userName.split(" ")[0]}` : ""}
+        </p>
+        <p className="dash-greeting-sub">What plant are you checking today?</p>
       </div>
 
       {/* ── Active member strip ── */}
@@ -267,6 +295,57 @@ const Dashboard = () => {
               </form>
             </div>
           )}
+        </div>
+      )}
+
+      {/* ── Hero Scan Card ── */}
+      <div className={`dash-hero-scan ${!selectedProfile ? "dash-hero-scan--disabled" : ""}`}
+        onClick={() => selectedProfile && navigate("/camera", { state: { selectedFamilyMember: selectedProfile } })}
+        role="button" tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && selectedProfile && navigate("/camera", { state: { selectedFamilyMember: selectedProfile } })}
+      >
+        <div className="dash-hero-scan-icon">
+          <Camera size={28} strokeWidth={1.8} />
+        </div>
+        <div className="dash-hero-scan-text">
+          <p className="dash-hero-scan-title">
+            {selectedProfile ? `Scan for ${selectedProfile.name}` : "Scan a Plant"}
+          </p>
+          <p className="dash-hero-scan-sub">
+            {selectedProfile
+              ? "Point your camera at any plant to identify and check safety"
+              : "Add a family member first to enable plant scanning"}
+          </p>
+        </div>
+        {selectedProfile && <Camera size={18} className="dash-hero-scan-arrow" strokeWidth={2} />}
+      </div>
+
+      {/* ── Recent Scans ── */}
+      {recentScans.length > 0 && (
+        <div className="dash-recent">
+          <div className="dash-recent-header">
+            <h2 className="dash-nav-label">Recent Scans</h2>
+            <button className="dash-recent-all" onClick={() => navigate("/history")}>View all</button>
+          </div>
+          <div className="dash-recent-list">
+            {recentScans.map((scan) => (
+              <div key={scan._id} className="dash-recent-card"
+                onClick={() => navigate("/history")} role="button" tabIndex={0}>
+                <div className="dash-recent-plant">
+                  <Leaf size={14} />
+                  <span className="dash-recent-name">{scan.plantName || "Unknown Plant"}</span>
+                </div>
+                <div className="dash-recent-meta">
+                  <span className="dash-recent-member">{scan.familyMemberName}</span>
+                  {scan.safetyRating && (
+                    <span className="dash-recent-rating" style={{ color: SAFETY_COLOR[scan.safetyRating] }}>
+                      {scan.safetyRating}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

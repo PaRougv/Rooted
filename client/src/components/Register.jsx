@@ -40,6 +40,7 @@ const Register = () => {
       );
 
       if (response.data.token) localStorage.setItem("token", response.data.token);
+      if (response.data.user?.name) localStorage.setItem("userName", response.data.user.name);
       triggerFlash(t("register.success"), "success");
       setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {

@@ -54,6 +54,184 @@
   background: var(--color-avoid-bg);
 }
 
+/* ── Greeting ── */
+.dash-greeting {
+  margin-bottom: 20px;
+}
+
+.dash-greeting-text {
+  margin: 0 0 2px;
+  font-size: clamp(1.3rem, 3.5vw, 1.65rem);
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.dash-greeting-sub {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* ── Hero Scan Card ── */
+.dash-hero-scan {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-btn);
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.dash-hero-scan:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.dash-hero-scan:active { transform: translateY(0); }
+
+.dash-hero-scan--disabled {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border-subtle);
+  cursor: default;
+}
+
+.dash-hero-scan--disabled:hover { transform: none; box-shadow: var(--shadow-xs); }
+
+.dash-hero-scan-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-hero-scan--disabled .dash-hero-scan-icon {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.dash-hero-scan-text { flex: 1; min-width: 0; }
+
+.dash-hero-scan-title {
+  margin: 0 0 3px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-hero-scan--disabled .dash-hero-scan-title { color: var(--text-primary); }
+
+.dash-hero-scan-sub {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.4;
+}
+
+.dash-hero-scan--disabled .dash-hero-scan-sub { color: var(--text-muted); }
+
+.dash-hero-scan-arrow { color: rgba(255,255,255,0.7); flex-shrink: 0; }
+
+/* ── Recent Scans ── */
+.dash-recent { margin-bottom: 24px; }
+
+.dash-recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.dash-recent-all {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-body);
+}
+
+.dash-recent-all:hover { text-decoration: underline; }
+
+.dash-recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-recent-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dash-recent-card:hover {
+  border-color: var(--accent-light);
+  background: var(--bg-elevated);
+}
+
+.dash-recent-plant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  min-width: 0;
+}
+
+.dash-recent-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-recent-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dash-recent-member {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.dash-recent-rating {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 /* ── Active member strip ── */
 .dash-member-strip {
   display: flex;
@@ -519,6 +697,10 @@
   .dash {
     padding: 0 16px 28px;
   }
+  .dash-hero-scan { padding: 16px 18px; gap: 14px; }
+  .dash-hero-scan-icon { width: 46px; height: 46px; }
+  .dash-hero-scan-title { font-size: 0.92rem; }
+  .dash-hero-scan-sub { font-size: 0.74rem; }
 
   .dash-topbar { padding: 14px 0; }
   .dash-logo { font-size: 1.25rem; }
