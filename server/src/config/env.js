@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-// Always load server/.env (not cwd), so `node server/server.js` from repo root still works
+// Try to load .env from server root (works locally). On Render, env vars are in process.env already.
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: join(__dirname, "../../.env") });
 
