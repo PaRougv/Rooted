@@ -74,6 +74,30 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.camera-flip-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.camera-flip-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
 }
 
 .camera-preview video,

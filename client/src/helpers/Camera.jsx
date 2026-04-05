@@ -1,4 +1,4 @@
-import React , { useEffect, useRef , useState } from 'react'
+import React , { useCallback, useEffect, useRef , useState } from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Map, { Marker, NavigationControl } from "react-map-gl/maplibre";
@@ -27,6 +27,8 @@ const Camera = () => {
     const [isIdentifying, setIsIdentifying] = useState(false);
     const [isCheckingSafety, setIsCheckingSafety] = useState(false);
     const [cnnResult, setCnnResult] = useState(null);
+    const [facingMode, setFacingMode] = useState("environment");
+    const [cameraActive, setCameraActive] = useState(false);
     const [userLocation, setUserLocation] = useState(null);
     const [locationMode, setLocationMode] = useState("none");
     const [manualLocation, setManualLocation] = useState(null);
@@ -89,10 +91,10 @@ const Camera = () => {
             streamRef.current.getTracks().forEach((track) => track.stop());
             streamRef.current = null;
         }
-
         if (videoRef.current) {
             videoRef.current.srcObject = null;
         }
+        setCameraActive(false);
     }
 
     const createPreviewImage = (source) => new Promise((resolve, reject) => {
@@ -214,20 +216,26 @@ const Camera = () => {
         }
     }
 
-    const startCamera = async () => {
+    const startCamera = useCallback(async (facing = facingMode) => {
         try {
             stopCamera();
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: true,
-            })
-
+                video: { facingMode: facing },
+            });
             streamRef.current = stream;
             videoRef.current.srcObject = stream;
+            setCameraActive(true);
         } catch (error) {
-            console.log(error)
+            console.log(error);
             triggerFlash("Camera access failed");
         }
-    }
+    }, [facingMode]);
+
+    const flipCamera = async () => {
+        const next = facingMode === "environment" ? "user" : "environment";
+        setFacingMode(next);
+        await startCamera(next);
+    };
 
     const capturePhoto = async () => {
         const video = videoRef.current;
@@ -382,11 +390,18 @@ const Camera = () => {
                 {image ? (
                     <img src={image} alt="Captured" className="camera-preview-image" />
                 ) : (
-                    <video
-                        ref={videoRef}
-                        autoPlay
-                        playsInline
-                    />
+                    <>
+                        <video ref={videoRef} autoPlay playsInline />
+                        {cameraActive && (
+                            <button
+                                className="camera-flip-btn"
+                                onClick={flipCamera}
+                                title={facingMode === "environment" ? "Switch to front camera" : "Switch to back camera"}
+                            >
+                                🔄
+                            </button>
+                        )}
+                    </>
                 )}
             </div>
 
