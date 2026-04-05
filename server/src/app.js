@@ -16,12 +16,19 @@ const app = express();
 
 app.use(cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. same-origin, Postman) or from localhost on any port
+      // Allow same-origin, localhost, and configured frontend URL
       if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
-        callback(null, true);
-      } else {
-        callback(null, false);
+        return callback(null, true);
       }
+      const allowed = ENV.APP_BASE_URL;
+      if (allowed && origin === allowed.replace(/\/$/, "")) {
+        return callback(null, true);
+      }
+      // Allow any .vercel.app subdomain in production
+      if (/\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+      callback(null, false);
     },
     credentials: true
 }));

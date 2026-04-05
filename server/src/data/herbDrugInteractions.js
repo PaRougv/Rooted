@@ -430,6 +430,698 @@ export const herbDrugInteractions = {
         interactions: ["Immunosuppressants: Ciclosporin / Azathioprine (immune modulation)", "Hepatotoxic drugs (additive in high doses — paradoxical: hepatoprotective at low doses, hepatotoxic at high doses)", "Metformin / Insulin (blood sugar lowering)"],
         contraindications: ["Pregnancy", "Autoimmune diseases"],
         warnings: ["Dose-dependent hepatotoxicity — very low doses are hepatoprotective, high doses are toxic to the liver", "Quality and adulteration are significant concerns — source from reputable Ayurvedic pharmacies", "Picroside I and II are the active hepatoprotective iridoid glycosides — standardised extracts preferred"]
+    },
+
+    // ── Toxic / Dangerous Plants ──────────────────────────────────────────────
+
+    "Oleander": {
+        interactions: ["Digoxin / Digitoxin (oleandrin is a cardiac glycoside — additive and potentially fatal toxicity)", "Beta-blockers: Atenolol / Metoprolol (additive bradycardia and AV block)", "Calcium channel blockers: Amlodipine / Verapamil (additive cardiac depression)", "Quinidine / Amiodarone (additive arrhythmia risk)", "Diuretics (hypokalaemia increases oleandrin toxicity)"],
+        contraindications: ["ANY cardiac condition", "All internal use — this plant is lethal", "Children and pets — extremely toxic"],
+        warnings: ["EXTREMELY TOXIC — ALL PARTS including leaves, flowers, bark, and sap are poisonous", "Even burning oleander wood and inhaling smoke is toxic", "A single leaf can be fatal to a child; lethal to adults at higher doses", "Contains oleandrin, neriine, and other cardiac glycosides — causes fatal arrhythmia", "Contact with sap can cause severe skin and eye irritation", "NEVER use medicinally without clinical supervision — no safe home use exists"]
+    },
+    "Foxglove": {
+        interactions: ["Digoxin (Digitalis lanata is the source of pharmaceutical digoxin — additive and unpredictable toxicity)", "Beta-blockers (additive bradycardia and AV nodal block)", "Calcium channel blockers (additive cardiac depression)", "Thiazide / Loop diuretics (hypokalaemia amplifies digitalis toxicity)", "Amiodarone / Quinidine (increases digitalis plasma levels)"],
+        contraindications: ["All forms of self-medication — this plant is a prescription-level cardiac drug", "Hypokalaemia", "Wolff-Parkinson-White syndrome"],
+        warnings: ["HIGHLY TOXIC — digitalis glycosides in ALL parts of the plant can cause fatal cardiac arrhythmia", "Symptoms of poisoning: nausea, visual disturbances (yellow-green halos), bradycardia, and ventricular fibrillation", "Pharmaceutical digoxin is derived from this plant — do NOT use plant form as substitute", "No safe home use — any suspected ingestion requires immediate emergency treatment"]
+    },
+    "Datura": {
+        interactions: ["Anticholinergic drugs: Atropine / Hyoscine / Oxybutynin (additive anticholinergic toxidrome — potentially fatal)", "Antihistamines: Diphenhydramine / Chlorphenamine (additive anticholinergic effects)", "Antipsychotics: Chlorpromazine / Clozapine (additive anticholinergic)", "Tricyclic antidepressants: Amitriptyline / Imipramine (additive anticholinergic and cardiac effects)", "CNS depressants (unpredictable interaction with hyoscine and scopolamine)"],
+        contraindications: ["ALL forms of recreational or medicinal self-use", "Glaucoma (closed-angle)", "Urinary retention", "GI motility disorders", "Tachycardia / cardiac arrhythmia"],
+        warnings: ["DEADLY TOXIC — contains atropine, scopolamine, and hyoscyamine (tropane alkaloids) in ALL parts", "Causes anticholinergic syndrome: dry mouth, urinary retention, hyperthermia, delirium, seizures, coma, and death", "Seeds are especially toxic — fewer than 10 seeds can be fatal in children", "Traditional use as intoxicant is extremely dangerous — variable alkaloid content makes every dose unpredictable", "Also known as Jimsonweed, Devil's Trumpet, Thorn Apple (Dhatura in Hindi)", "Any ingestion is a MEDICAL EMERGENCY — call poison control immediately"]
+    },
+    "Hemlock": {
+        interactions: ["CNS depressants (additive CNS and respiratory depression)", "Neuromuscular blocking agents: Succinylcholine / Vecuronium (additive neuromuscular paralysis)", "Anticholinesterases: Neostigmine (conflicting pharmacology)"],
+        contraindications: ["ALL internal use — this plant is fatal at small doses"],
+        warnings: ["FATAL POISON — coniine and gamma-coniceine cause ascending paralysis and respiratory arrest", "Poison hemlock (Conium maculatum) was used to execute Socrates", "Resembles edible plants like wild carrot, parsley, and fennel — fatal misidentification risk", "Even contact with sap can cause dermatitis", "No medicinal use is safe — zero therapeutic window", "Any suspected ingestion: emergency services immediately"]
+    },
+    "Ricinus": {
+        interactions: ["Anticoagulants (castor oil has mild anticoagulant properties)", "Laxatives (additive purgative effect — dehydration and electrolyte loss)"],
+        contraindications: ["ALL internal use of unprocessed seeds (ricin is one of the most toxic natural substances)", "Pregnancy (abortifacient)", "GI obstruction"],
+        warnings: ["EXTREMELY DANGEROUS — Ricinus communis seeds contain ricin, a biological toxin with no antidote", "1–2 seeds can be fatal to a child; 4–8 seeds potentially fatal to adults", "Ricin inhibits protein synthesis at cellular level — causes multi-organ failure", "Commercial castor oil (cold-pressed) does NOT contain ricin and is generally safe — the toxin is in the seed meal", "Contact with plant parts can cause severe dermatitis and eye damage", "Ricin is classified as a potential bioterrorism agent — handling castor beans is regulated in many countries"]
+    },
+    "Aconite": {
+        interactions: ["ALL cardiac medications — additive and fatal (Digoxin, beta-blockers, antiarrhythmics)", "Any drug that lowers heart rate or BP (profound bradycardia and hypotension)", "Calcium channel blockers (additive cardiac arrest risk)"],
+        contraindications: ["ALL internal use without pharmaceutical processing and TCM physician supervision", "Heart disease", "Pregnancy"],
+        warnings: ["EXTREMELY TOXIC — aconitine causes severe and rapid cardiac arrhythmia and ventricular fibrillation", "Also known as Monkshood, Wolfsbane, Meetha Vish, Vatsanabha (Sanskrit)", "Used in processed form in TCM (Fu Zi) — raw aconite is lethal; processing reduces but does not eliminate toxicity", "Onset of toxicity within 10–20 minutes of ingestion — tingling, numbness, vomiting, cardiac arrest", "No safe home use — any suspected poisoning is an immediate medical emergency", "Skin absorption of aconitine from handling plant has caused poisoning"]
+    },
+    "Belladonna": {
+        interactions: ["ALL anticholinergic drugs (additive anticholinergic toxidrome — severe)", "Antihistamines / TCAs / Antipsychotics (additive anticholinergic)", "MAO inhibitors (dangerous interaction)", "Digoxin (tachycardia from atropine increases Digoxin toxicity)"],
+        contraindications: ["Glaucoma (closed-angle)", "Urinary retention / BPH", "Tachycardia / atrial fibrillation", "GI motility disorders", "All recreational use"],
+        warnings: ["HIGHLY TOXIC — Atropa belladonna contains atropine, scopolamine, and hyoscyamine in ALL parts", "Berries look attractive but 3–5 berries can kill a child", "Pharmaceutical atropine is derived from belladonna — do NOT use herbal form as substitute", "Anticholinergic toxidrome: dry skin, hyperthermia, urinary retention, delirium, seizures, death", "Historically used as poison and in eye drops (cosmetic pupil dilation) — both dangerous"]
+    },
+    "Yew": {
+        interactions: ["Paclitaxel / Docetaxel (taxol is derived from yew — additive toxicity)", "ALL cardiac drugs (cardiac toxicity from taxine alkaloids)", "CNS depressants (additive)"],
+        contraindications: ["ALL internal use — lethal at small doses", "Pregnancy"],
+        warnings: ["DEADLY TOXIC — ALL parts of Taxus baccata are poisonous EXCEPT the red fleshy aril (seed itself is toxic)", "Taxine alkaloids cause rapid cardiac arrest with no specific antidote", "As little as 50 g of leaves can be fatal to an adult", "Pharmaceutical paclitaxel (Taxol) is derived from Pacific yew — never substitute with plant material", "One of the most common causes of fatal plant poisoning in the UK and Europe", "Any ingestion: emergency services immediately"]
+    },
+    "Water Hemlock": {
+        interactions: ["CNS stimulants (additive seizure risk)", "Antiepileptics (cicutoxin may overcome antiepileptic effect)"],
+        contraindications: ["ALL internal use — considered the most violently toxic plant in North America"],
+        warnings: ["MOST VIOLENTLY TOXIC — Cicuta maculata/virosa causes uncontrollable violent seizures and death", "Cicutoxin acts on GABA-A receptors causing status epilepticus — death from respiratory failure", "Resembles edible wild parsnip, celery, or water parsley — extremely dangerous misidentification", "Root is especially concentrated — ingestion of a walnut-sized piece of root has killed adults", "No antidote — treatment is only supportive seizure management", "Any suspected ingestion is an immediate life-threatening emergency"]
+    },
+    "Lantana": {
+        interactions: ["Digoxin (lantadene compounds affect cardiac function)", "Hepatotoxic drugs (additive liver toxicity)"],
+        contraindications: ["ALL internal use — toxic to humans and animals", "Children — attractive berries are poisonous", "Pregnancy"],
+        warnings: ["TOXIC — especially unripe green berries which are highly toxic; ripe black berries less so but still hazardous", "Lantadene A and B cause photosensitivity hepatitis and biliary stasis", "Causes GI distress, weakness, and hepatotoxicity", "Extremely toxic to livestock — also common garden ornamental", "Also known as Lantana camera, Tickberry, Putus, Raimuniya", "Contact with plant can cause contact dermatitis in sensitive individuals"]
+    },
+    "Nux Vomica": {
+        interactions: ["ALL CNS stimulants (strychnine and brucine — additive fatal convulsions)", "ALL anticholinergics (additive excitatory toxicity)", "Antiepileptic drugs (strychnine overwhelms anticonvulsants)", "Alcohol (additive CNS excitation)"],
+        contraindications: ["All self-medication — therapeutic window is extremely narrow", "Epilepsy", "Tetanus", "Liver disease", "Pregnancy"],
+        warnings: ["HIGHLY TOXIC — strychnine from Strychnos nux-vomica causes severe painful convulsions and death by respiratory failure", "Used in highly diluted homeopathic form (safe) and in some traditional formulations (Ayurvedic Kuchla — processed to reduce toxicity)", "Raw seeds are lethal — processing in Ayurvedic shodhana procedure is mandatory", "Strychnine poisoning: muscle spasms, opisthotonos (arched back), and asphyxiation", "Never use unprocessed Nux Vomica seeds for any purpose"]
+    },
+    "Calotropis": {
+        interactions: ["Digoxin / Digitoxin (calotropin and uscharin are cardiac glycosides — potentially fatal additive toxicity)", "Antiarrhythmics: Amiodarone / Quinidine (additive cardiac risk)", "Diuretics (hypokalaemia increases cardiac glycoside toxicity)"],
+        contraindications: ["ALL internal use without direct physician supervision", "Heart disease", "Pregnancy (abortifacient)", "Children"],
+        warnings: ["TOXIC — Calotropis gigantea and C. procera contain cardiac glycosides and cytotoxic calactin", "Milky latex is highly caustic — causes severe eye injury (calotropis latex keratitis) and skin burns", "Used in traditional medicine (Akanda/Aak in Hindi) — only highly processed preparations under expert supervision", "Can cause cardiac arrest, pulmonary oedema, and death in overdose", "Traditional use as arrow poison and for veterinary sterilisation in folk practice"]
+    },
+    "Abrus Precatorius": {
+        interactions: ["Immunosuppressants (abrin further compromises immune function)", "ANY other hepatotoxic drugs"],
+        contraindications: ["ALL internal use — seeds are among the most toxic known substances", "Any handling of broken or damaged seeds"],
+        warnings: ["EXTREMELY DEADLY — seeds (Rosary Peas / Gunchi / Jequirity beans) contain abrin, a toxin comparable to ricin", "A single seed, if chewed, can be fatal — intact seeds may pass through gut without harm", "Abrin inhibits protein synthesis causing multi-organ failure — no antidote", "Attractive red and black seeds used in jewellery — children should not handle them", "Case reports of death from seed needle-pricks (used in traditional criminal poisoning)", "Emergency medical treatment required immediately for any suspected ingestion"]
+    },
+
+    // ── More Indian Ayurvedic / Siddha / Unani Plants ─────────────────────────
+
+    "Triphala Guggul": {
+        interactions: ["Anticoagulants: Warfarin / Aspirin (guggulsterone affects platelet function)", "Statins: Atorvastatin / Simvastatin (guggul reduces LDL — additive but may affect CYP metabolism)", "Thyroid medications: Levothyroxine (guggul may stimulate thyroid function)", "Diltiazem / Propranolol (reduced bioavailability reported)"],
+        contraindications: ["Pregnancy (uterotonic)", "Active liver disease", "Thyroid disorders (stimulates thyroid)"],
+        warnings: ["Guggul resin stimulates thyroid — check TSH if using long-term", "Can cause GI irritation — take with food", "Antiplatelet properties — stop 1 week before surgery"]
+    },
+    "Guggul": {
+        interactions: ["Warfarin / Aspirin (antiplatelet guggulsterones)", "Diltiazem / Propranolol (reduces bioavailability by ~40%)", "Levothyroxine (may increase T3/T4)", "Statins (additive lipid-lowering but CYP interaction possible)"],
+        contraindications: ["Pregnancy", "Active liver or kidney disease", "Hyperthyroidism", "Active bleeding"],
+        warnings: ["Stimulates thyroid hormone production — monitor thyroid if using for more than 4 weeks", "Drug interaction with common heart medications is well documented", "Standardised extract (guggulsterone content) preferred over crude resin", "Skin rash and GI upset are the most common side effects"]
+    },
+    "Triphala": {
+        interactions: ["Warfarin / Aspirin (anticoagulant activity from gallic acid)", "Metformin / Insulin (additive hypoglycaemia)", "Bleomycin / Cyclophosphamide (antioxidant may reduce chemo efficacy)"],
+        contraindications: ["Pregnancy", "Breastfeeding", "Active diarrhoea or dysentery"],
+        warnings: ["Laxative effect — start with low doses at night", "Anticoagulant activity — stop 1 week before surgery", "Long-term use is generally considered safe in Ayurveda but monitor electrolytes"]
+    },
+    "Shilajit": {
+        interactions: ["Metformin / Insulin (additive hypoglycaemia from fulvic acid and mineral content)", "Iron supplements (high iron content in some preparations — avoid with haemochromatosis)", "Antihypertensives (mild antihypertensive properties)", "Levothyroxine (fulvic acid may affect thyroid)"],
+        contraindications: ["Haemochromatosis (excess iron)", "Sickle cell anaemia", "Thalassaemia", "Gout (high uric acid-related compounds)", "Pregnancy — insufficient safety data"],
+        warnings: ["Raw or unprocessed shilajit may contain heavy metals (arsenic, lead) and mycotoxins — only use processed, tested preparations", "Authentic shilajit is a mountain resin — most commercial products are adulterated", "Fulvic acid content may interact with drug bioavailability", "Promotes testosterone and may affect hormone-sensitive conditions"]
+    },
+    "Haritaki": {
+        interactions: ["Warfarin / Aspirin (tannic acid and chebulinic acid — anticoagulant)", "Metformin / Glibenclamide (additive blood sugar lowering)", "Oral drugs generally (tannin content may impair absorption — space by 2 hours)"],
+        contraindications: ["Pregnancy (laxative and possible emmenagogue)", "Severe dehydration", "Diarrhoea"],
+        warnings: ["One of the three fruits in Triphala — can be used individually", "Strong laxative effect — start with small doses", "Tannins may chelate iron and zinc — take separately from mineral supplements"]
+    },
+    "Bibhitaki": {
+        interactions: ["Metformin (mild additive hypoglycaemia)", "Warfarin (mild anticoagulant from tannins)", "Antihypertensives (mild additive BP lowering)"],
+        contraindications: ["Pregnancy (stimulates GI tract)", "Diarrhoea"],
+        warnings: ["One of the three fruits in Triphala", "Gallic acid and chebulagic acid are the main active compounds", "Stronger astringent effect than Haritaki or Amla — useful for respiratory mucus and diarrhoea"]
+    },
+    "Vidanga": {
+        interactions: ["Anthelmintic drugs: Albendazole / Mebendazole (additive antiparasitic effect)", "Anticoagulants (embelin has mild anticoagulant properties)"],
+        contraindications: ["Pregnancy (emmenagogue and abortifacient)", "Breastfeeding"],
+        warnings: ["Used primarily as antiparasitic (roundworms, tapeworms) in Ayurveda", "Embelin is the active anthelmintic component", "Do not use in high doses during pregnancy — abortifacient risk"]
+    },
+    "Chitraka": {
+        interactions: ["Metformin / Insulin (significant additive hypoglycaemia)", "Anticoagulants (mild)", "NSAIDs (additive GI irritant — use with caution)"],
+        contraindications: ["Pregnancy (strong uterine stimulant — abortifacient)", "Active peptic ulcer (GI irritant)", "Children"],
+        warnings: ["Also known as Plumbago / Leadwort (Chita in Hindi)", "Plumbagin, the active compound, causes GI irritation — always take with food", "Traditional use for digestive fire (agni) and obesity — requires practitioner guidance"]
+    },
+    "Pippali": {
+        interactions: ["Piperine-containing drugs (additive bioavailability enhancement — may raise plasma levels of many drugs)", "Phenytoin / Theophylline (piperine increases plasma levels)", "Rifampicin / Isoniazid (piperine improves TB drug absorption)", "NSAIDs (GI irritation additive)"],
+        contraindications: ["Active peptic ulcer", "Pregnancy in large medicinal doses"],
+        warnings: ["Long Pepper contains piperine (also in black pepper) — same CYP and P-gp inhibition warnings apply", "Used in Trikatu formulation with ginger and black pepper in Ayurveda", "Piperine enhances absorption of curcumin, selenium, and many drugs — both beneficial and hazardous"]
+    },
+    "Karpura Valli": {
+        uses: ["Cough and respiratory congestion", "Fever management", "Antimicrobial (topical)", "Digestive aid"],
+        preparation: ["Leaf juice for cough", "Tea from fresh leaves", "Topical poultice for headache"],
+        dosage: "2–3 tsp leaf juice in honey for cough; topical as needed"
+    },
+    "Punarnava Root": {
+        interactions: ["Furosemide / Hydrochlorothiazide (additive diuresis — potassium depletion)", "Lithium (diuretic effect increases plasma lithium to toxic levels)", "Amlodipine / Atenolol (additive antihypertensive)"],
+        contraindications: ["Pregnancy", "Severe kidney disease"],
+        warnings: ["Strong diuretic — ensure adequate fluid intake", "Avoid combining with other diuretics without medical supervision", "Traditional use for nephrotic syndrome — requires monitoring"]
+    },
+    "Vacha": {
+        interactions: ["Phenytoin / Carbamazepine (beta-asarone may lower seizure threshold at high doses)", "CNS depressants (mild additive sedation at low dose — stimulant at high dose)", "Anticholinergic drugs (asarone modulates cholinergic activity)"],
+        contraindications: ["Pregnancy (uterotonic)", "Epilepsy", "Liver disease (beta-asarone is hepatotoxic in large doses)"],
+        warnings: ["Also known as Sweet Flag / Calamus / Bach (Hindi)", "Beta-asarone is potentially carcinogenic — processed forms with low asarone content are preferred (Indian variety A. calamus is tetraploid and higher in asarone)", "Used for cognitive enhancement in Ayurveda — only in small doses under practitioner guidance", "Acorus calamus var. americanus (diploid) is asarone-free and safer"]
+    },
+    "Jatropha": {
+        interactions: ["All drugs metabolised by liver (jatrophin — hepatotoxic)", "Laxatives (additive purgative — severe dehydration risk)"],
+        contraindications: ["ALL internal use without medical supervision", "Children (toxic)", "Pregnancy (abortifacient)"],
+        warnings: ["TOXIC — seeds cause severe vomiting, diarrhoea, dehydration, and can be fatal", "Widely used as biofuel plant — seeds look like edible nuts but are poisonous", "Latex causes severe skin and eye irritation", "2–3 seeds can be toxic to children — keep away from children"]
+    },
+    "Tagetes": {
+        interactions: ["Warfarin (antiplatelet flavonoids)", "Iron supplements (tannins reduce iron absorption)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Asteraceae allergy", "Pregnancy (emmenagogue — stimulates uterus)"],
+        warnings: ["Marigold (Genda Phool) — different from Calendula (pot marigold)", "Traditionally used in Indian medicine for fever, digestive issues, and topical wound care", "Tagetes lucida (Mexican tarragon) has different pharmacology from common marigold", "Generally safe in food/flavouring amounts; medicinal extracts have interaction potential"]
+    },
+    "Kalonji": {
+        interactions: ["Metformin / Glipizide (additive blood sugar lowering from thymoquinone)", "Warfarin / Aspirin (antiplatelet thymoquinone)", "Ciclosporin (thymoquinone may modulate immune function)", "Phenobarbitone / Phenytoin (possible CYP interaction)"],
+        contraindications: ["Pregnancy (uterotonic at large doses)", "Bleeding disorders"],
+        warnings: ["Black seed / Nigella sativa — widely used in Unani and Islamic medicine", "Thymoquinone has significant pharmacological activity — not just a food spice at medicinal doses", "Strong antioxidant and immunomodulatory activity", "Safe in culinary amounts (1/4–1/2 tsp/day); medicinal doses require monitoring"]
+    },
+    "Henna": {
+        interactions: ["Anticoagulants (mild — lawsone has some coagulation activity)", "G6PD-sensitive medications: Primaquine / Dapsone / Sulphonamides (lawsone causes haemolysis in G6PD deficiency)"],
+        contraindications: ["G6PD deficiency (haemolytic anaemia risk — especially infants)", "Pregnancy (topical in small amounts is likely safe, internal is not)", "Open wounds or broken skin (lawsone absorption)"],
+        warnings: ["Natural henna (Lawsonia inermis) topical use is generally safe but can cause allergy", "'Black henna' contains PPD (para-phenylenediamine) — causes severe allergic reactions and permanent sensitisation", "Internal use of henna is not recommended — lawsone causes haemolysis in susceptible individuals", "Mehndi for skin decoration: patch test first, never apply to broken skin"]
+    },
+    "Alstonia": {
+        interactions: ["Antihypertensives (ditamine and echitamine lower BP — additive)", "Antimalaria drugs (additive)", "CNS depressants (additive sedation)"],
+        contraindications: ["Pregnancy", "Breastfeeding", "Liver disease"],
+        warnings: ["Alstonia scholaris (Saptaparni / Chatian) — used in traditional Indian medicine for malaria and skin disease", "Contains several alkaloids — narrow therapeutic window", "Should not be used without physician guidance", "Bark preparations used in Ayurveda and Siddha — significant pharmacological activity"]
+    },
+    "Wrightia Tinctoria": {
+        uses: ["Psoriasis and skin conditions (topical)", "Hair fall treatment", "Dandruff", "Antifungal (topical)"],
+        preparation: ["Leaf paste applied topically", "Wrightia oil preparations", "Decoction for scalp use"],
+        dosage: "Topical application as needed; internal use only under Ayurvedic supervision"
+    },
+    "Bael": {
+        interactions: ["Metformin / Insulin (additive blood sugar lowering)", "Thyroid medications (marmelosin may affect thyroid function)", "Tetracycline / Fluoroquinolone antibiotics (tannins may reduce absorption — space by 2 hours)"],
+        contraindications: ["Thyroid disorders", "Pregnancy in large medicinal doses"],
+        warnings: ["Aegle marmelos (Bel/Bilva) — sacred in Hinduism, widely used for GI health", "Unripe bael fruit is more medicinal; ripe fruit is a nutritious food", "Excessive use may cause constipation (dried fruit) or diarrhoea (fresh fruit juice)", "Marmelosin can affect thyroid function — monitor TSH with long-term use"]
+    },
+    "Patala": {
+        uses: ["Respiratory health (Stereospermum chelonoides)", "Digestive disorders", "Fever management", "Anti-inflammatory"],
+        preparation: ["Decoction of root bark", "Traditional Dashamool formulation (combined with 9 other roots)"],
+        dosage: "Only as part of Dashamool formulation under Ayurvedic guidance"
+    },
+    "Manjistha": {
+        interactions: ["Anticoagulants: Warfarin / Aspirin (rubia cordifolia — mild antiplatelet)", "Antihypertensives (mild ACE-inhibitory activity)", "Metformin (mild blood sugar lowering)"],
+        contraindications: ["Pregnancy (emmenagogue)", "Active bleeding"],
+        warnings: ["Indian Madder / Rubia cordifolia — used as blood purifier in Ayurveda", "Anthraquinone content may cause reddish urine — benign but notable", "Has mild estrogenic activity — caution in hormone-sensitive conditions"]
+    },
+    "Lodhra": {
+        interactions: ["Anticoagulants (loturine and colloturine have astringent, haemostatic properties — may reduce anticoagulant effect)", "Oestrogen therapies (mild oestrogenic / anti-oestrogenic effects)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Pregnancy (strong uterine astringent)", "Constipation"],
+        warnings: ["Symplocos racemosa — used in Ayurveda for vaginal discharge and menorrhagia", "Primary use is gynaecological — strong astringent properties", "Loturine reduces blood glucose — monitor if diabetic"]
+    },
+    "Gokshura": {
+        interactions: ["Metformin / Insulin (mild additive blood sugar lowering)", "Cyclosporin / Tacrolimus (mild immune modulation)", "Testosterone replacement therapy (saponins may modulate androgen)", "Antihypertensives (mild diuretic and ACE-inhibitory activity)"],
+        contraindications: ["Pregnancy", "Dehydration", "Kidney stones (may worsen oxalate stones)"],
+        warnings: ["Tribulus terrestris / Gokhru — commonly used for urinary health and testosterone support", "Evidence for testosterone boosting in healthy humans is weak", "Saponins may cause GI upset and liver stress at high doses — case reports of hepatotoxicity from Tribulus products", "Diuretic effect — adequate hydration important"]
+    },
+    "Yashtimadhu": {
+        interactions: ["Antihypertensives: Amlodipine / Ramipril (glycyrrhizin raises BP — counteracts treatment)", "Digoxin (hypokalaemia from glycyrrhizin increases Digoxin toxicity)", "Corticosteroids: Prednisolone / Hydrocortisone (enhanced cortisol-like effects)", "Spironolactone (pharmacological antagonism)"],
+        contraindications: ["Hypertension", "Hypokalaemia", "Kidney or liver disease", "Pregnancy"],
+        warnings: ["Glycyrrhiza glabra — same as Licorice Root, the Sanskrit Ayurvedic name", "DGL (deglycyrrhizinated licorice) preparations are safer for GI use", "Limit regular use to <4 weeks; monitor BP and potassium"]
+    },
+    "Kutaja": {
+        interactions: ["Antidiarrhoeal drugs: Loperamide / Diphenoxylate (additive — may cause excessive constipation)", "Digitalis (conessine alkaloid has some cardiac activity)"],
+        contraindications: ["Constipation", "Pregnancy"],
+        warnings: ["Holarrhena antidysenterica (Indrajav / Kurchi) — specific use for amoebic dysentery in Ayurveda", "Conessine alkaloid is pharmacologically active — monitor closely", "Conessine has anticholinergic activity — caution in prostatic hypertrophy and glaucoma"]
+    },
+    "Daruharidra": {
+        interactions: ["Metformin / Glipizide (additive blood sugar lowering from berberine)", "Cyclosporin / Tacrolimus (berberine inhibits CYP3A4 — raises immunosuppressant levels)", "Warfarin (berberine antiplatelet activity)", "Metformin (berberine may increase metformin plasma levels via P-glycoprotein inhibition)"],
+        contraindications: ["Pregnancy (berberine is a uterotonic and has embryotoxic effects)", "Breastfeeding (berberine crosses into breast milk — toxic to newborns)", "Newborns and infants (risk of neonatal jaundice)"],
+        warnings: ["Berberis aristata / Tree Turmeric — berberine is the primary active alkaloid", "Berberine has significant and well-documented drug interactions — treat as a pharmacological agent, not just an herb", "Very similar interaction profile to Berberine supplements (see separate entry)", "Do NOT use in pregnancy or breastfeeding — this is a serious contraindication"]
+    },
+    "Berberine": {
+        interactions: ["Metformin (synergistic blood sugar lowering — hypoglycaemia risk)", "Cyclosporin / Tacrolimus / Sirolimus (CYP3A4 inhibition — significantly raises immunosuppressant levels)", "Warfarin / Clopidogrel (antiplatelet activity)", "Doxycycline (berberine reduces bioavailability)", "Azithromycin / Clarithromycin (combined cardiac QT prolongation risk)"],
+        contraindications: ["Pregnancy (embryotoxic and neonatal jaundice risk)", "Breastfeeding", "Newborns and infants", "Low blood pressure"],
+        warnings: ["Berberine is found in barberry, goldenseal, Oregon grape, and Tree Turmeric", "Drug interaction potential is high — comparable to pharmaceutical agents", "Can lower blood sugar significantly — monitor closely if on antidiabetics", "May prolong cardiac QT interval — caution with other QT-prolonging drugs"]
+    },
+    "Shatapushpa": {
+        interactions: ["Tamoxifen / Anastrozole (phytoestrogenic anethole may oppose)", "Oral contraceptives (additive oestrogenic activity)", "Anticoagulants (mild)"],
+        contraindications: ["Oestrogen-sensitive cancers", "Pregnancy in medicinal doses (emmenagogue)"],
+        warnings: ["Anethum graveolens (Dill seed) — culinary use is completely safe", "At medicinal doses (supplements), phytoestrogenic activity becomes relevant", "Galactagogue — stimulates milk production in breastfeeding women (safe at food amounts)"]
+    },
+    "Khadira": {
+        interactions: ["Antibiotics (catechins may have synergistic antimicrobial activity)", "Metformin (mild blood sugar lowering)", "Anticoagulants (mild)"],
+        contraindications: ["Pregnancy", "Active liver disease"],
+        warnings: ["Acacia catechu / Cutch Tree (Kath in Hindi) — astringent heartwood resin", "Contains catechins and quercetin — antioxidant and anti-inflammatory", "Used for oral health, skin conditions, and as a dysentery remedy in Ayurveda"]
+    },
+
+    // ── Traditional Chinese Medicine Herbs ────────────────────────────────────
+
+    "Astragalus": {
+        interactions: ["Ciclosporin / Tacrolimus (immune stimulation antagonises)", "Lithium (diuretic effect increases lithium levels)", "Cyclophosphamide / Azathioprine (immune stimulation counteracts)", "Warfarin (mild anticoagulant polysaccharides)", "Antihypertensives (mild additive BP lowering)"],
+        contraindications: ["Active autoimmune diseases (SLE, RA, MS)", "Transplant recipients on immunosuppressants", "Pregnancy — insufficient data"],
+        warnings: ["Astragalus membranaceus (Huang Qi) — widely used in TCM for immune support and fatigue", "Immune stimulation may exacerbate autoimmune conditions", "Do not use during acute infections — reserved for prevention and recovery", "Telomere-extending properties claimed — limited human clinical evidence"]
+    },
+    "Dong Quai": {
+        interactions: ["Warfarin (coumarin derivatives — significant increase in INR documented)", "Tamoxifen / Anastrozole (phytoestrogenic activity may oppose cancer treatment)", "Combined oral contraceptives (additive oestrogenic effect)", "Aspirin / Clopidogrel (additive antiplatelet)"],
+        contraindications: ["Oestrogen-receptor-positive cancers", "Pregnancy (uterotonic — stimulates contractions)", "Bleeding disorders", "Fibroids or endometriosis (phytoestrogenic stimulation)"],
+        warnings: ["Angelica sinensis (Chinese angelica / female ginseng) — one of the most prescribed herbs in TCM", "Phytoestrogenic activity is significant — discuss with oncologist in cancer history", "Can cause photosensitivity — avoid UV exposure during use", "One of the most important herbs for female reproductive health in TCM but requires careful monitoring"]
+    },
+    "Bupleurum": {
+        interactions: ["Ciclosporin / Steroids (immune modulation)", "Sedatives / CNS depressants (additive with saikosaponin sedative effect)", "Interferon (synergistic antiviral — but not a substitute)", "Hepatotoxic drugs (paradoxical — hepatoprotective at low doses, hepatotoxic at high doses)"],
+        contraindications: ["Pregnancy", "Active bleeding", "Patients on immunosuppressants"],
+        warnings: ["Bupleurum falcatum / Chai Hu — cornerstone of many TCM formulas (Xiao Chai Hu Tang)", "Case reports of serious pneumonitis with Japanese Sho-saiko-to (a Bupleurum formula) — contraindicated with interferon-alpha", "Rare but serious interstitial pneumonitis reported — report any new respiratory symptoms", "Should be used as part of TCM formula under practitioner guidance — not as a standalone supplement"]
+    },
+    "Schisandra": {
+        interactions: ["Warfarin (CYP2C9 and CYP3A4 induction — reduces anticoagulant effect)", "Tacrolimus / Cyclosporin (significantly raises plasma levels via P-gp and CYP inhibition — toxicity risk)", "Midazolam / Alprazolam (CYP3A4 inhibition — raises benzodiazepine levels)", "Paclitaxel / Docetaxel (CYP and P-gp interaction — alters chemotherapy levels)", "Hepatoprotective drugs (additive)"],
+        contraindications: ["Pregnancy (stimulates uterus)", "Epilepsy", "Severe liver disease (paradoxical at high doses)", "Peptic ulcer"],
+        warnings: ["Schisandra chinensis (Wu Wei Zi / Five-Flavour Berry) — adaptogen and hepatoprotective herb", "CYP and P-glycoprotein interactions are significant — major drug interaction potential", "Immunosuppressant drug levels can be dramatically altered — transplant patients must avoid", "May cause CNS stimulation or sedation depending on dose"]
+    },
+    "Codonopsis": {
+        interactions: ["CNS depressants (additive sedative effect)", "Metformin (mild blood sugar lowering)", "Ciclosporin (immune modulation)"],
+        contraindications: ["Active infections with fever", "Active autoimmune flares"],
+        warnings: ["Codonopsis pilosula (Dang Shen / Poor Man's Ginseng) — milder adaptogen alternative to true ginseng", "Generally very well tolerated with a wide safety margin", "Immunomodulatory — avoid during acute illness; use for prevention and recovery"]
+    },
+    "Rehmannia": {
+        interactions: ["Metformin / Insulin (iridoid glycosides lower blood sugar — additive)", "Warfarin (mild anticoagulant)", "Antihypertensives (mild BP lowering)", "Iron supplements (may impair iron absorption)"],
+        contraindications: ["Digestive weakness (prepared — Shu Di Huang — is cloying and heavy)", "Pregnancy — insufficient safety data", "Diarrhoea"],
+        warnings: ["Rehmannia glutinosa — fundamental yin tonic in TCM (Sheng Di Huang raw, Shu Di Huang prepared)", "Prepared form (steamed in wine) is less cooling but more tonifying", "Can cause GI upset — combine with digestive herbs (Chen Pi / tangerine peel) as in traditional formulas", "Raw form has stronger blood sugar lowering effect than prepared form"]
+    },
+    "Cornus": {
+        interactions: ["Antidiabetics (cornuside and morroniside lower blood glucose — additive)", "Antihypertensives (mild BP lowering)"],
+        contraindications: ["Dysuria / difficult urination (astringent may worsen)"],
+        warnings: ["Cornus officinalis (Shan Zhu Yu / Cornelian Cherry) — kidney and liver yin tonic in TCM", "Used in the classic formula Liu Wei Di Huang Wan (Six-Ingredient Rehmannia Pill)", "Generally very safe — one of the more gentle TCM herbs", "Strong astringent — useful for excessive sweating, seminal emission, and urinary incontinence"]
+    },
+    "Poria": {
+        uses: ["Anxiety and insomnia (calming CNS)", "Digestive health (strengthens Spleen in TCM)", "Immune modulation", "Oedema (mild diuretic)"],
+        preparation: ["Traditionally decocted in soups and formulas", "Poria mushroom powder in warm water", "Poria extract capsules"],
+        dosage: "6–15 g dried mushroom in decoction; 500–1000 mg extract/day"
+    },
+    "Jujube": {
+        interactions: ["Sedatives / CNS depressants (saponins in jujube have mild sedative effect — additive)", "Immunosuppressants (polysaccharide immune stimulation)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Phlegm retention / damp conditions in TCM (sweet nature)", "Abdominal bloating"],
+        warnings: ["Ziziphus jujuba (Da Zao / Red Date) — nourishing and calming TCM herb used in many formulas", "Extremely safe as food; concentrated extracts have mild pharmacological effects", "Contains cyclopeptide alkaloids with sedative properties — small additive effect with sleep medications"]
+    },
+    "Chrysanthemum": {
+        interactions: ["Anticoagulants (mild — flavonoids have some antiplatelet activity)", "Sedatives (mild CNS depressant activity)"],
+        contraindications: ["Asteraceae allergy (cross-reactivity with ragweed, chamomile, daisy)", "Cold conditions (chrysanthemum is cooling — avoid in those with cold constitution in TCM"],
+        warnings: ["Chrysanthemum morifolium (Ju Hua) — cooling and liver-calming herb in TCM", "Used for eye strain, headache, hypertension, and early-stage fevers", "Allergy risk in Asteraceae-sensitive individuals", "Very safe at normal tea amounts (1–3 cups/day)"]
+    },
+    "Eucommia": {
+        interactions: ["Antihypertensives (additive BP lowering from chlorogenic acid)", "Anticoagulants (mild)"],
+        contraindications: ["Pregnancy — insufficient data", "Heat conditions in TCM (Eucommia is warming)"],
+        warnings: ["Eucommia ulmoides (Du Zhong / Hardy Rubber Tree) — kidney-yang tonic in TCM", "Used for lower back pain, hypertension, and osteoporosis support", "Generally very safe; long history of use as tonic herb", "Mild antihypertensive effect — monitor if on medication"]
+    },
+    "Ligustrum": {
+        interactions: ["Ciclosporin / Tacrolimus (immune modulation)", "Chemotherapy drugs (may mitigate bone marrow suppression — clinical data limited)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Diarrhoea", "Deficiency cold conditions in TCM"],
+        warnings: ["Ligustrum lucidum (Nu Zhen Zi / Chinese Privet) — liver and kidney yin tonic in TCM", "Used with Eclipta prostrata (Han Lian Cao) in the formula Er Zhi Wan for kidney-yin deficiency", "Case reports of liver injury — use caution with long-term high-dose consumption", "Generally safe at standard doses; monitor liver enzymes with prolonged use"]
+    },
+    "Magnolia Bark": {
+        interactions: ["Benzodiazepines / Zolpidem (additive CNS depression from honokiol and magnolol)", "Warfarin (antiplatelet activity)", "Anticholinergic drugs (magnolol has anticholinergic-like activity)", "Amlodipine (calcium channel inhibition)"],
+        contraindications: ["Pregnancy (muscle-relaxing effect on uterus)", "Breastfeeding"],
+        warnings: ["Magnolia officinalis (Hou Po) — used in TCM for anxiety, depression, and digestive issues", "Honokiol and magnolol have potent CNS-sedating and anxiolytic properties", "Do not use with benzodiazepines or sleep medications without medical advice", "Anti-obesity potential studied in clinical trials"]
+    },
+    "Coptis": {
+        interactions: ["Metformin (berberine in coptis has additive blood sugar lowering)", "Cyclosporin / Tacrolimus (CYP3A4 inhibition from berberine — raises drug levels)", "Warfarin (antiplatelet berberine)", "Antibiotics (synergistic antimicrobial — but may also affect gut microbiome)", "QT-prolonging drugs: Azithromycin / Clarithromycin (additive QT prolongation risk)"],
+        contraindications: ["Pregnancy (berberine — embryotoxic)", "Breastfeeding (berberine in breast milk)", "Newborns and infants"],
+        warnings: ["Coptis chinensis (Huang Lian) — the highest natural source of berberine in TCM", "Very bitter — typically used in small doses in formulas", "Berberine drug interactions are significant — see Berberine entry", "Used clinically for type 2 diabetes in China — effective but requires monitoring"]
+    },
+    "Pueraria": {
+        interactions: ["Methotrexate (puerarin may affect methotrexate transport)", "Antidiabetics (puerarin lowers blood glucose — additive)", "Anticoagulants (mild antiplatelet)", "Alcohol (kudzu extracts used to reduce alcohol craving — daidzin inhibits aldehyde dehydrogenase)", "Tamoxifen (isoflavone phytoestrogen — possible antagonism)"],
+        contraindications: ["Oestrogen-sensitive conditions (isoflavone content)", "Pregnancy — insufficient data"],
+        warnings: ["Pueraria montana var. lobata (Ge Gen / Kudzu) — used in TCM for stiff neck, fever, and alcoholism", "Kudzu extract used in clinical trials for alcohol use disorder", "Phytoestrogenic isoflavones — discuss with oncologist in hormone-sensitive cancer history", "Generally well tolerated; liver safety confirmed in most trials"]
+    },
+    "Fritillaria": {
+        interactions: ["Cardiac drugs: Digoxin / Beta-blockers (isosteroidal alkaloids — additive bradycardia)", "ACE inhibitors (additive cough side effect)", "Respiratory medications (additive antitussive — may over-suppress cough reflex)"],
+        contraindications: ["Cold phlegm conditions in TCM", "Pregnancy"],
+        warnings: ["Fritillaria cirrhosa (Chuan Bei Mu) and F. thunbergii (Zhe Bei Mu) — TCM herbs for cough", "Contains isosteroidal alkaloids (imperialine, verticinone) — cardiac and neuromuscular activity", "Primarily used for chronic cough and bronchitis — quite safe at therapeutic doses in TCM formulas", "Toxicity in overdose — adhere to recommended doses in classical formulas"]
+    },
+    "Acanthopanax": {
+        interactions: ["Sedatives / CNS depressants (additive)", "Immunosuppressants (immune stimulation)", "Anticoagulants (mild antiplatelet)"],
+        contraindications: ["Autoimmune diseases", "Pregnancy"],
+        warnings: ["Eleutherococcus senticosus (Siberian Ginseng / Ci Wu Jia) — adaptogen widely used in TCM and Russia", "Often adulterated with Periploca sepium (silk vine) which has cardiac glycoside activity — source carefully", "Genuine Siberian ginseng is generally safe; adulterated products are dangerous", "Mild stimulant effect — take in the morning to avoid insomnia"]
+    },
+
+    // ── African Traditional Medicine Plants ────────────────────────────────────
+
+    "Devil's Claw": {
+        interactions: ["Warfarin / Aspirin / Clopidogrel (harpagoside — significant anticoagulant and antiplatelet activity)", "Antacids / PPIs: Omeprazole / Pantoprazole (increased gastric acid — antagonises acid-reducing drugs)", "Antidiabetics (additive hypoglycaemia)", "Antiarrhythmics / Cardiac drugs (harpagoside affects heart rhythm at high doses)", "Antihypertensives (mild hypotensive activity)"],
+        contraindications: ["Peptic ulcers and GERD (stimulates acid secretion)", "Pregnancy (uterotonic)", "Gallstones (bile stimulation)", "Active bleeding disorders"],
+        warnings: ["Harpagophytum procumbens — used primarily for osteoarthritis and lower back pain (good clinical evidence)", "Harpagosides are the active anti-inflammatory compounds", "Do not take with blood thinners without monitoring INR", "One of the better-studied African medicinal plants with positive clinical trial data for OA"]
+    },
+    "Sutherlandia": {
+        interactions: ["Antiretroviral drugs: Efavirenz / Nevirapine (CYP3A4 induction may reduce HIV drug levels — serious concern in Africa)", "Warfarin (GABA-like activity — possible interaction)", "Antidiabetics (canavanine and pinitol lower blood sugar)", "Immunosuppressants (immune stimulation antagonises)"],
+        contraindications: ["HIV/AIDS patients on antiretroviral therapy (drug interaction documented)", "Pregnancy (L-canavanine — possible teratogen)", "Autoimmune conditions"],
+        warnings: ["Sutherlandia frutescens (Cancer Bush / Kankerbos) — important traditional medicine in South Africa", "L-canavanine content may exacerbate SLE/autoimmune conditions (similar to alfalfa)", "Drug interaction with ARVs is clinically significant in sub-Saharan Africa", "Despite name, anticancer properties in humans are not clinically established"]
+    },
+    "Buchu": {
+        interactions: ["Warfarin (diosphenol — volatile oil has anticoagulant activity)", "Furosemide / Hydrochlorothiazide (additive diuretic — electrolyte depletion)", "Lithium (diuresis increases plasma lithium)", "Antibiotics — UTI treatment (buchu may reduce efficacy of synthetic antibiotics if used as sole therapy)"],
+        contraindications: ["Pregnancy (volatile oil — uterotonic)", "Kidney disease (volatile oil irritates inflamed kidneys)", "Active UTI with haematuria (haemorrhagic cystitis risk)"],
+        warnings: ["Agathosma betulina — traditional Khoi and Cape Malay remedy for UTI and kidney health", "Diosphenol has antiseptic properties in the urinary tract", "Do not substitute buchu for antibiotics in established UTI — use as adjunct only", "Essential oil is very concentrated — internal use of oil (not tea) not recommended"]
+    },
+    "Pelargonium": {
+        interactions: ["Warfarin (umckalin and coumarins — anticoagulant)", "Immunosuppressants (immune stimulation)", "Hepatotoxic drugs (rare but reported hepatotoxicity — additive risk)"],
+        contraindications: ["Pregnancy and breastfeeding", "Liver disease", "Asteraceae allergy (some cross-reactivity)"],
+        warnings: ["Pelargonium sidoides (Umckaloabo / EPs 7630) — South African plant used for acute bronchitis", "Good clinical evidence for acute respiratory tract infections — one of the few African herbs with robust trial data", "Post-marketing surveillance identified rare cases of hepatotoxicity and haematological effects", "EPs 7630 standardised extract is different from other Pelargonium species — ensure correct product"]
+    },
+    "African Wild Ginger": {
+        uses: ["Respiratory infections and cough", "Anti-inflammatory", "Antibacterial", "Digestive disorders"],
+        preparation: ["Root decoction", "Traditional steam inhalation", "Infusion of rhizome"],
+        dosage: "Under traditional healer guidance; 1–2 cups decoction/day"
+    },
+    "Moringa": {
+        interactions: ["Levothyroxine (may alter T3/T4 levels)", "Metformin / Insulin (additive blood sugar lowering)", "Atenolol / Lisinopril (additive antihypertensive effect)"],
+        contraindications: ["Pregnancy (root, bark, and flowers are uterotonic — leaves safer)", "Breastfeeding (bark/root)", "Hypothyroidism"],
+        warnings: ["Root and bark should never be used during pregnancy", "Moringa leaves are nutritionally safe in food amounts", "May enhance effects of antihypertensive and antidiabetic drugs"]
+    },
+    "Rooibos": {
+        interactions: ["Warfarin (quercetin and rutin — mild anticoagulant)", "Iron supplements (tannins in fermented rooibos reduce iron absorption — but much lower than black tea)", "Antidiabetics (flavonoids may mildly lower blood sugar)", "Cyclosporin (aspalathin may modulate CYP3A4)"],
+        contraindications: ["Oestrogen-sensitive conditions (weak phytoestrogenic activity)", "Kidney disease — insufficient data on high doses"],
+        warnings: ["Aspalathus linearis — South African herbal tea, naturally caffeine-free", "Excellent antioxidant profile (aspalathin, nothofagin, rutin, quercetin)", "Green (unfermented) rooibos has stronger antioxidant activity than red (fermented)", "Generally extremely safe — one of the safest herbal teas with wide therapeutic range"]
+    },
+    "Hoodia": {
+        interactions: ["Antidiabetics (appetite suppression may mask hypoglycaemia signs)", "Anticoagulants (uncertain — data limited)", "Cardiac medications — P57 (active compound) has uncertain cardiac effects"],
+        contraindications: ["Pregnancy and breastfeeding", "Diabetes", "Cardiovascular disease", "Liver or kidney disease"],
+        warnings: ["Hoodia gordonii — San Bushman appetite suppressant from Southern Africa", "P57 (oxypregnane steroidal glycoside) is the putative appetite-suppressing compound", "Most commercial 'hoodia' products contain little or no authentic Hoodia gordonii — widespread adulteration", "Limited clinical safety data — hepatotoxicity and cardiovascular effects documented in preclinical studies"]
+    },
+    "Pygeum": {
+        interactions: ["Alpha-blockers: Tamsulosin / Alfuzosin (additive benefit for BPH but possible additive hypotension)", "5-alpha reductase inhibitors: Finasteride / Dutasteride (additive BPH benefit)", "Anticoagulants (moderate ferulic acid antiplatelet activity)"],
+        contraindications: ["Prostate cancer (consult urologist before use)", "Pregnancy — N/A (male-specific use)", "Active bleeding disorders"],
+        warnings: ["Prunus africana (Pygeum africanum) — African cherry bark for BPH (benign prostatic hyperplasia)", "Clinical trials support modest improvement in urinary flow and nocturia", "Over-harvested and now CITES-protected — source responsibly", "Should not replace standard BPH medications without urologist consultation"]
+    },
+    "African Potato": {
+        interactions: ["Antiretroviral drugs: Efavirenz / Lopinavir (CYP3A4 induction — significantly reduces HIV drug plasma levels — serious)", "Warfarin (anticoagulant activity)", "Digoxin (cardiac sterols — possible additive effect)", "Immunosuppressants (sterols modulate immune function)"],
+        contraindications: ["HIV/AIDS patients on antiretroviral therapy (serious interaction)", "Pregnancy", "Autoimmune conditions"],
+        warnings: ["Hypoxis hemerocallidea — widely used in South Africa for immune support including HIV-related conditions", "Plant sterols (hypoxoside, rooperol) modulate immune function", "Serious pharmacokinetic interaction with ARVs documented — reduces efavirenz levels — threatens HIV treatment", "Patients with HIV on ARVs must avoid African potato"]
+    },
+    "Khat": {
+        interactions: ["ALL stimulants: Ephedrine / Methylphenidate / Amphetamines (additive cardiovascular stimulation)", "MAO inhibitors (cathinone — serious hypertensive crisis risk)", "Antihypertensives (opposes BP control)", "Antidiabetics (raises blood glucose)", "Warfarin (increased metabolism — reduces anticoagulant effect)"],
+        contraindications: ["Cardiovascular disease", "Hypertension", "Mental health conditions (psychosis risk)", "Pregnancy (vasoconstriction — foetal harm)", "Lactation"],
+        warnings: ["Catha edulis — stimulant plant from East Africa and Arabian Peninsula", "Cathinone and cathine are amphetamine-like compounds — Schedule I or II controlled substance in many countries", "Long-term chewing causes significant psychiatric and cardiovascular effects", "Tolerance and dependence develop rapidly", "Legal status varies widely — illegal in most Western countries; traditional use in East Africa and Yemen"]
+    },
+
+    // ── Common Worldwide Medicinal Plants ─────────────────────────────────────
+
+    "Turmeric": {
+        interactions: ["Warfarin / Clopidogrel / Aspirin (additive antiplatelet effect)", "Metformin / Insulin (additive hypoglycaemia)", "Omeprazole / Ranitidine (curcumin reduces acid secretion)", "Paclitaxel / Doxorubicin (may reduce chemo efficacy in some studies)", "Iron supplements (curcumin chelates iron)"],
+        contraindications: ["Gallbladder obstruction or bile-duct stones", "Active bleeding disorders", "Iron-deficiency anaemia"],
+        warnings: ["High-dose supplements (>2 g/day) significantly increase bleeding risk", "Curcumin bioavailability is low — piperine (black pepper) enhances absorption but also raises drug plasma levels", "Avoid 2 weeks before surgery"]
+    },
+    "Grapefruit": {
+        interactions: ["Statins: Simvastatin / Lovastatin / Atorvastatin (CYP3A4 inhibition — raises statin plasma levels dramatically — myopathy risk)", "Calcium channel blockers: Amlodipine / Felodipine / Nifedipine (CYP3A4 — raised plasma levels)", "Immunosuppressants: Cyclosporin / Tacrolimus / Sirolimus (CYP3A4 — significant toxicity risk)", "Benzodiazepines: Midazolam / Triazolam (CYP3A4 — raised sedation)", "HIV antiretrovirals: Saquinavir (CYP3A4 — raises plasma levels)", "Anticoagulants: Apixaban / Rivaroxaban (CYP3A4 and P-gp inhibition)", "Amiodarone (CYP3A4 — severe cardiac toxicity)"],
+        contraindications: ["Used concurrently with any CYP3A4-metabolised medication unless dose-adjusted by physician"],
+        warnings: ["Grapefruit juice is one of the most clinically significant food-drug interactions", "Furanocoumarins (bergamottin, DHB) are the interacting compounds — inhibit intestinal CYP3A4 permanently until new enzyme is synthesised (24–72 hours)", "Even one glass of grapefruit juice can double or triple plasma levels of certain drugs", "Seville oranges, pomelo, and tangelo have similar effects", "Many statin labels specifically warn against grapefruit consumption"]
+    },
+    "Cranberry": {
+        interactions: ["Warfarin (CYP2C9 inhibition by proanthocyanidins — clinically significant INR increase)", "Tacrolimus / Ciclosporin (mild CYP3A4 inhibition)", "Antacids (ascorbic acid increases acidic drug absorption)", "Flurbiprofen (CYP2C9 — raises NSAID levels)"],
+        contraindications: ["Kidney stones — calcium-oxalate type (high oxalate content)", "Aspirin allergy / Salicylate sensitivity (high salicylic acid in berries)"],
+        warnings: ["Warfarin interaction is well-documented in case reports and pharmacokinetic studies — INR monitoring recommended", "For UTI prevention, the evidence is modest — proanthocyanidins prevent E. coli adhesion", "High oxalate content — caution in recurrent calcium-oxalate kidney stone formers", "Juice is high in sugar — relevant for diabetes"]
+    },
+    "Turmeric": {
+        interactions: ["Warfarin / Clopidogrel / Aspirin (additive antiplatelet effect)", "Metformin / Insulin (additive hypoglycaemia)", "Iron supplements (curcumin chelates iron)"],
+        contraindications: ["Gallbladder obstruction", "Active bleeding disorders"],
+        warnings: ["High-dose supplements increase bleeding risk", "Avoid 2 weeks before surgery"]
+    },
+    "Cat's Claw": {
+        interactions: ["Ciclosporin / Tacrolimus (immune stimulation antagonises immunosuppression)", "Warfarin / Aspirin (anticoagulant and antiplatelet oxindole alkaloids)", "Antihypertensives (mild BP lowering)", "Antiretroviral drugs (quinovic acid glycosides may inhibit viral replication — unstudied interaction)", "Cytochrome P450 substrates (alkaloids modulate CYP3A4)"],
+        contraindications: ["Active autoimmune diseases (SLE, RA, MS)", "Pregnancy (uterotonic at high doses)", "Organ transplant recipients on immunosuppressants", "Coagulation disorders"],
+        warnings: ["Uncaria tomentosa and U. guianensis — South American vine used for inflammation and immune support", "Immune stimulation is significant — use with extreme caution in autoimmune conditions", "Oxindole alkaloids are the primary active compounds — different chemotypes (tetracyclic vs pentacyclic) have different pharmacology", "Should not be used within 2 weeks of surgery"]
+    },
+    "Pau D'Arco": {
+        interactions: ["Warfarin / Clopidogrel (lapachol — significant anticoagulant and antiplatelet activity)", "Chemotherapy (lapachol has anti-tumour activity but also increases bleeding risk in combination)", "Anticoagulants (additive — monitor INR)"],
+        contraindications: ["Pregnancy (possible teratogen — animal studies)", "Bleeding disorders", "Pre-operative period"],
+        warnings: ["Tabebuia impetiginosa (Lapacho / Taheebo) — South American bark used for infections and cancer support", "Lapachol at high doses causes haemolytic anaemia and anticoagulation", "Clinical evidence for anticancer or antifungal effects in humans is limited", "Avoid combining with blood thinners"]
+    },
+    "Arnica": {
+        interactions: ["Warfarin / Aspirin / NSAIDs (helenalin — significant anticoagulant and antiplatelet — topical absorption is minimal but supplement form is significant)", "Antihypertensives (mild vasodilatory activity)"],
+        contraindications: ["Internal use — toxic; topical use only (not on broken skin)", "Asteraceae allergy (ragweed cross-reactivity)", "Pregnancy"],
+        warnings: ["Arnica montana — EXTERNAL USE ONLY for bruising, muscle pain, and arthritis", "Helenalin in arnica is toxic if ingested — oral use causes vomiting, arrhythmia, and death", "Homeopathic arnica (30C, 200C) contains negligible active compound — different safety profile", "Do not apply to broken skin, wounds, or mucous membranes", "Widely misused internally — the topical gel/cream is the safe form"]
+    },
+    "Kava Kava": {
+        interactions: ["Benzodiazepines / Zolpidem / Alcohol (additive CNS depression — serious over-sedation)", "Levodopa / Dopaminergic agents (kavalactones interfere with dopamine — worsens Parkinson's symptoms)", "Hepatotoxic drugs (additive liver toxicity — major concern)", "Alprazolam — specific case report of coma from combination", "Warfarin (additive anticoagulant effect)"],
+        contraindications: ["Liver disease (hepatotoxicity risk)", "Depression (may worsen)", "Pregnancy and breastfeeding", "Active alcohol use disorder", "Any concurrent hepatotoxic drug"],
+        warnings: ["Piper methysticum — kava kava preparations are banned or restricted in several countries due to hepatotoxicity", "Causes a reversible, dose-dependent liver toxicity — 25+ cases of liver failure requiring transplant reported", "Do not use for more than 3 months; avoid with alcohol or other liver-stressing agents", "Traditional aqueous kava preparations may be safer than acetone/ethanol extracts — but evidence is inconclusive", "Dermopathy (scaly skin rash) with chronic heavy use"]
+    },
+    "Saw Palmetto": {
+        interactions: ["Warfarin / Clopidogrel (fatty acid antiplatelet activity — modest)", "Finasteride / Dutasteride (additive 5-alpha-reductase inhibition — may be synergistic)", "Combined oral contraceptives / Testosterone replacement (hormonal modulation)", "Iron (may impair iron absorption)"],
+        contraindications: ["Prostate cancer — do not use without urology clearance", "Pregnancy and breastfeeding (hormone-modulating)", "Bleeding disorders"],
+        warnings: ["Serenoa repens — widely used for BPH (benign prostatic hyperplasia)", "Clinical evidence is mixed — some trials show improvement in urinary symptoms, others are negative", "Does not prevent prostate cancer and may mask PSA elevation — inform urologist", "Hormonal activity is mild but relevant in hormone-sensitive conditions"]
+    },
+    "Feverfew": {
+        interactions: ["Warfarin / Aspirin / Clopidogrel (parthenolide — significant antiplatelet activity)", "NSAIDs: Ibuprofen / Naproxen (may reduce feverfew's antiplatelet activity — pharmacological antagonism)", "Triptans: Sumatriptan / Rizatriptan (additive serotonin-modulating activity)", "Corticosteroids (parthenolide inhibits NF-κB — possible interaction)"],
+        contraindications: ["Pregnancy (parthenolide is uterotonic)", "Asteraceae allergy", "Active bleeding disorders"],
+        warnings: ["Tanacetum parthenium — used for migraine prevention (modest clinical evidence)", "Abrupt discontinuation after prolonged use causes 'post-feverfew syndrome' — anxiety, insomnia, joint pain, rebound migraine", "Parthenolide inhibits platelet aggregation — stop 1–2 weeks before surgery", "Fresh leaf causes mouth ulcers in sensitive individuals — capsules preferred"]
+    },
+    "Willow Bark": {
+        interactions: ["Warfarin / Aspirin / NSAIDs (salicin metabolises to salicylate — significant antiplatelet and anticoagulant additive effect)", "Methotrexate (salicylates reduce methotrexate excretion — toxicity risk)", "Antidiabetics (mild hypoglycaemia)", "Beta-blockers: Atenolol (salicylates may reduce antihypertensive efficacy)"],
+        contraindications: ["Aspirin allergy or sensitivity (cross-reaction)", "Children and teenagers with viral infections (Reye syndrome risk)", "Peptic ulcer", "Pregnancy (high doses — Reye risk and antiplatelet)", "Bleeding disorders"],
+        warnings: ["Salix alba / white willow bark — natural salicylate source (similar to aspirin but slower-onset)", "Contains salicin which is metabolised to salicylate — shares aspirin risks including GI irritation and bleeding", "Children with viral fever should NOT take willow bark (Reye syndrome risk, same as aspirin)", "Lower dose of salicylate than aspirin — less cardiovascular protective effect too"]
+    },
+    "Horse Chestnut": {
+        interactions: ["Anticoagulants: Warfarin / Aspirin / Heparin (aescin — anticoagulant effect — additive bleeding risk)", "Antidiabetics (aescin may lower blood glucose)", "Antihypertensives (mild vasodilatory — additive)", "Lithium (diuretic effect — increases lithium levels)"],
+        contraindications: ["Bleeding disorders", "Kidney disease", "Pregnancy and breastfeeding", "Liver disease"],
+        warnings: ["Aesculus hippocastanum — primarily used for chronic venous insufficiency and varicose veins", "Aescin (escin) is the active compound — good clinical evidence for venous insufficiency", "Raw horse chestnut is TOXIC (aesculin — haemolytic glycoside) — only standardised, processed extract is safe", "Do not eat raw horse chestnut seeds — toxic symptoms include nausea, vomiting, haemolysis"]
+    },
+    "Ginkgo Biloba": {
+        interactions: ["Warfarin / Aspirin / Clopidogrel (ginkgolides are platelet activating factor antagonists — significant anticoagulant risk)", "SSRIs / SNRIs: Fluoxetine / Venlafaxine (additive serotonin effects — serotonin syndrome reported)", "Trazodone (additive CNS effects — coma reported in combination)", "Antiepileptics: Phenytoin / Carbamazepine / Valproate (CYP induction — reduces drug levels)", "Cyclosporin (variable — may increase or decrease levels)", "Hypoglycaemic drugs (mild additive blood sugar lowering)"],
+        contraindications: ["Bleeding disorders", "Pre-operative period (stop 2 weeks before surgery)", "Pregnancy (possible uterotonic)"],
+        warnings: ["Significant and well-documented anticoagulant effect from ginkgolide B — serious bleeding risk with blood thinners", "Ginkgo nuts are toxic (4-methoxypyridoxine — causes seizures) — only leaf extracts are used medicinally", "Stop 2 weeks before surgery", "Contaminated or unextracted products may contain ginkgolic acids — allergenic and toxic"]
+    },
+    "Bilberry": {
+        interactions: ["Warfarin / Aspirin / Clopidogrel (anthocyanins and quercetin — antiplatelet activity)", "Antidiabetics (additive blood sugar lowering)", "Antihypertensives (mild additive effect)", "Iron supplements (tannins may reduce absorption)"],
+        contraindications: ["Bleeding disorders", "Surgery within 2 weeks", "Diabetes on antidiabetic medication (monitor glucose)"],
+        warnings: ["Vaccinium myrtillus — European blueberry used for eye health, microcirculation, and blood sugar", "Anthocyanins are the primary active compounds — antioxidant and capillary-stabilising", "Clinical evidence for night vision improvement is weak despite popular belief", "Generally very safe as food; concentrated extracts have moderate interaction potential"]
+    },
+    "Ashwagandha": {
+        interactions: ["Benzodiazepines / Zolpidem (additive CNS depression)", "Levothyroxine (may increase T4/T3 — monitor TSH)", "Ciclosporin / Tacrolimus (immune stimulation counteracts)", "Prednisolone / Methylprednisolone (may enhance or oppose immune effects)"],
+        contraindications: ["Pregnancy (uterotonic)", "Hyperthyroidism / Graves' disease", "Active autoimmune conditions (RA, lupus, MS)"],
+        warnings: ["Can raise thyroid hormone levels — recheck TSH after 4 weeks", "May cause excessive drowsiness when combined with sedatives", "Avoid in hormone-sensitive cancers (androgenic activity)"]
+    },
+    "Horsetail": {
+        interactions: ["Diuretics: Furosemide / Hydrochlorothiazide (additive diuresis — dehydration and electrolyte loss)", "Lithium (diuretic effect concentrates lithium — toxicity risk)", "Thiamine / Vitamin B1 (equisetine is a thiamine antagonist — causes B1 deficiency with chronic use)", "Nicotine (contains nicotine — additive effects with nicotine patches/gums/vaping)"],
+        contraindications: ["Thiamine deficiency / chronic alcohol use (thiaminase enzyme in fresh plant destroys B1)", "Pregnancy", "Heart disease (fluid and electrolyte changes)", "Kidney disease"],
+        warnings: ["Equisetum arvense — used for urinary tract health, bone strength (high silica), and wound healing", "Contains thiaminase enzyme which destroys Vitamin B1 — do not use raw; drying/cooking inactivates it", "Nicotine content is pharmacologically relevant — additive with nicotine replacement therapies", "Good silica content supports nail, hair, and bone health — safe at standard doses"]
+    },
+    "Marshmallow Root": {
+        interactions: ["Oral medications generally (mucilage forms a gel — delays absorption of all oral drugs — space by 2 hours)", "Metformin (mucilage may slow absorption)", "Lithium (possible enhanced lithium absorption)"],
+        contraindications: ["Diabetes (mucilage may affect blood sugar regulation)", "Pregnancy — insufficient data on high doses"],
+        warnings: ["Althaea officinalis — soothing mucilaginous herb for GI and respiratory tract", "Mucilage can coat the GI tract and slow or reduce absorption of ANY medication — always take drugs separately", "Generally very safe and well tolerated — excellent safety profile", "Used for sore throat, GERD, gastritis, dry cough, and UTI (soothes mucous membranes)"]
+    },
+    "Bladderwrack": {
+        interactions: ["Levothyroxine / Carbimazole (high iodine — disrupts thyroid function — both hyper- and hypothyroidism)", "Anticoagulants: Warfarin / Heparin (fucoidans — significant anticoagulant activity)", "Antihypertensives (mild additive)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Thyroid disorders (high iodine content)", "Pregnancy and breastfeeding (iodine excess and heavy metal contamination risk)", "Kidney disease", "Active bleeding disorders"],
+        warnings: ["Fucus vesiculosus — brown seaweed used for thyroid support and weight management", "Very high iodine content — can cause or worsen both hypothyroidism (Wolff-Chaikoff effect) and hyperthyroidism (Jod-Basedow phenomenon)", "Marine algae accumulate heavy metals (arsenic, lead, mercury) — quality control essential", "Should NOT be used without thyroid function testing — iodine excess is as dangerous as deficiency"]
+    },
+
+    // ── More Indian Kitchen and Garden Plants ──────────────────────────────────
+
+    "Curry Leaf": {
+        interactions: ["Metformin / Glipizide (additive hypoglycaemia)"],
+        contraindications: [],
+        warnings: ["Safe in food amounts — used daily in Indian cooking", "May lower blood glucose — monitor if diabetic on medication", "High in carbazole alkaloids which have antioxidant and hypoglycaemic properties"]
+    },
+    "Drumstick Leaf": {
+        uses: ["Iron and protein supplementation", "Blood sugar support", "Lactation enhancement", "Anti-inflammatory"],
+        preparation: ["Cooked fresh leaves in dal or curry (Murungai keerai)", "Leaf powder in smoothies", "Drumstick vegetable (pods) in Sambhar"],
+        dosage: "1–2 cups of cooked leaves per day; 2–4 g leaf powder"
+    },
+    "Brahmi Leaves": {
+        uses: ["Cognitive enhancement", "Memory support", "Anxiety and stress", "Hair growth (topical oil)"],
+        preparation: ["Fresh juice with honey", "Brahmi chutney (South Indian)", "Brahmi oil for scalp massage"],
+        dosage: "30 ml fresh juice or 300–450 mg standardised extract/day"
+    },
+    "Curry Leaf Tree": {
+        uses: ["Diabetes management", "Hair loss prevention", "Digestive health", "Antioxidant"],
+        preparation: ["10 fresh leaves chewed on empty stomach (traditional diabetes remedy)", "Leaf paste for hair", "Add to tadka/tempering in cooking"],
+        dosage: "8–10 fresh leaves/day medicinally; culinary use throughout day"
+    },
+    "Pudina": {
+        uses: ["Digestive aid and bloating", "Nausea relief", "Headache (topical)", "Respiratory congestion"],
+        preparation: ["Pudina chutney (ground with garlic and lemon)", "Pudina raita (yoghurt with mint)", "Fresh leaves in drinks", "Pudina tea"],
+        dosage: "Culinary amounts; 1–2 cups mint tea for digestive relief"
+    },
+    "Dhania": {
+        uses: ["Digestive bloating and gas", "Blood sugar support", "Anti-inflammatory", "Urinary tract health"],
+        preparation: ["Coriander seed water (boil 1 tsp seeds, cool and drink)", "Fresh leaves in chutney and garnish", "Coriander powder in cooking"],
+        dosage: "1 cup seed water/day for blood sugar; culinary leaf amounts"
+    },
+    "Jeera": {
+        interactions: ["Metformin / Insulin (additive blood sugar lowering from thymoquinone and cuminaldehyde)", "Anticoagulants (mild — thymol derivatives)", "Iron supplements (cumin enhances non-haem iron absorption — synergistic)"],
+        contraindications: ["Active bleeding disorders (high-dose supplements)"],
+        warnings: ["Cuminum cyminum / cumin — common Indian kitchen spice with significant medicinal properties", "Cumin water (jeera pani) is a traditional digestive remedy — safe", "May lower blood sugar — relevant for diabetics on medication at supplement doses", "Enhances iron absorption from plant foods — beneficial in vegetarian diets"]
+    },
+    "Methi Leaf": {
+        uses: ["Blood sugar management", "Lactation support", "Digestive health", "Cholesterol reduction"],
+        preparation: ["Methi paratha (flatbread with fresh leaves)", "Methi dal", "Soaked seeds in water (drink first thing in morning)", "Methi tea"],
+        dosage: "1 tsp soaked seeds in the morning; culinary leaf amounts"
+    },
+    "Ajwain": {
+        interactions: ["Anticoagulants (thymol — mild antiplatelet)", "Antihypertensives (mild diuretic and vasodilatory)", "Antiepileptics (thymol may modulate GABA — uncertain interaction)"],
+        contraindications: ["Pregnancy in large medicinal doses (uterotonic)", "Peptic ulcer (irritant)", "Liver disease (thymol metabolism)"],
+        warnings: ["Trachyspermum ammi / Carom seeds / Bishop's weed — common in Indian cooking", "Thymol is the primary active compound — also present in thyme and oregano", "Used for digestive complaints, colic, and respiratory issues in India", "Safe in culinary amounts; medicinal doses (1–2 g thymol) have pharmacological effects"]
+    },
+    "Hing": {
+        interactions: ["Anticoagulants: Warfarin (ferulic acid — antiplatelet activity)", "Antihypertensives (umbelliferone and ferulic acid lower BP — mild)", "Antidiabetics (mild blood sugar lowering)"],
+        contraindications: ["Pregnancy (strong uterotonic — may cause miscarriage)", "Bleeding disorders", "Children under 5 (can cause haemolysis)"],
+        warnings: ["Ferula assa-foetida (Asafoetida / Heeng) — pungent resin widely used in Indian cooking", "Strong antiflatulent and digestive stimulant — small amounts are safe and effective", "Large doses are uterotonic — absolutely avoid in pregnancy", "Anticoagulant activity is relevant at supplement/medicinal doses but negligible in cooking amounts"]
+    },
+    "Tejpat": {
+        interactions: ["Metformin / Insulin (additive blood sugar lowering from cinnamon-related compounds)", "Warfarin (coumarin content — may alter INR)", "Anticoagulants (mild)"],
+        contraindications: ["Pregnancy in large medicinal doses", "Liver disease (coumarin metabolism)"],
+        warnings: ["Cinnamomum tamala / Indian Bay Leaf / Malabar Leaf — not to be confused with Mediterranean bay leaf (Laurus nobilis)", "Contains coumarin and cinnamate compounds similar to cinnamon — similar (though milder) interaction profile", "Widely used in biryani, pulao, and curries — safe in culinary amounts", "Leaf tea in Ayurveda used for diabetes and digestion — contains active blood sugar-lowering compounds"]
+    },
+    "Imli": {
+        interactions: ["Aspirin / Ibuprofen (tamarind increases bioavailability of aspirin significantly)", "Metformin / Insulin (mild blood sugar lowering)", "Iron supplements (tartaric acid enhances non-haem iron absorption)", "Antibiotics: Ampicillin / Amoxicillin (increased bioavailability by enhanced GI absorption)"],
+        contraindications: ["Aspirin allergy (enhanced aspirin absorption may cause toxicity)", "Active peptic ulcer (high acidity — tartaric and malic acid)"],
+        warnings: ["Tamarindus indica / Imli / Puli — widely used in Indian and Southeast Asian cooking", "Tamarind significantly increases bioavailability of aspirin — relevant for high-dose aspirin users", "Very acidic — may worsen GERD or peptic ulcer", "Hypoglycaemic effect documented — monitor blood sugar if on antidiabetics"]
+    },
+    "Kadamba": {
+        uses: ["Fever management (traditional)", "Wound healing (topical)", "Anti-inflammatory", "Respiratory infections"],
+        preparation: ["Bark decoction for fever", "Leaf poultice for wounds", "Traditional Ayurvedic formulations"],
+        dosage: "Under Ayurvedic practitioner guidance only"
+    },
+    "Sitaphal Leaf": {
+        interactions: ["Antidiabetics (acetogenins — blood sugar lowering)", "Immunosuppressants (acetogenins modulate immunity)", "Chemotherapy — caution: acetogenins (annonacin) are mitochondrial complex I inhibitors"],
+        contraindications: ["Pregnancy (seeds and leaves are abortifacient)", "Neurodegenerative disease — atypical Parkinson's concern"],
+        warnings: ["Annona squamosa (Sugar apple / Custard apple leaf) — seeds, bark, and leaves used medicinally; fruit is safe food", "Acetogenins (including annonacin) in seeds and bark are potent mitochondrial toxins", "High consumption of soursop (Annona muricata) in some Caribbean populations is epidemiologically linked to atypical Parkinsonism", "Do not consume seeds or bark extracts — fruit pulp is safe to eat"]
+    },
+    "Baheda": {
+        interactions: ["Warfarin / Anticoagulants (gallotannins — mild anticoagulant)", "Metformin (mild blood sugar lowering)", "Oral iron (tannins may reduce absorption — space by 2 hours)"],
+        contraindications: ["Pregnancy (emmenagogue in large doses)", "Active diarrhoea"],
+        warnings: ["Terminalia bellirica (Bibhitaki in Sanskrit) — one of the three fruits in Triphala", "Strong astringent and tonic properties — useful for respiratory, GI, and vision health in Ayurveda", "Tannins chelate iron and other minerals — space from mineral supplements"]
+    },
+
+    // ── Additional Indian Plants ──────────────────────────────────────────────
+
+    "Jackfruit Leaf": {
+        interactions: ["Metformin / Insulin (lectins and flavonoids — additive blood sugar lowering)", "Anticoagulants (mild antiplatelet flavonoids)"],
+        contraindications: ["Birch pollen allergy (cross-reactivity possible)", "Latex allergy (jackfruit latex — cross-reactive with natural rubber latex)"],
+        warnings: ["Artocarpus heterophyllus leaves traditionally used in India for diabetes management", "Leaf tea lowers blood glucose — monitor if on antidiabetics", "Latex from unripe fruit and stem can cause contact dermatitis in latex-sensitive individuals", "Fruit is a safe and nutritious food; leaves and bark have medicinal activity"]
+    },
+    "Teak": {
+        interactions: ["Anticoagulants: Warfarin (lapachol-like quinones — mild anticoagulant activity)", "Antidiabetics (bark extract — mild blood sugar lowering)"],
+        contraindications: ["Pregnancy (emmenagogue — stimulates uterine contractions)", "Kidney disease (oxalate content in heartwood)"],
+        warnings: ["Tectona grandis (Sagwan) — heartwood, bark, and leaves used in Ayurveda and Siddha medicine", "Teak sawdust is a significant occupational allergen — causes rhinitis, asthma, and contact dermatitis in woodworkers", "Internal use of bark or leaf should only be under Ayurvedic supervision", "Traditionally used for hair loss, skin disorders, and as a tonic"]
+    },
+    "Silk Cotton Tree": {
+        interactions: ["Antidiabetics (bark extract — additive blood sugar lowering)", "Anticoagulants (mild antiplatelet flavonoids in gum)"],
+        contraindications: ["Pregnancy (root bark — uterotonic)", "Cotton fibre allergy (kapok — aerogenic allergen)"],
+        warnings: ["Bombax ceiba (Semal / Shimul / Red Silk Cotton) — bark, roots, and gum used in Indian traditional medicine", "Kapok fibres from seed pods are an aerogenic allergen — respiratory sensitisation in occupational settings", "Root bark has uterotonic properties — strictly avoid in pregnancy", "Floral extracts used in Ayurveda as tonic; fruit and seeds used as topical anti-inflammatory"]
+    },
+    "Indian Laburnum": {
+        interactions: ["Antidiabetics: Metformin (cassia glycosides — additive blood sugar lowering)", "Laxatives (additive purgative — severe dehydration risk)", "Cardiac drugs (oxalic acid derivatives — additive effects uncertain)"],
+        contraindications: ["Pregnancy (strong purgative — risk of miscarriage)", "Children (all parts toxic — unripe pods especially dangerous)", "IBD / Crohn's disease"],
+        warnings: ["Cassia fistula (Amaltas / Golden Shower / Kondrai) — bark, root, leaves, and unripe pods are toxic", "Ripe pulp of pods is used as a gentle laxative in Ayurveda — unripe pods contain toxic compounds", "Anthraquinone glycosides are the purgative constituents — never self-dose; use only ripe pod pulp under guidance", "Flowers are used in Kerala as a vegetable (Vishu Kani) — safe in small food amounts"]
+    },
+    "Jamun": {
+        interactions: ["Metformin / Glibenclamide / Insulin (significant additive hypoglycaemia — jambolana glycoside)", "Antihypertensives (mild additive BP lowering from anthocyanins)", "Warfarin (mild antiplatelet — anthocyanins and ellagic acid)"],
+        contraindications: ["Hypoglycaemia (risk of excessive glucose lowering)", "Post-operative period (antiplatelet activity)"],
+        warnings: ["Syzygium cumini (Java Plum / Jamun / Naaval Pazham) — seeds, bark, and fruit all used in Ayurveda and Siddha", "Jamun seed powder is one of the most widely used traditional diabetes remedies in India — significant blood sugar lowering documented", "Eating unripe or excessive Jamun fruit may cause throat irritation and diarrhoea", "Seed powder can lower blood glucose by 20–30% — dangerous if combined with antidiabetic medication without monitoring"]
+    },
+    "Kathal": {
+        uses: ["Digestive health (unripe fruit as vegetable)", "Blood sugar management (seed flour)", "Antioxidant (ripe fruit)", "Nutritional support (high potassium, B vitamins)"],
+        preparation: ["Unripe jackfruit cooked as vegetable (Kathal sabji)", "Ripe fruit eaten fresh or dried", "Seed flour added to rotis and cooking"],
+        dosage: "Culinary amounts; 1–2 g seed flour daily as supplement"
+    },
+    "Agathi": {
+        interactions: ["Metformin / Insulin (additive blood sugar lowering)", "Anticoagulants (mild antiplatelet flavonoids)", "Iron supplements (oxalates — reduce absorption; space by 2 hours)"],
+        contraindications: ["Pregnancy in large medicinal doses", "Active diarrhoea (mild laxative effect of leaves)", "Hypothyroidism (possible goitrogenic compounds)"],
+        warnings: ["Sesbania grandiflora (August Tree / Agati / Agathi Keerai) — flowers, leaves, and bark used in South Indian and Southeast Asian medicine", "Leaves and flowers are consumed as vegetables in South India and Sri Lanka — safe in food amounts", "Medicinal doses of bark and seeds are stronger — use under guidance", "Rich in iron, calcium, and protein — beneficial as nutritional supplement especially for vegetarians"]
+    },
+    "Parijat": {
+        interactions: ["Antidiabetics (iridoid glycosides — additive blood sugar lowering)", "Anticoagulants (mild antiplatelet oleanolic acid)", "NSAIDs (additive anti-inflammatory — allows dose reduction)", "Antipyretics (additive fever-lowering effect)"],
+        contraindications: ["Pregnancy (emmenagogue — stimulates menstruation)", "Active diarrhoea (mild laxative)"],
+        warnings: ["Nyctanthes arbor-tristis (Night Jasmine / Har Singar / Parijata) — leaves, flowers, and bark used in Ayurveda", "Strong anti-inflammatory and antipyretic activity — used in Ayurveda for dengue, malaria, and arthritis", "Iridoid glycosides (arbortristoside) are the active compounds — well-studied antimalarial activity", "Do not use as sole treatment for malaria — use as adjunct under medical supervision"]
+    },
+    "Bhui Amla": {
+        interactions: ["Hepatotoxic drugs (hepatoprotective — reduces drug-induced liver injury — beneficial but may mask hepatotoxicity signals)", "Metformin (mild additive hypoglycaemia)", "Antiviral drugs (phyllanthin — documented anti-hepatitis-B activity — possible additive effect with antiviral medications)"],
+        contraindications: ["Pregnancy (emmenagogue)", "Bleeding disorders (mild antiplatelet effect)"],
+        warnings: ["Phyllanthus niruri (Stonebreaker / Bhumyamalaki / Keezhanelli) — significant hepatoprotective activity documented in clinical trials", "Used in Ayurveda and Siddha for liver disease, kidney stones, and urinary tract infections", "Anti-hepatitis-B virus (HBV) activity shown in human studies — use under physician supervision alongside conventional antiviral therapy", "May dissolve calcium oxalate kidney stones over time — adequate hydration essential during use"]
+    },
+    "Jatamansi": {
+        interactions: ["CNS depressants: Diazepam / Zolpidem / Barbiturates (additive sedation — risk of over-sedation)", "MAO inhibitors (jatamansone — possible interaction)", "Levothyroxine (may modulate thyroid function — monitor TSH)", "Antihypertensives (mild additive hypotension)"],
+        contraindications: ["Pregnancy (uterotonic at medicinal doses)", "Breastfeeding", "Epilepsy (may lower seizure threshold at high doses)"],
+        warnings: ["Nardostachys jatamansi (Spikenard / Jatamansi) — used in Ayurveda for anxiety, insomnia, and epilepsy", "Jatamansone is the primary active compound — sedative and anxiolytic activity", "Do not drive or operate machinery after use — sedating", "CITES Appendix II-listed species — overharvested; ensure ethically sourced product"]
+    },
+    "Chirata": {
+        interactions: ["Metformin / Glibenclamide (additive blood sugar lowering from amarogentin)", "Anticoagulants (mild antiplatelet)", "Antihypertensives (mild additive effect)"],
+        contraindications: ["Pregnancy (bitter compounds — potential abortifacient at high doses)", "Peptic ulcer (bitter principles stimulate acid secretion)", "Hypoglycaemia"],
+        warnings: ["Swertia chirayita (Chiretta / Indian Gentian / Chiraita) — intensely bitter Himalayan herb used in Ayurveda and Siddha", "One of the most bitter plants known — extremely small doses are medicinally active", "Amarogentin and swertianin are the primary active iridoids — anti-diabetic, anti-malarial, and hepatoprotective", "Adulteration with other Swertia species (S. angustifolia, S. bimaculata) is common — source from reputable supplier"]
+    },
+
+    // ── Additional TCM Plants ──────────────────────────────────────────────────
+
+    "Goji Berry": {
+        interactions: ["Warfarin (betaine and polysaccharides — significant increase in INR documented in case reports)", "Antidiabetics: Metformin / Insulin (additive blood sugar lowering from polysaccharides)", "Antihypertensives (mild additive BP lowering)"],
+        contraindications: ["Active bleeding disorders", "Pregnancy — insufficient safety data on supplements (food amounts likely safe)", "Nightshade (Solanaceae) allergy — cross-reactivity possible"],
+        warnings: ["Lycium barbarum and L. chinense (Wolfberry / Gou Qi Zi) — widely used in TCM as a tonic for eyes, liver, and kidneys", "Warfarin interaction is well-documented in case reports — INR monitoring essential for anticoagulated patients eating goji regularly", "Very high antioxidant content (zeaxanthin, betaine, polysaccharides) — generally safe as a food", "Supplement doses are much higher than food amounts and carry greater interaction risk"]
+    },
+    "Chinese Yam": {
+        interactions: ["Oestrogen therapies / HRT (diosgenin — phytoestrogenic activity)", "Tamoxifen / Anastrozole (diosgenin may oppose anti-oestrogenic treatment)", "Antidiabetics (additive blood sugar lowering — allantoin)"],
+        contraindications: ["Oestrogen-sensitive cancers (breast, uterine, ovarian)", "Hormone-sensitive conditions", "Allergy to yams or Dioscoreaceae family"],
+        warnings: ["Dioscorea opposita / D. polystachya (Shan Yao / Nagaimo) — used in TCM as a spleen, lung, and kidney tonic", "Diosgenin is a steroidal saponin precursor — phytoestrogenic activity at supplement doses", "Do NOT use wild yam as a substitute for DHEA or progesterone — the body cannot convert plant diosgenin to human hormones", "Safe as a food in moderate culinary amounts; supplement concentrates have hormonal activity"]
+    },
+    "Angelica Dahurica": {
+        interactions: ["Warfarin (furanocoumarin derivatives — significant anticoagulant effect)", "Antiplatelet drugs: Aspirin / Clopidogrel (additive)", "Photosensitising drugs: Tetracyclines / Fluoroquinolones (additive photosensitisation from psoralen and bergapten)"],
+        contraindications: ["Pregnancy (emmenagogue and possible uterotonic)", "Photosensitive skin conditions", "Active bleeding disorders"],
+        warnings: ["Angelica dahurica (Bai Zhi) — TCM herb used for headache, sinus pain, and toothache", "Furanocoumarins (psoralen, bergapten, byakangelicol) cause significant photosensitivity — avoid sun exposure during use", "Anticoagulant effect is more pronounced than most TCM herbs — stop 1 week before surgery", "Should be distinguished from Angelica sinensis (Dong Quai) — similar photosensitivity risk but different therapeutic uses"]
+    },
+    "White Peony": {
+        interactions: ["Warfarin / Aspirin (paeoniflorin — moderate antiplatelet and anticoagulant activity)", "Metformin / Insulin (additive blood sugar lowering)", "Phenytoin / Carbamazepine (paeoniflorin may modulate seizure threshold — uncertain interaction)", "Oestrogen therapies (mild phytoestrogenic / anti-oestrogenic activity — complex)"],
+        contraindications: ["Active bleeding disorders", "Pregnancy — emmenagogue at high doses", "Hypotension (mild vasodilatory effect)"],
+        warnings: ["Paeonia lactiflora (Bai Shao / White Peony Root) — one of the most commonly prescribed herbs in TCM for blood nourishment", "Paeoniflorin is the primary active compound — anti-inflammatory, spasmolytic, and analgesic", "Used in the classic formula Gui Zhi Fu Ling Wan and Xiao Yao San for menstrual disorders", "Anticoagulant activity is clinically relevant at high doses — stop 1 week before surgery"]
+    },
+
+    // ── Additional Worldwide Medicinal Plants ─────────────────────────────────
+
+    "Witch Hazel": {
+        interactions: ["Warfarin / Aspirin (tannins — mild antiplatelet activity; oral use only)", "Iron supplements (tannins reduce non-haem iron absorption — space by 2 hours if taken orally)"],
+        contraindications: ["Oral use not recommended (hepatotoxic pyrrolizidine alkaloids present in some preparations)", "Pregnant women (avoid oral use)", "Children — only external use"],
+        warnings: ["Hamamelis virginiana — primarily used as a topical astringent for haemorrhoids, bruising, and skin inflammation", "Topical use is very safe and well evidenced — commercial witch hazel preparations (distilled) are widely used", "Oral witch hazel contains safrole and pyrrolizidine alkaloids — hepatotoxic and potentially carcinogenic; avoid internal use", "Topical preparation should NOT contain alcohol in concentrations >20% for prolonged skin application"]
+    },
+    "Slippery Elm": {
+        interactions: ["Oral medications generally (mucilage delays gastric emptying and absorption of all drugs — space by 2 hours)", "Metformin (delayed absorption)", "Levothyroxine (delayed absorption — space by at least 4 hours)"],
+        contraindications: ["Elm allergy (rare cross-reactivity)", "Pregnancy — mucilage preparations generally considered safe in food amounts but avoid concentrated supplements"],
+        warnings: ["Ulmus rubra — inner bark used for soothing mucous membranes of GI and respiratory tracts", "Mucilage mechanism is the same as Marshmallow Root — coats the GI lining and can significantly slow oral drug absorption", "Generally very safe with an excellent safety profile — one of the most gentle herbal remedies", "Used for GERD, IBS, sore throat, and IBD flare symptom management"]
+    },
+    "Mullein": {
+        interactions: ["Antidiabetics (mild blood sugar lowering from iridoid glycosides)", "Anticoagulants (mild coumarin derivatives — relevant at high doses only)", "Diuretics (mild additive diuretic effect)"],
+        contraindications: ["Pregnancy — insufficient safety data at medicinal doses", "Verbascum (figwort) allergy"],
+        warnings: ["Verbascum thapsus (Great Mullein / Aaron's Rod) — used for respiratory infections, coughs, and ear infections", "Leaf preparations for tea: strain carefully to remove fine hairs — can irritate mucous membranes and throat if not filtered", "Mullein ear oil is used for otitis media symptom relief — not a substitute for antibiotics in bacterial ear infection", "One of the safer herbal remedies for children's coughs when properly prepared as strained tea"]
+    },
+    "Comfrey": {
+        interactions: ["Hepatotoxic drugs: Methotrexate / Statins / Paracetamol (additive liver toxicity from pyrrolizidine alkaloids — serious)", "Anticoagulants (allantoin and rosmarinic acid — mild antiplatelet)"],
+        contraindications: ["Internal use — banned or restricted in many countries due to pyrrolizidine alkaloid hepatotoxicity", "Open wounds (topical — risk of systemic pyrrolizidine alkaloid absorption)", "Pregnancy and breastfeeding (even topical use is discouraged)", "Children under 12 (hepatotoxicity risk)"],
+        warnings: ["Symphytum officinale (Knitbone / Boneset / Beinwell) — contains pyrrolizidine alkaloids (PAs) which cause hepatic veno-occlusive disease", "INTERNAL USE IS BANNED in many countries (UK, Germany, USA) — hepatotoxic, genotoxic, and potentially carcinogenic", "Topical use (creams, gels) for bruises and sprains is generally accepted but avoid broken skin", "Root contains 10× more PAs than leaves — root preparations are especially dangerous", "Allantoin provides the wound-healing benefit — safer alternatives without PAs are available"]
+    },
+    "Plantain Herb": {
+        interactions: ["Warfarin (Vitamin K in leaves — may modestly reduce anticoagulant effect)", "Lithium (diuretic effect — may increase lithium levels)", "Antidiabetics (mild blood sugar lowering from aucubin iridoid)"],
+        contraindications: ["Plantain / Psyllium allergy (Plantago genus cross-reactivity)", "Bowel obstruction (mucilage bulk — same as Psyllium)"],
+        warnings: ["Plantago major / P. lanceolata (Greater Plantain / Narrowleaf Plantain / Isabgol relative) — common garden weed used medicinally worldwide", "Different from Plantain banana (Musa paradisiaca) — this is the herbaceous ground plant", "Leaves used topically for insect stings, minor cuts, and skin irritation — well-established traditional use", "Seeds contain psyllium-like mucilage — beneficial for bowel regularity but can obstruct if taken dry without water"]
+    },
+    "Black Cohosh": {
+        interactions: ["Tamoxifen / Anastrozole (uncertain: may interfere with breast cancer treatment — conflicting evidence)", "Hepatotoxic drugs: Statins / Methotrexate (additive liver toxicity — rare but serious)", "Hormone replacement therapy / Combined oral contraceptives (possible additive oestrogenic effects)", "Antihypertensives (mild additive BP lowering from triterpene glycosides)"],
+        contraindications: ["Oestrogen-receptor-positive breast cancer (uncertain risk — discuss with oncologist)", "Liver disease (hepatotoxicity risk)", "Pregnancy (uterotonic — historically used to induce labour)", "Buttercup (Ranunculaceae) allergy"],
+        warnings: ["Actaea racemosa / Cimicifuga racemosa — most widely used Western herb for menopausal symptoms", "Rare but documented hepatotoxicity — several cases of liver failure requiring transplant have been reported", "Mechanism of action is NOT purely oestrogenic — does not stimulate ER-positive breast cells in most studies, but caution warranted", "Limit use to 6 months without a break; discontinue and seek medical attention if jaundice, dark urine, or liver-related symptoms appear"]
+    },
+    "Goldenseal": {
+        interactions: ["Cyclosporin / Tacrolimus (berberine — CYP3A4 inhibition — raises immunosuppressant levels — serious)", "Warfarin / Clopidogrel (berberine — antiplatelet activity)", "Metformin (berberine — additive blood sugar lowering)", "Digoxin (berberine — increases digoxin levels via P-glycoprotein inhibition)", "QT-prolonging drugs: Azithromycin / Clarithromycin (additive QT prolongation risk from berberine)"],
+        contraindications: ["Pregnancy (berberine — uterotonic and embryotoxic)", "Breastfeeding (berberine in breast milk — toxic to newborns)", "Neonates and infants (kernicterus / neonatal jaundice risk)", "Low blood pressure"],
+        warnings: ["Hydrastis canadensis — primary source of berberine in North American herbal medicine", "Berberine drug interactions are extensive and clinically significant — see Berberine entry", "Severely overharvested — CITES-protected; use cultivated sources only", "Do NOT use during pregnancy under any circumstances — documented uterotonic and embryotoxic effects", "Antibacterial activity does NOT justify its use as a replacement for antibiotics — insufficient clinical evidence"]
+    },
+    "Oregon Grape": {
+        interactions: ["Cyclosporin / Tacrolimus (berberine — CYP3A4 inhibition — raises immunosuppressant levels)", "Warfarin (berberine — antiplatelet and anticoagulant)", "Metformin (berberine — additive hypoglycaemia)", "QT-prolonging drugs (berberine — additive QT prolongation)"],
+        contraindications: ["Pregnancy (berberine — uterotonic and embryotoxic)", "Breastfeeding", "Neonates"],
+        warnings: ["Mahonia aquifolium — contains berberine (same as Goldenseal and Barberry) — identical pharmacological interaction profile", "Well-evidenced for topical use in psoriasis — oral use in psoriasis is less well studied", "Berberine drug interactions are clinically significant — review current medication list before use", "Generally better tolerated than Goldenseal with a slightly lower berberine content per dose"]
+    },
+    "Barberry": {
+        interactions: ["Cyclosporin / Tacrolimus (berberine — CYP3A4 inhibition — raises immunosuppressant plasma levels — serious)", "Warfarin / Aspirin (berberine — antiplatelet and anticoagulant)", "Metformin / Insulin (berberine — significant additive blood sugar lowering)", "QT-prolonging drugs (berberine — additive QT prolongation)", "Doxycycline (berberine reduces bioavailability)"],
+        contraindications: ["Pregnancy (berberine — uterotonic and embryotoxic)", "Breastfeeding", "Neonates (jaundice risk)", "Hypotension"],
+        warnings: ["Berberis vulgaris (European Barberry) and B. aristata (Indian Barberry / Daruharidra) — both contain berberine as the primary active alkaloid", "Berberine interaction profile is identical to Goldenseal and Oregon Grape — all three herbs carry the same significant drug interactions", "Can lower blood glucose by up to 20–25% — dangerous hypoglycaemia risk if combined with antidiabetics without monitoring", "Berries are safe as food in moderate amounts; root and bark extracts are pharmacologically active and require monitoring"]
+    },
+    "Indian Cork Tree": {
+        interactions: ["Antidiabetics (bacoside-like alkaloids — mild blood sugar lowering)", "Antihypertensives (mild vasodilatory activity from millingtonia alkaloids)"],
+        contraindications: ["Pregnancy (insufficient safety data)", "Allergy to Bignoniaceae family"],
+        warnings: ["Millingtonia hortensis (Tree Jasmine / Indian Cork Tree / Akash Neem) — bark, root, and flowers used in Indian traditional medicine", "Flowers used as a cheap substitute for cork — hence the common name", "Traditionally used in Ayurveda and Unani for respiratory disorders, asthma, and as a nasal decongestant", "Research is limited — use only under qualified practitioner guidance"]
+    },
+    "Bhringraj Oil": {
+        uses: ["Hair growth stimulation (topical)", "Premature greying prevention", "Scalp health and dandruff", "Stress-related hair loss"],
+        preparation: ["Bhringraj leaves boiled in sesame or coconut oil", "Commercial Bhringraj hair oil applied 2–3× per week", "Leave on scalp for 1–2 hours before washing"],
+        dosage: "Topical scalp application 2–3 times per week; leave 30–60 min before washing"
+    },
+    "Neem Leaf": {
+        uses: ["Blood sugar management", "Skin conditions (acne, eczema)", "Dental hygiene (neem twig chewing)", "Immune support"],
+        preparation: ["10–15 fresh neem leaves chewed on empty stomach (traditional diabetes remedy)", "Neem leaf powder in capsules", "Neem leaf tea (very bitter)"],
+        dosage: "500 mg leaf powder twice daily; 10–15 leaves/day for blood sugar — under supervision only"
+    },
+    "Gotu Kola": {
+        interactions: ["Diazepam / Benzodiazepines (additive CNS sedation)", "Levothyroxine (may alter thyroid hormone metabolism)", "Hepatotoxic drugs (rare hepatotoxicity — additive risk with long-term high-dose use)", "Antidiabetics (mild blood sugar lowering from asiaticoside)", "Antihypertensives (mild additive effect)"],
+        contraindications: ["Liver disease (hepatotoxicity risk with high doses)", "Pregnancy (emmenagogue)", "Breastfeeding"],
+        warnings: ["Centella asiatica (Mandukaparni / Brahmi alternative / Brahma Manduki) — widely used in Ayurveda for wound healing, cognitive function, and anxiety", "Often confused with Brahmi (Bacopa monnieri) in common usage — different plant with distinct pharmacology", "Asiaticoside improves collagen synthesis — excellent clinical evidence for wound healing and varicose vein management", "Rare hepatotoxicity reported — limit use to 6 weeks without a break; avoid with other liver-stressors"]
+    },
+    "Kutki Root": {
+        uses: ["Liver protection and regeneration (hepatoprotective)", "Immune modulation", "Fever management (antipyretic)", "Digestive health (bitter digestive stimulant)"],
+        preparation: ["Kutki powder (100–200 mg) mixed with honey", "Decoction of dried root (1 g in 200 ml water)", "Standardised picroside extract capsules"],
+        dosage: "100–400 mg root powder/day under Ayurvedic supervision; lower doses are hepatoprotective, higher doses hepatotoxic"
+    },
+    "Ashwagandha Root": {
+        uses: ["Stress and anxiety reduction (adaptogen)", "Testosterone and fertility support", "Thyroid hormone balance", "Athletic endurance and recovery"],
+        preparation: ["Root powder in warm milk with honey and ghee (traditional Ayurvedic formulation)", "KSM-66 or Sensoril standardised extract capsules", "Ashwagandha latte"],
+        dosage: "300–600 mg standardised root extract daily; 3–5 g root powder with warm milk at bedtime"
     }
 };
 
@@ -1011,5 +1703,151 @@ export const plantNamesMap = {
     "Betel Leaf":        { scientificName: "Piper betle",                    commonNames: ["Paan", "Betel Pepper", "Tambula", "Vetrilai"] },
     "Sarpagandha":       { scientificName: "Rauvolfia serpentina",           commonNames: ["Indian Snakeroot", "Serpentwood", "Chandra", "Sarpagandha Vine"] },
     "Ashoka":            { scientificName: "Saraca asoca",                   commonNames: ["Asoka Tree", "Sorrowless Tree", "Sita Ashok", "Ashok"] },
-    "Kutki":             { scientificName: "Picrorhiza kurroa",              commonNames: ["Indian Hellebore", "Katuki", "Kadu", "Kurroa"] }
+    "Kutki":             { scientificName: "Picrorhiza kurroa",              commonNames: ["Indian Hellebore", "Katuki", "Kadu", "Kurroa"] },
+
+    // ── Toxic / Dangerous Plants ──────────────────────────────────────────────
+    "Oleander":          { scientificName: "Nerium oleander",                commonNames: ["Rose Bay", "Kaner", "Arali", "Ganeru", "Laurier Rose"] },
+    "Foxglove":          { scientificName: "Digitalis purpurea",             commonNames: ["Common Foxglove", "Purple Foxglove", "Fairy Gloves", "Dead Men's Bells"] },
+    "Datura":            { scientificName: "Datura stramonium",              commonNames: ["Jimsonweed", "Devil's Trumpet", "Thorn Apple", "Dhatura", "Unmatta", "Ummathai"] },
+    "Hemlock":           { scientificName: "Conium maculatum",               commonNames: ["Poison Hemlock", "Spotted Hemlock", "Conium", "Spotted Corobane"] },
+    "Ricinus":           { scientificName: "Ricinus communis",               commonNames: ["Castor Plant", "Castor Bean", "Arand", "Eranda", "Chittamanak", "Wonder Tree"] },
+    "Aconite":           { scientificName: "Aconitum napellus",              commonNames: ["Monkshood", "Wolfsbane", "Vatsanabha", "Meetha Vish", "Fu Zi", "Blue Rocket"] },
+    "Belladonna":        { scientificName: "Atropa belladonna",              commonNames: ["Deadly Nightshade", "Devil's Cherries", "Naughty Man's Cherries", "Divale"] },
+    "Yew":               { scientificName: "Taxus baccata",                  commonNames: ["Common Yew", "English Yew", "European Yew", "Taxus"] },
+    "Water Hemlock":     { scientificName: "Cicuta maculata",                commonNames: ["Spotted Water Hemlock", "Cowbane", "Suicide Root", "Poison Parsnip"] },
+    "Lantana":           { scientificName: "Lantana camara",                 commonNames: ["Lantana", "Tickberry", "Putus", "Raimuniya", "Big Sage", "Wild Sage"] },
+    "Nux Vomica":        { scientificName: "Strychnos nux-vomica",           commonNames: ["Poison Nut", "Kuchla", "Vishamushti", "Kajra", "Strychnine Tree"] },
+    "Calotropis":        { scientificName: "Calotropis gigantea",            commonNames: ["Crown Flower", "Akanda", "Aak", "Madar", "Erukku", "Milkweed"] },
+    "Abrus Precatorius": { scientificName: "Abrus precatorius",              commonNames: ["Rosary Pea", "Jequirity Bean", "Gunchi", "Gunja", "Ratti", "Indian Licorice"] },
+
+    // ── Indian Ayurvedic / Siddha / Unani Plants ──────────────────────────────
+    "Guggul":            { scientificName: "Commiphora wightii",             commonNames: ["Indian Bdellium", "Mukul Myrrh", "Guggulu", "Guggal"] },
+    "Shilajit":          { scientificName: "Asphaltum punjabianum",          commonNames: ["Mineral Pitch", "Stone Oil", "Asphaltum", "Shilajita", "Mumijo"] },
+    "Haritaki":          { scientificName: "Terminalia chebula",             commonNames: ["Chebulic Myrobalan", "Black Myrobalan", "Harad", "Kadukkai", "Abhaya"] },
+    "Bibhitaki":         { scientificName: "Terminalia bellirica",           commonNames: ["Bahera", "Beleric Myrobalan", "Baheda", "Tani", "Vibhitaka"] },
+    "Vidanga":           { scientificName: "Embelia ribes",                  commonNames: ["False Black Pepper", "Vidang", "Vayuvilanga", "Baberang"] },
+    "Chitraka":          { scientificName: "Plumbago zeylanica",             commonNames: ["Leadwort", "White Plumbago", "Chita", "Chitrak", "Kodiveli"] },
+    "Pippali":           { scientificName: "Piper longum",                   commonNames: ["Long Pepper", "Indian Long Pepper", "Pipli", "Thippali"] },
+    "Vacha":             { scientificName: "Acorus calamus",                 commonNames: ["Sweet Flag", "Calamus", "Bach", "Vayambu", "Ugragandha"] },
+    "Jatropha":          { scientificName: "Jatropha curcas",                commonNames: ["Physic Nut", "Purging Nut", "Ratanjot", "Kadu Yeranda", "Seemai Iluppai"] },
+    "Tagetes":           { scientificName: "Tagetes erecta",                 commonNames: ["African Marigold", "Genda Phool", "Mexican Marigold", "Big Marigold"] },
+    "Kalonji":           { scientificName: "Nigella sativa",                 commonNames: ["Black Seed", "Black Cumin", "Kalonji", "Habbatus Sauda", "Karun Jeeragam"] },
+    "Henna":             { scientificName: "Lawsonia inermis",               commonNames: ["Henna Plant", "Mehndi", "Maruthani", "Mindi", "Egyptian Privet"] },
+    "Alstonia":          { scientificName: "Alstonia scholaris",             commonNames: ["Saptaparni", "Devil Tree", "Chatian", "Ezhilampala", "Blackboard Tree"] },
+    "Bael":              { scientificName: "Aegle marmelos",                 commonNames: ["Bel", "Bilva", "Bengal Quince", "Golden Apple", "Vilva", "Beli"] },
+    "Manjistha":         { scientificName: "Rubia cordifolia",               commonNames: ["Indian Madder", "Majith", "Manjitti", "Majeeth", "Common Madder"] },
+    "Lodhra":            { scientificName: "Symplocos racemosa",             commonNames: ["Lodh Tree", "Lodhra", "Velli Iluppai"] },
+    "Gokshura":          { scientificName: "Tribulus terrestris",            commonNames: ["Puncture Vine", "Gokhru", "Gokshura", "Nerunji", "Caltrops"] },
+    "Yashtimadhu":       { scientificName: "Glycyrrhiza glabra",             commonNames: ["Licorice Root", "Mulethi", "Atimadhuram", "Yashti"] },
+    "Kutaja":            { scientificName: "Holarrhena antidysenterica",     commonNames: ["Kurchi", "Indrajav", "Conessi Bark", "Tellicherry Bark", "Veppalai"] },
+    "Daruharidra":       { scientificName: "Berberis aristata",              commonNames: ["Tree Turmeric", "Indian Barberry", "Daruhaldi", "Rasaut", "Kashmal"] },
+    "Berberine":         { scientificName: "Various (Berberis, Coptis, Hydrastis)", commonNames: ["Berberine Alkaloid", "Daruhaldi Active", "Huang Lian Active", "Goldenseal Active"] },
+    "Shatapushpa":       { scientificName: "Anethum graveolens",             commonNames: ["Dill", "Suwa", "Sowa", "Shatapushpi", "Perunjirakam (Dill)"] },
+    "Khadira":           { scientificName: "Acacia catechu",                 commonNames: ["Cutch Tree", "Black Catechu", "Kath", "Khair", "Karangalli"] },
+    "Wrightia Tinctoria":{ scientificName: "Wrightia tinctoria",             commonNames: ["Pala Indigo Plant", "Sweet Indrajao", "Veppala", "Dyer's Oleander"] },
+
+    // ── Traditional Chinese Medicine Herbs ────────────────────────────────────
+    "Astragalus":        { scientificName: "Astragalus membranaceus",        commonNames: ["Huang Qi", "Milkvetch Root", "Chinese Astragalus", "Bei Qi"] },
+    "Dong Quai":         { scientificName: "Angelica sinensis",              commonNames: ["Chinese Angelica", "Female Ginseng", "Dang Gui", "Danggui", "Tang Kuei"] },
+    "Bupleurum":         { scientificName: "Bupleurum falcatum",             commonNames: ["Chai Hu", "Hare's Ear Root", "Thorowax Root", "Sickle-leaf Hare's Ear"] },
+    "Schisandra":        { scientificName: "Schisandra chinensis",           commonNames: ["Wu Wei Zi", "Five-Flavour Berry", "Chinese Magnolia Vine", "Omija"] },
+    "Codonopsis":        { scientificName: "Codonopsis pilosula",            commonNames: ["Dang Shen", "Poor Man's Ginseng", "Bonnet Bellflower", "Bastard Ginseng"] },
+    "Rehmannia":         { scientificName: "Rehmannia glutinosa",            commonNames: ["Sheng Di Huang", "Chinese Foxglove", "Di Huang", "Rehmannia Root"] },
+    "Cornus":            { scientificName: "Cornus officinalis",             commonNames: ["Shan Zhu Yu", "Cornelian Cherry", "Japanese Cornel", "Asiatic Cornelian Cherry"] },
+    "Poria":             { scientificName: "Wolfiporia extensa",             commonNames: ["Fu Ling", "Tuckahoe", "China Root", "Indian Bread", "Hoelen"] },
+    "Jujube":            { scientificName: "Ziziphus jujuba",                commonNames: ["Da Zao", "Red Date", "Chinese Date", "Ber", "Ilanthai"] },
+    "Chrysanthemum":     { scientificName: "Chrysanthemum morifolium",       commonNames: ["Ju Hua", "Florist's Chrysanthemum", "Mums", "Guldaudi"] },
+    "Eucommia":          { scientificName: "Eucommia ulmoides",              commonNames: ["Du Zhong", "Hardy Rubber Tree", "Chinese Rubber Tree", "Gutta-percha Tree"] },
+    "Ligustrum":         { scientificName: "Ligustrum lucidum",              commonNames: ["Nu Zhen Zi", "Chinese Privet", "Glossy Privet", "Ligustrum"] },
+    "Magnolia Bark":     { scientificName: "Magnolia officinalis",           commonNames: ["Hou Po", "Chinese Magnolia", "Magnolia", "Houpu Magnolia"] },
+    "Coptis":            { scientificName: "Coptis chinensis",               commonNames: ["Huang Lian", "Chinese Goldthread", "Coptis Root", "Gold Thread"] },
+    "Pueraria":          { scientificName: "Pueraria montana var. lobata",   commonNames: ["Kudzu", "Ge Gen", "Japanese Arrowroot", "Kudzu Vine"] },
+    "Fritillaria":       { scientificName: "Fritillaria cirrhosa",           commonNames: ["Chuan Bei Mu", "Sichuan Fritillary", "Fritillary Bulb", "Chuanbeimu"] },
+    "Acanthopanax":      { scientificName: "Eleutherococcus senticosus",     commonNames: ["Siberian Ginseng", "Ci Wu Jia", "Eleuthero", "Touch-me-not"] },
+
+    // ── African Traditional Medicine Plants ────────────────────────────────────
+    "Devil's Claw":      { scientificName: "Harpagophytum procumbens",       commonNames: ["Grapple Plant", "Wood Spider", "Sengaparile", "Harpago"] },
+    "Sutherlandia":      { scientificName: "Sutherlandia frutescens",        commonNames: ["Cancer Bush", "Kankerbos", "Insiswa", "Unwele"] },
+    "Buchu":             { scientificName: "Agathosma betulina",             commonNames: ["Bookoo", "Bucco", "Short Buchu", "Round Leaf Buchu"] },
+    "Pelargonium":       { scientificName: "Pelargonium sidoides",           commonNames: ["Umckaloabo", "South African Geranium", "EPs 7630", "African Geranium"] },
+    "Rooibos":           { scientificName: "Aspalathus linearis",            commonNames: ["Redbush Tea", "Red Tea", "Rooitea", "Bush Tea"] },
+    "Hoodia":            { scientificName: "Hoodia gordonii",                commonNames: ["Bushman's Hat", "Queen of the Namib", "Xhoba", "South African Desert Cactus"] },
+    "Pygeum":            { scientificName: "Prunus africana",                commonNames: ["African Cherry", "Pygeum africanum", "Red Stinkwood", "Bitter Almond"] },
+    "African Potato":    { scientificName: "Hypoxis hemerocallidea",         commonNames: ["African Star Grass", "Yellow Stars", "Inkomfe", "Molapo"] },
+    "Khat":              { scientificName: "Catha edulis",                   commonNames: ["Qat", "Chat", "Miraa", "Muirungi", "Arabian Tea", "Bushman's Tea"] },
+    "African Wild Ginger":{ scientificName: "Siphonochilus aethiopicus",     commonNames: ["Wild Ginger", "Indudu", "Isiphephetho", "African Ginger"] },
+
+    // ── Common Worldwide Medicinal Plants ─────────────────────────────────────
+    "Grapefruit":        { scientificName: "Citrus paradisi",                commonNames: ["Grapefruit", "Chakotara", "Pumelo Hybrid", "Forbidden Fruit"] },
+    "Cranberry":         { scientificName: "Vaccinium macrocarpon",          commonNames: ["Large Cranberry", "American Cranberry", "Bounceberry", "Fenberry"] },
+    "Cat's Claw":        { scientificName: "Uncaria tomentosa",              commonNames: ["Una de Gato", "Vilcacora", "Uña de Gato", "Paraguayo"] },
+    "Pau D'Arco":        { scientificName: "Handroanthus impetiginosus",     commonNames: ["Lapacho", "Taheebo", "Trumpet Tree", "Ipe Roxo"] },
+    "Arnica":            { scientificName: "Arnica montana",                 commonNames: ["Mountain Tobacco", "Leopard's Bane", "Wolf's Bane Arnica", "Mountain Arnica"] },
+    "Kava Kava":         { scientificName: "Piper methysticum",              commonNames: ["Kava", "Yaqona", "Awa", "Ava"] },
+    "Saw Palmetto":      { scientificName: "Serenoa repens",                 commonNames: ["Saw Palmetto Berry", "American Dwarf Palm", "Cabbage Palm", "Sabal"] },
+    "Feverfew":          { scientificName: "Tanacetum parthenium",           commonNames: ["Featherfoil", "Midsummer Daisy", "Bachelor's Buttons", "Altamisa"] },
+    "Willow Bark":       { scientificName: "Salix alba",                     commonNames: ["White Willow", "Salicin Bark", "European Willow", "Withe Willow"] },
+    "Horse Chestnut":    { scientificName: "Aesculus hippocastanum",         commonNames: ["Common Horse Chestnut", "Conker Tree", "Buckeye", "Aescin Plant"] },
+    "Ginkgo Biloba":     { scientificName: "Ginkgo biloba",                  commonNames: ["Maidenhair Tree", "Bai Guo", "Fossil Tree", "Kew Tree"] },
+    "Bilberry":          { scientificName: "Vaccinium myrtillus",            commonNames: ["European Blueberry", "Whortleberry", "Huckleberry", "Whinberry"] },
+    "Horsetail":         { scientificName: "Equisetum arvense",              commonNames: ["Field Horsetail", "Scouring Rush", "Shavegrass", "Pewterwort"] },
+    "Marshmallow Root":  { scientificName: "Althaea officinalis",            commonNames: ["White Mallow", "Marsh Mallow", "Mortification Plant", "Sweetweed"] },
+    "Bladderwrack":      { scientificName: "Fucus vesiculosus",              commonNames: ["Bladder Fucus", "Sea Oak", "Black Tang", "Rockweed"] },
+
+    // ── Indian Kitchen and Garden Plants ──────────────────────────────────────
+    "Jeera":             { scientificName: "Cuminum cyminum",                commonNames: ["Cumin", "Zeera", "Jeerakam", "Seeragam", "Kala Jeera"] },
+    "Ajwain":            { scientificName: "Trachyspermum ammi",             commonNames: ["Carom Seeds", "Bishop's Weed", "Omam", "Ajmo", "Thymol Seeds"] },
+    "Hing":              { scientificName: "Ferula assa-foetida",            commonNames: ["Asafoetida", "Heeng", "Perungayam", "Devil's Dung", "Kayam"] },
+    "Tejpat":            { scientificName: "Cinnamomum tamala",              commonNames: ["Indian Bay Leaf", "Tej Patta", "Malabar Leaf", "Tamalapatra"] },
+    "Imli":              { scientificName: "Tamarindus indica",              commonNames: ["Tamarind", "Imlee", "Puli", "Chinch", "Tintiri"] },
+    "Kalonji":           { scientificName: "Nigella sativa",                 commonNames: ["Black Seed", "Black Cumin", "Habbatus Sauda", "Karun Jeeragam"] },
+    "Baheda":            { scientificName: "Terminalia bellirica",           commonNames: ["Beleric Myrobalan", "Bahera", "Vibhitaka", "Tani", "Bibhitaki"] },
+    "Sitaphal Leaf":     { scientificName: "Annona squamosa",                commonNames: ["Sugar Apple Leaf", "Custard Apple Leaf", "Sitaphal", "Sharifa", "Seethapazham"] },
+    "Triphala Guggul":   { scientificName: "Commiphora wightii (+ Triphala fruits)", commonNames: ["Triphala Guggulu", "Guggul with Three Fruits", "Trifala Guggul"] },
+    "Patala":            { scientificName: "Stereospermum chelonoides",      commonNames: ["Trumpet Flower", "Padal", "Patala", "Pathiri"] },
+    "Karpura Valli":     { scientificName: "Plectranthus amboinicus",        commonNames: ["Indian Borage", "Country Borage", "Karpura Valli", "Ajwain Leaves", "Mexican Mint"] },
+    "Punarnava Root":    { scientificName: "Boerhavia diffusa",              commonNames: ["Spreading Hogweed", "Red Spiderling", "Thazhuthama", "Punarnava"] },
+    "Drumstick Leaf":    { scientificName: "Moringa oleifera",               commonNames: ["Moringa Leaf", "Murungai Keerai", "Sahjan Patta", "Drumstick Tree Leaf"] },
+    "Brahmi Leaves":     { scientificName: "Bacopa monnieri",                commonNames: ["Water Hyssop Leaf", "Jalabrahmi Leaf", "Brahmi Fresh Leaves"] },
+    "Curry Leaf Tree":   { scientificName: "Murraya koenigii",               commonNames: ["Sweet Neem Tree", "Karivepaku", "Kadi Patta Tree", "Meetha Neem Plant"] },
+    "Pudina":            { scientificName: "Mentha spicata",                 commonNames: ["Mint", "Spearmint", "Peppermint", "Podina", "Fudhina"] },
+    "Dhania":            { scientificName: "Coriandrum sativum",             commonNames: ["Coriander Leaf", "Cilantro", "Malli", "Kothamalli", "Chinese Parsley"] },
+    "Methi Leaf":        { scientificName: "Trigonella foenum-graecum",      commonNames: ["Fenugreek Leaf", "Vendhaya Keerai", "Kasuri Methi", "Methi Saag"] },
+    "Kadamba":           { scientificName: "Neolamarckia cadamba",           commonNames: ["Kadamba Tree", "Burflower Tree", "Kadambu", "Kalam"] },
+
+    // ── Additional Indian Plants ──────────────────────────────────────────────
+    "Jackfruit Leaf":    { scientificName: "Artocarpus heterophyllus",        commonNames: ["Kathal Patta", "Panasa Patra", "Palakkai Ilai", "Jack Tree Leaf"] },
+    "Teak":              { scientificName: "Tectona grandis",                 commonNames: ["Sagwan", "Sagun", "Tekku", "Teka", "Indian Oak"] },
+    "Silk Cotton Tree":  { scientificName: "Bombax ceiba",                    commonNames: ["Semal", "Shimul", "Red Silk Cotton", "Kapok Tree", "Mullilavu"] },
+    "Indian Laburnum":   { scientificName: "Cassia fistula",                  commonNames: ["Amaltas", "Golden Shower Tree", "Kondrai", "Rajataru", "Pudding Pipe Tree"] },
+    "Jamun":             { scientificName: "Syzygium cumini",                 commonNames: ["Java Plum", "Black Plum", "Naaval Pazham", "Jambul", "Malabar Plum"] },
+    "Kathal":            { scientificName: "Artocarpus heterophyllus",        commonNames: ["Jackfruit", "Jack Tree Fruit", "Panasa", "Halasina Hannu"] },
+    "Agathi":            { scientificName: "Sesbania grandiflora",            commonNames: ["Agati", "August Tree", "Vegetable Hummingbird", "Agathi Keerai", "West Indian Pea"] },
+    "Parijat":           { scientificName: "Nyctanthes arbor-tristis",        commonNames: ["Night Jasmine", "Har Singar", "Parijatak", "Coral Jasmine", "Shiuli"] },
+    "Bhui Amla":         { scientificName: "Phyllanthus niruri",              commonNames: ["Stonebreaker", "Bhumyamalaki", "Keezhanelli", "Chanca Piedra", "Phyllanthus"] },
+    "Jatamansi":         { scientificName: "Nardostachys jatamansi",          commonNames: ["Spikenard", "Nard", "Jatamansi Root", "Musk Root", "Nalada"] },
+    "Chirata":           { scientificName: "Swertia chirayita",               commonNames: ["Chiretta", "Indian Gentian", "Chiraita", "Kirata Tikta", "Brown Chirata"] },
+
+    // ── Additional TCM Plants ──────────────────────────────────────────────────
+    "Goji Berry":        { scientificName: "Lycium barbarum",                 commonNames: ["Wolfberry", "Gou Qi Zi", "Chinese Wolfberry", "Tibetan Goji", "Matrimony Vine"] },
+    "Chinese Yam":       { scientificName: "Dioscorea polystachya",           commonNames: ["Shan Yao", "Nagaimo", "Wild Yam (Chinese)", "Huai Shan", "Cinnamon Vine"] },
+    "Angelica Dahurica": { scientificName: "Angelica dahurica",               commonNames: ["Bai Zhi", "Dahurian Angelica", "Chinese Angelica Root", "White Angelica"] },
+    "White Peony":       { scientificName: "Paeonia lactiflora",              commonNames: ["Bai Shao", "White Peony Root", "Chinese Peony", "Paeonia Root"] },
+
+    // ── Additional Worldwide Medicinal Plants ─────────────────────────────────
+    "Witch Hazel":       { scientificName: "Hamamelis virginiana",            commonNames: ["American Witch Hazel", "Winterbloom", "Snapping Hazel", "Spotted Alder"] },
+    "Slippery Elm":      { scientificName: "Ulmus rubra",                     commonNames: ["Red Elm", "Indian Elm", "Moose Elm", "Soft Elm", "Gray Elm"] },
+    "Mullein":           { scientificName: "Verbascum thapsus",               commonNames: ["Great Mullein", "Aaron's Rod", "Common Mullein", "Velvet Dock", "Flannel Leaf"] },
+    "Comfrey":           { scientificName: "Symphytum officinale",            commonNames: ["Knitbone", "Boneset", "Consound", "Bruisewort", "Beinwell"] },
+    "Plantain Herb":     { scientificName: "Plantago major",                  commonNames: ["Greater Plantain", "Broadleaf Plantain", "Waybread", "Snakeweed", "Englishman's Foot"] },
+    "Black Cohosh":      { scientificName: "Actaea racemosa",                 commonNames: ["Black Snakeroot", "Bugbane", "Rattleroot", "Cimicifuga", "Squawroot"] },
+    "Goldenseal":        { scientificName: "Hydrastis canadensis",            commonNames: ["Yellow Root", "Ground Raspberry", "Eye Root", "Indian Dye", "Yellow Puccoon"] },
+    "Oregon Grape":      { scientificName: "Mahonia aquifolium",              commonNames: ["Holly-leaved Barberry", "Mountain Grape", "Oregon Holly Grape", "Mahonia"] },
+    "Barberry":          { scientificName: "Berberis vulgaris",               commonNames: ["European Barberry", "Common Barberry", "Zereshk", "Daruhaldi", "Katkatai"] },
+    "Indian Cork Tree":  { scientificName: "Millingtonia hortensis",          commonNames: ["Tree Jasmine", "Akash Neem", "Indian Cork", "Cork Tree", "Venn Margosa"] },
+    "Bhringraj Oil":     { scientificName: "Eclipta prostrata",               commonNames: ["False Daisy Oil", "Kehraj Tel", "Bhringraj Hair Oil", "Trailing Eclipta Oil"] },
+    "Neem Leaf":         { scientificName: "Azadirachta indica",              commonNames: ["Neem Tree Leaf", "Nimba Patra", "Veppilai", "Indian Lilac Leaf", "Margosa Leaf"] },
+    "Gotu Kola":         { scientificName: "Centella asiatica",               commonNames: ["Mandukaparni", "Brahma Manduki", "Asiatic Pennywort", "Tiger Grass", "Gotu Kola"] },
+    "Kutki Root":        { scientificName: "Picrorhiza kurroa",               commonNames: ["Kutki", "Katuki", "Indian Hellebore Root", "Kadu", "Kurroa Root"] },
+    "Ashwagandha Root":  { scientificName: "Withania somnifera",              commonNames: ["Indian Ginseng Root", "Winter Cherry Root", "Asgandh Root", "Withania Root"] }
 };
