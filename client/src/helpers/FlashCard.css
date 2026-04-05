@@ -2,59 +2,54 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 9998;
   min-width: 260px;
   max-width: min(92vw, 420px);
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
-  font-family: "Manrope", "Segoe UI", sans-serif;
-  animation: flash-slide-in 0.25s ease;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: flash-slide-in 0.22s ease;
 }
 
 .flash-card--success {
-  background: linear-gradient(140deg, #ecfbf0 0%, #ddf6e6 100%);
-  border-color: #8ad4a2;
-  color: #12432a;
+  background: var(--color-safe-bg);
+  border-color: var(--color-safe-border);
+  color: var(--color-safe-text);
 }
 
 .flash-card--error {
-  background: linear-gradient(140deg, #fff1f1 0%, #ffe4e4 100%);
-  border-color: #f1a5a5;
-  color: #742727;
+  background: var(--color-avoid-bg);
+  border-color: var(--color-avoid-border);
+  color: var(--color-avoid-text);
 }
 
 .flash-card__close {
-  border: 0;
+  border: none;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1;
   padding: 0;
+  opacity: 0.7;
+  transition: opacity var(--ease-fast);
 }
 
+.flash-card__close:hover { opacity: 1; }
+
 @keyframes flash-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 600px) {
-  .flash-card {
-    left: 12px;
-    right: 12px;
-    top: 12px;
-    min-width: 0;
-  }
+  .flash-card { left: 12px; right: 12px; top: 12px; min-width: 0; }
 }

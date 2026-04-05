@@ -8,5 +8,6 @@ router.get('/takeuser', authMiddleware, getProfiles);
 router.post('/takeuser', authMiddleware, createProfile);
 router.put('/takeuser/:id', authMiddleware, updateProfile);
 router.delete('/takeuser/:id', authMiddleware, deleteProfile);
+router.post('/summary', authMiddleware, llmOutput);
 
 export default router;

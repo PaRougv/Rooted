@@ -24,7 +24,12 @@ const healthDataSchema = new mongoose.Schema({
     },
     anyOtherCondition: {
         type: String,
-    }
+    },
+    medications: [{
+        name: { type: String, required: true },
+        dosage: { type: String },
+        frequency: { type: String }
+    }]
 },{
     timestamps:true
 })

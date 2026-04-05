@@ -1,0 +1,178 @@
+/* ═══════════════════════════════════════════════
+   ROOTED — Global Design Tokens
+   Calm.com warmth + Linear.app precision + AllTrails grounding
+   ═══════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap");
+
+/* ── Shared constants (both themes) ── */
+:root {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body:    "Manrope", "Segoe UI", sans-serif;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   22px;
+  --radius-xl:   30px;
+  --radius-pill: 9999px;
+
+  --ease-fast:   0.15s ease;
+  --ease-base:   0.22s ease;
+  --ease-slow:   0.38s ease;
+  --ease-spring: 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════════════════════════════════════════════
+   LIGHT THEME
+   Inspired by: AllTrails sidebar + Calm soft cards
+   ═══════════════════════════════════════════════ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Backgrounds */
+  --bg-page:     #f2f7f0;
+  --bg-surface:  #ffffff;
+  --bg-elevated: #eaf3e6;
+  --bg-card:     #ffffff;
+  --bg-subtle:   #f0f7ec;
+  --bg-input:    #f8fdf6;
+  --bg-overlay:  rgba(20, 50, 32, 0.55);
+
+  /* Text */
+  --text-primary:   #192e22;
+  --text-secondary: #3c5c48;
+  --text-muted:     #6a8a74;
+  --text-placeholder: #a0b8a8;
+  --text-inverse:   #ffffff;
+  --text-on-accent: #ffffff;
+
+  /* Brand / Accent */
+  --accent:        #2d6a4f;
+  --accent-hover:  #1b4332;
+  --accent-press:  #14532d;
+  --accent-light:  #52b788;
+  --accent-subtle: #d8f3e0;
+  --accent-glow:   rgba(45, 106, 79, 0);
+
+  /* Borders */
+  --border:         #c4dccb;
+  --border-subtle:  #dff0e4;
+  --border-strong:  #9fc4aa;
+  --border-input:   rgba(45, 106, 79, 0.2);
+  --border-focus:   rgba(45, 106, 79, 0.65);
+
+  /* Shadows */
+  --shadow-xs:  0 1px 3px rgba(20, 55, 35, 0.07);
+  --shadow-sm:  0 2px 8px rgba(20, 55, 35, 0.09);
+  --shadow-md:  0 6px 24px rgba(15, 45, 28, 0.12);
+  --shadow-lg:  0 16px 52px rgba(8, 30, 18, 0.15);
+  --shadow-xl:  0 28px 80px rgba(4, 20, 12, 0.18);
+  --shadow-btn: 0 4px 18px rgba(27, 67, 50, 0.28);
+  --shadow-btn-hover: 0 8px 26px rgba(27, 67, 50, 0.38);
+  --shadow-card: 0 2px 12px rgba(15, 45, 28, 0.09), 0 0 0 1px rgba(196, 220, 203, 0.6);
+
+  /* Gradients */
+  --gradient-page:   linear-gradient(158deg, #f2f7f0 0%, #e4efe0 100%);
+  --gradient-card:   linear-gradient(158deg, #ffffff 0%, #f0f7ec 100%);
+  --gradient-btn:    linear-gradient(128deg, #2d6a4f 0%, #40916c 55%, #52b788 100%);
+  --gradient-btn-h:  linear-gradient(128deg, #1b4332 0%, #2d6a4f 55%, #40916c 100%);
+  --gradient-input:  linear-gradient(180deg, #f8fdf6 0%, #f0f8f2 100%);
+  --gradient-hero:
+    radial-gradient(circle at 14% 10%, rgba(180, 240, 200, 0.35) 0%, transparent 46%),
+    radial-gradient(circle at 88% 82%, rgba(130, 210, 160, 0.28) 0%, transparent 48%),
+    linear-gradient(145deg, #e8f3e4 0%, #d4ecd9 100%);
+
+  /* Safety Semantic */
+  --color-safe:        #15803d;
+  --color-safe-bg:     #dcfce7;
+  --color-safe-border: #86efac;
+  --color-safe-text:   #14532d;
+
+  --color-caution:        #b45309;
+  --color-caution-bg:     #fef9c3;
+  --color-caution-border: #fde047;
+  --color-caution-text:   #78350f;
+
+  --color-avoid:        #b91c1c;
+  --color-avoid-bg:     #fee2e2;
+  --color-avoid-border: #fca5a5;
+  --color-avoid-text:   #7f1d1d;
+}
+
+/* ═══════════════════════════════════════════════
+   DARK THEME
+   Inspired by: Linear.app depth + Calm dark mode + AllTrails night
+   ═══════════════════════════════════════════════ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-page:     #0a1812;
+  --bg-surface:  #0f2219;
+  --bg-elevated: #152e22;
+  --bg-card:     #102018;
+  --bg-subtle:   #1a3028;
+  --bg-input:    #122018;
+  --bg-overlay:  rgba(0, 0, 0, 0.65);
+
+  /* Text */
+  --text-primary:   #e0f5e8;
+  --text-secondary: #88c79a;
+  --text-muted:     #527a62;
+  --text-placeholder: #3d6050;
+  --text-inverse:   #0a1812;
+  --text-on-accent: #ffffff;
+
+  /* Brand / Accent */
+  --accent:        #52b788;
+  --accent-hover:  #74c69d;
+  --accent-press:  #95d5b2;
+  --accent-light:  #95d5b2;
+  --accent-subtle: #1b4332;
+  --accent-glow:   rgba(82, 183, 136, 0.18);
+
+  /* Borders */
+  --border:         #1e3d2e;
+  --border-subtle:  #152a20;
+  --border-strong:  #2d6a4f;
+  --border-input:   rgba(82, 183, 136, 0.18);
+  --border-focus:   rgba(82, 183, 136, 0.6);
+
+  /* Shadows */
+  --shadow-xs:  0 1px 3px rgba(0, 0, 0, 0.28);
+  --shadow-sm:  0 2px 8px rgba(0, 0, 0, 0.38);
+  --shadow-md:  0 6px 24px rgba(0, 0, 0, 0.48);
+  --shadow-lg:  0 16px 52px rgba(0, 0, 0, 0.6);
+  --shadow-xl:  0 28px 80px rgba(0, 0, 0, 0.7);
+  --shadow-btn: 0 4px 18px rgba(82, 183, 136, 0.22);
+  --shadow-btn-hover: 0 8px 26px rgba(82, 183, 136, 0.35);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(30, 61, 46, 0.8);
+
+  /* Gradients */
+  --gradient-page:   linear-gradient(158deg, #0a1812 0%, #0f2219 100%);
+  --gradient-card:   linear-gradient(158deg, rgba(16, 32, 24, 0.97) 0%, rgba(21, 46, 34, 0.94) 100%);
+  --gradient-btn:    linear-gradient(128deg, #2d6a4f 0%, #40916c 55%, #52b788 100%);
+  --gradient-btn-h:  linear-gradient(128deg, #40916c 0%, #52b788 55%, #74c69d 100%);
+  --gradient-input:  linear-gradient(180deg, #122018 0%, #0f1e16 100%);
+  --gradient-hero:
+    radial-gradient(circle at 14% 10%, rgba(82, 183, 136, 0.14) 0%, transparent 48%),
+    radial-gradient(circle at 88% 82%, rgba(64, 145, 108, 0.12) 0%, transparent 50%),
+    linear-gradient(145deg, #0a1812 0%, #0f2219 100%);
+
+  /* Safety Semantic */
+  --color-safe:        #4ade80;
+  --color-safe-bg:     rgba(74, 222, 128, 0.1);
+  --color-safe-border: rgba(74, 222, 128, 0.3);
+  --color-safe-text:   #86efac;
+
+  --color-caution:        #fbbf24;
+  --color-caution-bg:     rgba(251, 191, 36, 0.1);
+  --color-caution-border: rgba(251, 191, 36, 0.3);
+  --color-caution-text:   #fde68a;
+
+  --color-avoid:        #f87171;
+  --color-avoid-bg:     rgba(248, 113, 113, 0.1);
+  --color-avoid-border: rgba(248, 113, 113, 0.3);
+  --color-avoid-text:   #fca5a5;
+}

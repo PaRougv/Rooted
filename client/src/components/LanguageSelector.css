@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════════════
+   LANGUAGE SELECTOR — Floating button + dropdown
+   ═══════════════════════════════════════════════ */
+
+.lang-selector {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1100;
+}
+
+.lang-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--ease-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-toggle:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Backdrop */
+.lang-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Dropdown */
+.lang-dropdown {
+  position: absolute;
+  bottom: 52px;
+  left: 0;
+  min-width: 150px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  animation: langFadeIn 0.15s ease;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--ease-fast);
+}
+
+.lang-option:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.lang-option.active {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.lang-option-flag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  min-width: 24px;
+}
+
+.lang-option-label {
+  flex: 1;
+}

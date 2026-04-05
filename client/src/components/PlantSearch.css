@@ -1,0 +1,355 @@
+/* ═══════════════════════════════════════════════
+   PLANT SEARCH — Search by Name + Safety Check
+   ══════════════════════════════════���════════════ */
+
+.psearch-page {
+  min-height: 100dvh;
+  background: var(--gradient-page);
+  padding: 60px 16px 32px;
+}
+
+.psearch-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.psearch-header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.psearch-kicker {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.psearch-header h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.psearch-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ── Search Bar ── */
+.psearch-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--ease-fast);
+}
+
+.psearch-bar:focus-within {
+  border-color: var(--border-focus);
+}
+
+.psearch-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.psearch-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.psearch-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.psearch-spinner {
+  color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Results dropdown ── */
+.psearch-results {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.psearch-result-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background var(--ease-fast);
+}
+
+.psearch-result-item:hover {
+  background: var(--bg-elevated);
+}
+
+.psearch-result-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.psearch-result-sci {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.psearch-no-results {
+  text-align: center;
+  padding: 16px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* ── Selected Plant Card ── */
+.psearch-selected-card {
+  margin-top: 16px;
+  background: var(--gradient-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.psearch-plant-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin: 0 0 2px;
+}
+
+.psearch-sci-name {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 0 16px;
+}
+
+.psearch-info-section {
+  margin-top: 14px;
+}
+
+.psearch-info-section h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 6px;
+}
+
+.psearch-info-section ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.psearch-info-section li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+
+/* ── Member selection ── */
+.psearch-member-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.psearch-member-section h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+
+.psearch-member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.psearch-member-chip {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--ease-fast);
+}
+
+.psearch-member-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.psearch-member-chip.active {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.psearch-no-members {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.psearch-no-members button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ── Check Safety button ── */
+.psearch-check-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--gradient-btn);
+  color: var(--text-on-accent);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: all var(--ease-fast);
+}
+
+.psearch-check-btn:hover:not(:disabled) {
+  background: var(--gradient-btn-h);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.psearch-check-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.psearch-ghost-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all var(--ease-fast);
+}
+
+.psearch-ghost-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Safety Result Card ── */
+.psearch-safety-card {
+  margin-top: 16px;
+  background: var(--gradient-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0 24px 24px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.psearch-rating-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  margin: 0 -24px 16px;
+  background: color-mix(in srgb, var(--rating-color) 12%, transparent);
+  border-bottom: 2px solid var(--rating-color);
+}
+
+.psearch-rating-text {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--rating-color);
+}
+
+.psearch-safety-for {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+.psearch-safety-section {
+  margin-top: 14px;
+}
+
+.psearch-safety-section h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 6px;
+}
+
+.psearch-safety-section ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.psearch-safety-section li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.psearch-safety-actions {
+  margin-top: 20px;
+}

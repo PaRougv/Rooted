@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./Login.css"
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,7 @@ const ForgotPassword = () => {
   const [showFlash, setShowFlash] = useState(false);
   const [resetToken, setResetToken] = useState("");
   const [showToken, setShowToken] = useState(false);
+  const [emailDeliveryPending, setEmailDeliveryPending] = useState(false);
 
   const triggerFlash = (message, type) => {
     setFlashMessage(message);
@@ -32,17 +35,22 @@ const ForgotPassword = () => {
       );
 
       triggerFlash(response.data.message, "success");
-      
-      // Show reset token (in production, this would be sent via email)
-      if (response.data.resetToken) {
-        setResetToken(response.data.resetToken);
+
+      if (response.data.debugResetToken) {
+        setResetToken(response.data.debugResetToken);
         setShowToken(true);
+        setEmailDeliveryPending(false);
+      } else {
+        setResetToken("");
+        setShowToken(false);
+        setEmailDeliveryPending(true);
       }
-      
-      setTimeout(() => {
-        // Navigate to reset password page with token
-        navigate(`/reset-password?token=${response.data.resetToken}`);
-      }, 3000);
+
+      if (response.data.debugResetToken) {
+        setTimeout(() => {
+          navigate(`/reset-password?token=${response.data.debugResetToken}`);
+        }, 3000);
+      }
       
     } catch (error) {
       console.error(error.response?.data || error.message);
@@ -67,16 +75,16 @@ const ForgotPassword = () => {
       <section className="login-card">
         <header className="login-header">
           <p className="login-kicker">Rooted</p>
-          <h2>Forgot Password</h2>
-          <p className="login-subtitle">Enter your email to receive a reset link.</p>
+          <h2>{t("forgotPw.title")}</h2>
+          <p className="login-subtitle">{t("forgotPw.subtitle")}</p>
         </header>
 
         <form onSubmit={handleSubmit} className="login-form">
           <label className="login-field">
-            <span>Email</span>
+            <span>{t("login.email")}</span>
             <input
               type="email"
-              placeholder='Enter your email'
+              placeholder={t("login.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -88,7 +96,7 @@ const ForgotPassword = () => {
             className="login-button"
             disabled={loading}
           >
-            {loading ? "Sending..." : "Send Reset Link"}
+            {loading ? t("forgotPw.sending") : t("forgotPw.sendBtn")}
           </button>
         </form>
 
@@ -101,7 +109,7 @@ const ForgotPassword = () => {
             border: "1px solid #3b82f6"
           }}>
             <p style={{ fontSize: "0.875rem", color: "#374151", marginBottom: "0.5rem" }}>
-              <strong>Your Reset Token:</strong> (Copy this - would be emailed in production)
+              <strong>Development Reset Token:</strong> Only shown because insecure token responses are enabled locally.
             </p>
             <code style={{ 
               display: "block", 
@@ -116,8 +124,14 @@ const ForgotPassword = () => {
           </div>
         )}
 
+        {emailDeliveryPending && (
+          <p className="login-note" style={{ marginTop: "1rem" }}>
+            {t("forgotPw.checkEmail")}
+          </p>
+        )}
+
         <p className="login-note">
-          Remember your password? <Link to="/login" className="login-link">Login</Link>
+          {t("forgotPw.rememberPw")} <Link to="/login" className="login-link">{t("nav.login")}</Link>
         </p>
       </section>
     </div>

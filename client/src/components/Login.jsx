@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./Login.css"
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +38,7 @@ const Login = () => {
       )
 
       console.log(response.data);
-      triggerFlash("Login successful", "success");
+      triggerFlash(t("login.success"), "success");
       setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {
       console.error(error.response?.data || error.message);
@@ -59,27 +61,27 @@ const Login = () => {
       <section className="login-card">
         <header className="login-header">
           <p className="login-kicker">Rooted</p>
-          <h2>Welcome Back</h2>
-          <p className="login-subtitle">Sign in and continue your plant care routine.</p>
+          <h2>{t("login.welcomeBack")}</h2>
+          <p className="login-subtitle">{t("login.subtitle")}</p>
         </header>
 
         <form onSubmit={handleLogin} className="login-form">
           <label className="login-field">
-            <span>Email</span>
+            <span>{t("login.email")}</span>
             <input
               type="email"
-              placeholder='Enter Email'
+              placeholder={t("login.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
 
           <label className="login-field">
-            <span>Password</span>
+            <span>{t("login.password")}</span>
             <div className="password-input-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder='Enter Password'
+                placeholder={t("login.passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -106,15 +108,15 @@ const Login = () => {
 
           <div className="forgot-password-wrapper">
             <Link to="/forgot-password" className="forgot-password-link">
-              Forgot password?
+              {t("login.forgotPassword")}
             </Link>
           </div>
 
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button">{t("login.loginBtn")}</button>
         </form>
 
         <p className="login-note">
-          Don&apos;t have an account? <Link to="/register" className="login-link">Register</Link>
+          {t("login.noAccount")} <Link to="/register" className="login-link">{t("nav.register")}</Link>
         </p>
       </section>
     </div>

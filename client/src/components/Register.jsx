@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./Login.css"
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +40,7 @@ const Register = () => {
       );
 
       console.log(response.data);
-      triggerFlash("Registration successful", "success");
+      triggerFlash(t("register.success"), "success");
       setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {
       console.error("Registration error:", error.response?.data || error.message);
@@ -64,37 +66,37 @@ const Register = () => {
       <section className="login-card">
         <header className="login-header">
           <p className="login-kicker">Rooted</p>
-          <h2>Create Account</h2>
-          <p className="login-subtitle">Register and start your plant care journey.</p>
+          <h2>{t("register.title")}</h2>
+          <p className="login-subtitle">{t("register.subtitle")}</p>
         </header>
 
         <form onSubmit={handleRegister} className="login-form">
           <label className="login-field">
-            <span>Name</span>
+            <span>{t("register.name")}</span>
             <input
               type="text"
-              placeholder='Enter Name'
+              placeholder={t("register.namePlaceholder")}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </label>
 
           <label className="login-field">
-            <span>Email</span>
+            <span>{t("login.email")}</span>
             <input
               type="email"
-              placeholder='Enter Email'
+              placeholder={t("login.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
 
           <label className="login-field">
-            <span>Password</span>
+            <span>{t("login.password")}</span>
             <div className="password-input-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder='Enter Password'
+                placeholder={t("login.passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -119,11 +121,11 @@ const Register = () => {
             </div>
           </label>
 
-          <button type="submit" className="login-button">Register</button>
+          <button type="submit" className="login-button">{t("register.registerBtn")}</button>
         </form>
 
         <p className="login-note">
-          Already have an account? <Link to="/login" className="login-link">Login</Link>
+          {t("register.haveAccount")} <Link to="/login" className="login-link">{t("nav.login")}</Link>
         </p>
       </section>
     </div>

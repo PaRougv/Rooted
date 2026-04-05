@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
+import {
+  Camera, Search, Leaf, Map, Clock, Heart, BarChart3,
+  MessageCircle, BookOpen, Calendar, GitCompare, LogOut,
+  Plus, Pencil, Trash2, ChevronDown, ChevronUp, User, X,
+  Scale, AlertTriangle, Bookmark
+} from "lucide-react";
 import FlashCard from "../helpers/FlashCard.jsx";
+import PlantOfTheDay from "./PlantOfTheDay.jsx";
 import "./Dashboard.css";
 
 const API_BASE = "/api/input/takeuser";
 
 const emptyForm = () => ({
-  name: "",
-  weight: "",
-  height: "",
-  bloodpressure: "",
-  heartrate: "",
-  anyothercondition: ""
+  name: "", weight: "", height: "",
+  bloodpressure: "", heartrate: "", anyothercondition: ""
 });
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [profiles, setProfiles] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [showInfoForm, setShowInfoForm] = useState(false);
@@ -26,7 +31,7 @@ const Dashboard = () => {
   const [flashType, setFlashType] = useState("success");
   const [showFlash, setShowFlash] = useState(false);
   const [isLoadingHealth, setIsLoadingHealth] = useState(true);
-  const [scans, setScans] = useState([]);
+  const [showFamily, setShowFamily] = useState(false);
 
   const loadProfiles = async () => {
     try {
@@ -34,9 +39,7 @@ const Dashboard = () => {
       const data = response.data?.data || [];
       const list = Array.isArray(data) ? data : data ? [data] : [];
       setProfiles(list);
-      if (!selectedId && list.length) {
-        setSelectedId(list[0]?.id ?? list[0]?._id);
-      }
+      if (!selectedId && list.length) setSelectedId(list[0]?.id ?? list[0]?._id);
     } catch (error) {
       console.error(error.response?.data || error.message);
     } finally {
@@ -44,425 +47,255 @@ const Dashboard = () => {
     }
   };
 
-  const fetchLatestScans = async () => {
-    try {
-      const result = await axios.get('http://localhost:3000/api/safety/history' , {
-        withCredentials: true
-      })
-
-      const scans = result.data.data;
-
-    // 👇 take only top 5
-    const top5 = scans.slice(0, 5);
-
-    // 👇 format data
-    const formatted = top5.map(item => ({
-      name: item.familyMemberName,
-      plant: item.plantName,
-      recommendation: item.recommendations[0] // short one
-    }));
-
-      console.log(formatted);
-
-      setScans(formatted);
-    } catch (error){
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    loadProfiles();
-    fetchLatestScans()
-  }, []);
+  useEffect(() => { loadProfiles(); }, []);
 
   const selectedProfile = profiles.find((p) => (p.id || p._id) === selectedId) || profiles[0];
 
-  const openAddForm = () => {
-    setForm(emptyForm());
-    setEditId(null);
-    setShowInfoForm(true);
-  };
-
+  const openAddForm = () => { setForm(emptyForm()); setEditId(null); setShowInfoForm(true); setShowFamily(true); };
   const openEditForm = (profile) => {
     setForm({
-      name: profile.name ?? "",
-      weight: profile.weight ?? "",
-      height: profile.height ?? "",
-      bloodpressure: profile.bloodPressure ?? "",
-      heartrate: profile.heartRate ?? "",
+      name: profile.name ?? "", weight: profile.weight ?? "", height: profile.height ?? "",
+      bloodpressure: profile.bloodPressure ?? "", heartrate: profile.heartRate ?? "",
       anyothercondition: profile.anyOtherCondition ?? ""
     });
     setEditId(profile.id || profile._id);
     setShowInfoForm(true);
+    setShowFamily(true);
   };
+  const closeForm = () => { setShowInfoForm(false); setEditId(null); setForm(emptyForm()); };
 
-  const closeForm = () => {
-    setShowInfoForm(false);
-    setEditId(null);
-    setForm(emptyForm());
-  };
+  const flash = (msg, type = "success") => { setFlashMessage(msg); setFlashType(type); setShowFlash(true); };
 
   const handleSaveInfo = async (e) => {
     e.preventDefault();
-    if (!form.name.trim()) {
-      setFlashMessage("Name is required");
-      setFlashType("error");
-      setShowFlash(true);
-      return;
-    }
+    if (!form.name.trim()) { flash(t("dashboard.nameRequired"), "error"); return; }
     try {
+      const payload = {
+        name: form.name, weight: form.weight, height: form.height,
+        bloodpressure: form.bloodpressure, heartrate: form.heartrate,
+        anyothercondition: form.anyothercondition
+      };
       if (editId) {
-        const response = await axios.put(
-          `${API_BASE}/${editId}`,
-          {
-            name: form.name,
-            weight: form.weight,
-            height: form.height,
-            bloodpressure: form.bloodpressure,
-            heartrate: form.heartrate,
-            anyothercondition: form.anyothercondition
-          },
-          { withCredentials: true }
-        );
-        await loadProfiles(); // Refresh the list from server
-        setFlashMessage("Profile updated successfully");
+        await axios.put(`${API_BASE}/${editId}`, payload, { withCredentials: true });
+        await loadProfiles();
+        flash(t("dashboard.profileUpdated"));
       } else {
-        const response = await axios.post(
-          API_BASE,
-          {
-            name: form.name,
-            weight: form.weight,
-            height: form.height,
-            bloodpressure: form.bloodpressure,
-            heartrate: form.heartrate,
-            anyothercondition: form.anyothercondition
-          },
-          { withCredentials: true }
-        );
-        await loadProfiles(); // Refresh the list from server
-        // Select the newly created member if we have the ID
-        if (response.data?.data?.id) {
-          setSelectedId(response.data.data.id);
-        }
-        setFlashMessage("Family member added successfully");
+        const response = await axios.post(API_BASE, payload, { withCredentials: true });
+        await loadProfiles();
+        if (response.data?.data?.id) setSelectedId(response.data.data.id);
+        flash(t("dashboard.profileCreated"));
       }
-      setFlashType("success");
-      setShowFlash(true);
       closeForm();
     } catch (error) {
-      console.error("Save error:", error);
-      console.error("Response:", error.response?.data);
-      setFlashMessage(error.response?.data?.message || error.message || "Failed to save");
-      setFlashType("error");
-      setShowFlash(true);
+      flash(error.response?.data?.message || error.message || "Failed to save", "error");
     }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Remove this family member?")) return;
     const idStr = String(id ?? "");
-    if (!idStr) return;
     try {
       await axios.delete(`${API_BASE}/${idStr}`, { withCredentials: true });
       setProfiles((prev) => {
         const next = prev.filter((p) => String(p.id || p._id) !== idStr);
         if (selectedId === idStr || selectedId === id) {
-          const nextProfile = next[0];
-          setSelectedId(nextProfile ? (nextProfile.id || nextProfile._id) : null);
+          setSelectedId(next[0] ? (next[0].id || next[0]._id) : null);
         }
         return next;
       });
-      setFlashMessage("Profile removed");
-      setFlashType("success");
-      setShowFlash(true);
+      flash(t("dashboard.profileRemoved"));
     } catch (error) {
-      setFlashMessage(error.response?.data?.message || "Failed to delete");
-      setFlashType("error");
-      setShowFlash(true);
+      flash(error.response?.data?.message || "Failed to delete", "error");
     }
   };
 
   const handleLogout = async () => {
     try {
       await axios.get("/api/auth/logout", { withCredentials: true });
-      setFlashMessage("Logged out successfully");
-      setFlashType("success");
-      setShowFlash(true);
-      setTimeout(() => navigate("/login"), 500);
+      flash("Logged out");
+      setTimeout(() => navigate("/login"), 400);
     } catch (error) {
-      setFlashMessage(error.response?.data?.message || "Logout failed");
-      setFlashType("error");
-      setShowFlash(true);
+      flash(error.response?.data?.message || "Logout failed", "error");
     }
   };
 
-  const renderSummary = (profile) => {
-    const hasData =
-      profile.weight != null ||
-      profile.height != null ||
-      profile.bloodPressure ||
-      profile.heartRate != null ||
-      profile.anyOtherCondition;
-    return (
-      <div className="dashboard-summary">
-        <div className="dashboard-summary-header">
-          <span className="dashboard-summary-greeting">
-            {profile.name ? `Hi, ${profile.name}` : "Your profile"}
-          </span>
-        </div>
-        {hasData && (
-          <div className="dashboard-summary-grid">
-            {profile.weight != null && (
-              <div className="dashboard-summary-item">
-                <span className="dashboard-summary-label">Weight</span>
-                <span className="dashboard-summary-value">{profile.weight} kg</span>
-              </div>
-            )}
-            {profile.height != null && (
-              <div className="dashboard-summary-item">
-                <span className="dashboard-summary-label">Height</span>
-                <span className="dashboard-summary-value">{profile.height} cm</span>
-              </div>
-            )}
-            {profile.bloodPressure && (
-              <div className="dashboard-summary-item">
-                <span className="dashboard-summary-label">Blood pressure</span>
-                <span className="dashboard-summary-value">{profile.bloodPressure}</span>
-              </div>
-            )}
-            {profile.heartRate != null && (
-              <div className="dashboard-summary-item">
-                <span className="dashboard-summary-label">Heart rate</span>
-                <span className="dashboard-summary-value">{profile.heartRate} bpm</span>
-              </div>
-            )}
-            {profile.anyOtherCondition && (
-              <div className="dashboard-summary-item dashboard-summary-item--full">
-                <span className="dashboard-summary-label">Conditions</span>
-                <span className="dashboard-summary-value">{profile.anyOtherCondition}</span>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  };
+  // Navigation items grouped by category
+  const NAV_GROUPS = [
+    {
+      label: "Identify",
+      items: [
+        { icon: Camera, label: t("nav.camera"), path: "/camera", state: { selectedFamilyMember: selectedProfile }, primary: true, disabled: !selectedProfile },
+        { icon: Search, label: t("nav.plantSearch"), path: "/plant-search" },
+        { icon: Leaf, label: t("nav.plantDetails"), path: "/plant" },
+        { icon: GitCompare, label: t("nav.compare"), path: "/compare" },
+        { icon: Scale, label: t("nav.dosage"), path: "/dosage" },
+      ]
+    },
+    {
+      label: "Track",
+      items: [
+        { icon: Clock, label: t("nav.history"), path: "/history" },
+        { icon: BookOpen, label: t("nav.journal"), path: "/journal" },
+        { icon: Bookmark, label: t("nav.bookmarks"), path: "/bookmarks" },
+        { icon: BarChart3, label: t("nav.results"), path: "/results" },
+      ]
+    },
+    {
+      label: "Explore",
+      items: [
+        { icon: MessageCircle, label: t("nav.chat"), path: "/chat" },
+        { icon: Map, label: t("nav.maps"), path: "/maps" },
+        { icon: Heart, label: t("nav.firstAid"), path: "/first-aid" },
+        { icon: Calendar, label: t("nav.calendar"), path: "/calendar" },
+        { icon: AlertTriangle, label: t("emergency.title"), path: "/emergency" },
+      ]
+    }
+  ];
 
   return (
-    <main className="dashboard-page">
-      <FlashCard
-        message={flashMessage}
-        type={flashType}
-        visible={showFlash}
-        onClose={() => setShowFlash(false)}
-      />
+    <main className="dash">
+      <FlashCard message={flashMessage} type={flashType} visible={showFlash} onClose={() => setShowFlash(false)} />
 
-      <div className="scans-container">
-  <h2 className="scans-title">🌿 Latest Scans</h2>
-
-  <div className="scans-grid">
-    {scans.map((scan, index) => (
-      <div key={index} className="scan-card">
-        <div className="scan-header">
-          <span className="scan-name">{scan.name}</span>
-        </div>
-
-        <div className="scan-body">
-          <p className="scan-plant">{scan.plant}</p>
-          <p className="scan-note">{scan.recommendation}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
-      <section className="dashboard-card">
-        <button type="button" className="dashboard-top-logout" onClick={handleLogout}>
-          Logout
+      {/* ── Top bar ── */}
+      <div className="dash-topbar">
+        <span className="dash-logo">Rooted</span>
+        <button className="dash-logout" onClick={handleLogout}>
+          <LogOut size={15} /> {t("nav.logout")}
         </button>
+      </div>
 
-        <header className="dashboard-header">
-          <p className="dashboard-kicker">Rooted Dashboard</p>
-          <h1>Your Green Control Center</h1>
-          <p>
-            Add family members, track health info, open camera, or continue with maps later.
-          </p>
-        </header>
-
-        <div className="dashboard-actions">
-          <button
-            type="button"
-            className="dashboard-btn dashboard-btn--primary"
-            onClick={openAddForm}
-          >
-            Add Family Member
-          </button>
-          <button
-            type="button"
-            className="dashboard-btn dashboard-btn--secondary"
-            onClick={() => navigate("/camera", { state: { selectedFamilyMember: selectedProfile } })}
-            disabled={!selectedProfile}
-            title={selectedProfile ? `Scan for ${selectedProfile.name}` : "Select a family member first"}
-          >
-            {selectedProfile ? `🔍 Identify for ${selectedProfile.name}` : "Select Member to Scan"}
-          </button>
-          <button
-            type="button"
-            className="dashboard-btn dashboard-btn--ghost"
-            onClick={() => navigate("/plant")}
-          >
-            Plant Details
-          </button>
-          <button type="button" className="dashboard-btn dashboard-btn--ghost">
-            Maps
+      {/* ── Active member strip ── */}
+      {selectedProfile && (
+        <div className="dash-member-strip">
+          <div className="dash-member-avatar">
+            <User size={18} />
+          </div>
+          <div className="dash-member-info">
+            <span className="dash-member-name">{selectedProfile.name}</span>
+            <span className="dash-member-details">
+              {[
+                selectedProfile.weight && `${selectedProfile.weight}kg`,
+                selectedProfile.height && `${selectedProfile.height}cm`,
+                selectedProfile.bloodPressure && `BP ${selectedProfile.bloodPressure}`,
+                selectedProfile.heartRate && `${selectedProfile.heartRate}bpm`,
+              ].filter(Boolean).join(" · ") || "No health data"}
+            </span>
+          </div>
+          {selectedProfile.anyOtherCondition && (
+            <span className="dash-member-condition">{selectedProfile.anyOtherCondition}</span>
+          )}
+          <button className="dash-member-change" onClick={() => setShowFamily((v) => !v)}>
+            {showFamily ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
         </div>
+      )}
 
-        {/* Add/Edit Form - shows inline */}
-        {showInfoForm && !isLoadingHealth && (
-          <div className="dashboard-form-container">
-            <div className="dashboard-form-header">
-              <h3 className="dashboard-form-title">
-                {editId ? "✏️ Edit Family Member" : "➕ Add New Family Member"}
-              </h3>
-              <button 
-                type="button" 
-                className="dashboard-form-close"
-                onClick={closeForm}
-                title="Close"
-              >
-                ✕
-              </button>
-            </div>
-            <form className="dashboard-form" onSubmit={handleSaveInfo}>
-              <label className="dashboard-field">
-                <span>Name *</span>
-                <input
-                  type="text"
-                  placeholder="e.g. Mom, Dad, Alex"
-                  value={form.name}
-                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                  required
-                />
-              </label>
-              <label className="dashboard-field">
-                <span>Weight (kg)</span>
-                <input
-                  type="text"
-                  placeholder="Enter weight (kg)"
-                  value={form.weight}
-                  onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))}
-                />
-              </label>
-              <label className="dashboard-field">
-                <span>Height (cm)</span>
-                <input
-                  type="text"
-                  placeholder="Enter height (cm)"
-                  value={form.height}
-                  onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))}
-                />
-              </label>
-              <label className="dashboard-field">
-                <span>Blood pressure</span>
-                <input
-                  type="text"
-                  placeholder="e.g. 120/80"
-                  value={form.bloodpressure}
-                  onChange={(e) => setForm((f) => ({ ...f, bloodpressure: e.target.value }))}
-                />
-              </label>
-              <label className="dashboard-field">
-                <span>Heart rate</span>
-                <input
-                  type="text"
-                  placeholder="bpm"
-                  value={form.heartrate}
-                  onChange={(e) => setForm((f) => ({ ...f, heartrate: e.target.value }))}
-                />
-              </label>
-              <label className="dashboard-field">
-                <span>Other conditions</span>
-                <input
-                  type="text"
-                  placeholder="e.g. Pregnancy, Diabetes, Blood thinners"
-                  value={form.anyothercondition}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, anyothercondition: e.target.value }))
-                  }
-                />
-              </label>
-              <div className="dashboard-form-actions">
-                <button type="submit" className="dashboard-save-btn">
-                  {editId ? "Update" : "Save"} Profile
-                </button>
-                <button type="button" className="dashboard-cancel-btn" onClick={closeForm}>
-                  Cancel
-                </button>
-              </div>
-            </form>
-            
+      {!selectedProfile && !isLoadingHealth && (
+        <div className="dash-member-strip dash-member-strip--empty">
+          <p>No family members yet.</p>
+          <button className="dash-add-first" onClick={openAddForm}>
+            <Plus size={14} /> {t("dashboard.addFamily")}
+          </button>
+        </div>
+      )}
+
+      {/* ── Family panel (collapsible) ── */}
+      {showFamily && (
+        <div className="dash-family-panel">
+          <div className="dash-family-header">
+            <h3>{t("dashboard.familyMembers")}</h3>
+            <button className="dash-family-add" onClick={openAddForm}>
+              <Plus size={14} /> {t("dashboard.add")}
+            </button>
           </div>
-          
-        )}
 
-        {/* Always show family members list */}
-        {profiles.length > 0 && !isLoadingHealth && (
-          <div className="dashboard-profiles">
-            <div className="dashboard-profiles-header">
-              <h3 className="dashboard-profiles-title">Family members</h3>
-              {!showInfoForm && (
-                <button
-                  type="button"
-                  className="dashboard-add-btn-small"
-                  onClick={openAddForm}
-                  title="Add new family member"
-                >
-                  + Add
-                </button>
-              )}
-            </div>
-            <div className="dashboard-profile-tabs">
-              {profiles.map((p) => {
-                const pid = p.id || p._id;
-                const isSelected = selectedId === pid;
-                return (
-                  <div
-                    key={pid}
-                    className={`dashboard-profile-tab ${isSelected ? "dashboard-profile-tab--active" : ""}`}
-                    onClick={() => setSelectedId(pid)}
-                  >
-                    <span>{p.name || "Unnamed"}</span>
-                    <div className="dashboard-profile-tab-actions">
-                      <button
-                        type="button"
-                        className="dashboard-tab-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openEditForm(p);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        className="dashboard-tab-btn dashboard-tab-btn--danger"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(pid);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </div>
+          <div className="dash-family-list">
+            {profiles.map((p) => {
+              const pid = p.id || p._id;
+              const active = selectedId === pid;
+              return (
+                <div key={pid} className={`dash-family-chip ${active ? "active" : ""}`} onClick={() => { setSelectedId(pid); setShowFamily(false); }}>
+                  <span className="dash-family-chip-name">{p.name || "Unnamed"}</span>
+                  <div className="dash-family-chip-actions">
+                    <button onClick={(e) => { e.stopPropagation(); openEditForm(p); }} title={t("dashboard.edit")}>
+                      <Pencil size={12} />
+                    </button>
+                    <button className="danger" onClick={(e) => { e.stopPropagation(); handleDelete(pid); }} title={t("dashboard.remove")}>
+                      <Trash2 size={12} />
+                    </button>
                   </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Inline form */}
+          {showInfoForm && (
+            <div className="dash-form-card">
+              <div className="dash-form-top">
+                <h4>{editId ? t("dashboard.editFamily") : t("dashboard.addFamily")}</h4>
+                <button className="dash-form-x" onClick={closeForm}><X size={16} /></button>
+              </div>
+              <form className="dash-form" onSubmit={handleSaveInfo}>
+                <label><span>{t("dashboard.name")} *</span>
+                  <input type="text" placeholder={t("dashboard.namePlaceholder")} value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required />
+                </label>
+                <div className="dash-form-row">
+                  <label><span>{t("dashboard.weight")}</span>
+                    <input type="text" placeholder="kg" value={form.weight} onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))} />
+                  </label>
+                  <label><span>{t("dashboard.height")}</span>
+                    <input type="text" placeholder="cm" value={form.height} onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))} />
+                  </label>
+                </div>
+                <div className="dash-form-row">
+                  <label><span>{t("dashboard.bloodPressure")}</span>
+                    <input type="text" placeholder={t("dashboard.bpPlaceholder")} value={form.bloodpressure} onChange={(e) => setForm((f) => ({ ...f, bloodpressure: e.target.value }))} />
+                  </label>
+                  <label><span>{t("dashboard.heartRate")}</span>
+                    <input type="text" placeholder="bpm" value={form.heartrate} onChange={(e) => setForm((f) => ({ ...f, heartrate: e.target.value }))} />
+                  </label>
+                </div>
+                <label><span>{t("dashboard.conditions")}</span>
+                  <input type="text" placeholder={t("dashboard.condPlaceholder")} value={form.anyothercondition} onChange={(e) => setForm((f) => ({ ...f, anyothercondition: e.target.value }))} />
+                </label>
+                <div className="dash-form-btns">
+                  <button type="submit" className="dash-form-save">{editId ? t("dashboard.updateProfile") : t("dashboard.saveProfile")}</button>
+                  <button type="button" className="dash-form-cancel" onClick={closeForm}>{t("dashboard.cancel")}</button>
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── Plant of the Day ── */}
+      <PlantOfTheDay />
+
+      {/* ── Navigation grid ── */}
+      <div className="dash-nav-grid">
+        {NAV_GROUPS.map((group) => (
+          <section key={group.label} className="dash-nav-section">
+            <h2 className="dash-nav-label">{group.label}</h2>
+            <div className="dash-nav-items">
+              {group.items.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.path}
+                    className={`dash-nav-card ${item.primary ? "dash-nav-card--primary" : ""}`}
+                    onClick={() => navigate(item.path, item.state ? { state: item.state } : undefined)}
+                    disabled={item.disabled}
+                  >
+                    <span className="dash-nav-icon"><Icon size={20} /></span>
+                    <span className="dash-nav-text">{item.label}</span>
+                  </button>
                 );
               })}
             </div>
-            {selectedProfile && renderSummary(selectedProfile)}
-          </div>
-        )}
-      </section>
+          </section>
+        ))}
+      </div>
     </main>
   );
 };

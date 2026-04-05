@@ -1,6 +1,7 @@
 import { ENV } from "./src/config/env.js";
-import app from "./src/app.js";
+// Load DB config before app so Mongoose options apply before models register
 import { connectDB } from "./src/config/db.js";
+import app from "./src/app.js";
 
 const startServer = async () => {
     try {

@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════
+   SEASONAL CALENDAR — Indian Medicinal Plants
+   ═══════════════════════════════════════════════ */
+
+.scal-page {
+  min-height: 100dvh;
+  background: var(--gradient-page);
+  padding: 60px 16px 32px;
+}
+
+.scal-container { max-width: 720px; margin: 0 auto; }
+
+/* ── Header ── */
+.scal-header { text-align: center; padding-bottom: 20px; }
+.scal-kicker { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.scal-header h1 { font-family: var(--font-display); font-size: 1.6rem; color: var(--text-primary); margin: 0 0 4px; }
+.scal-header p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* ── Tabs ── */
+.scal-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scal-tabs::-webkit-scrollbar { display: none; }
+
+.scal-tab {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--ease-fast);
+  position: relative;
+  min-width: 80px;
+}
+
+.scal-tab:hover {
+  border-color: var(--tab-color);
+  color: var(--tab-color);
+}
+
+.scal-tab.active {
+  border-color: var(--tab-color);
+  background: color-mix(in srgb, var(--tab-color) 10%, var(--bg-card));
+  color: var(--tab-color);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--tab-color) 20%, transparent);
+}
+
+.scal-tab-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.scal-tab-months {
+  font-size: 0.62rem;
+  opacity: 0.7;
+}
+
+.scal-tab-now {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--tab-color);
+  color: white;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Grid ── */
+.scal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.scal-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-xs);
+  border-left: 3px solid var(--card-accent);
+  transition: all var(--ease-fast);
+}
+
+.scal-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.scal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.scal-plant-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.scal-region {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
+.scal-use {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--card-accent);
+  margin: 0 0 4px;
+}
+
+.scal-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.scal-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .scal-tab { min-width: 68px; padding: 10px 10px; }
+  .scal-tab-label { font-size: 0.68rem; }
+  .scal-card-header { flex-direction: column; gap: 4px; }
+  .scal-region { align-self: flex-start; }
+}

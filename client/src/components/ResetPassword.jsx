@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./Login.css"
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";
 
 const ResetPassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState("");
@@ -36,17 +38,17 @@ const ResetPassword = () => {
     e.preventDefault();
     
     if (newPassword !== confirmPassword) {
-      triggerFlash("Passwords do not match", "error");
+      triggerFlash(t("resetPw.mismatch"), "error");
       return;
     }
 
     if (newPassword.length < 6) {
-      triggerFlash("Password must be at least 6 characters", "error");
+      triggerFlash(t("resetPw.tooShort"), "error");
       return;
     }
 
     if (!token) {
-      triggerFlash("Reset token is required", "error");
+      triggerFlash(t("resetPw.tokenRequired"), "error");
       return;
     }
 
@@ -90,16 +92,16 @@ const ResetPassword = () => {
       <section className="login-card">
         <header className="login-header">
           <p className="login-kicker">Rooted</p>
-          <h2>Reset Password</h2>
-          <p className="login-subtitle">Enter your new password below.</p>
+          <h2>{t("resetPw.title")}</h2>
+          <p className="login-subtitle">{t("resetPw.subtitle")}</p>
         </header>
 
         <form onSubmit={handleSubmit} className="login-form">
           <label className="login-field">
-            <span>Reset Token</span>
+            <span>{t("resetPw.token")}</span>
             <input
               type="text"
-              placeholder='Enter reset token'
+              placeholder={t("resetPw.tokenPlaceholder")}
               value={token}
               onChange={(e) => setToken(e.target.value)}
               required
@@ -107,11 +109,11 @@ const ResetPassword = () => {
           </label>
 
           <label className="login-field">
-            <span>New Password</span>
+            <span>{t("resetPw.newPassword")}</span>
             <div className="password-input-wrapper">
               <input
                 type={showNewPassword ? "text" : "password"}
-                placeholder='Enter new password (min 6 chars)'
+                placeholder={t("resetPw.newPasswordPlaceholder")}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
@@ -138,11 +140,11 @@ const ResetPassword = () => {
           </label>
 
           <label className="login-field">
-            <span>Confirm Password</span>
+            <span>{t("resetPw.confirmPassword")}</span>
             <div className="password-input-wrapper">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder='Confirm new password'
+                placeholder={t("resetPw.confirmPlaceholder")}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -173,12 +175,12 @@ const ResetPassword = () => {
             className="login-button"
             disabled={loading}
           >
-            {loading ? "Resetting..." : "Reset Password"}
+            {loading ? t("resetPw.resetting") : t("resetPw.resetBtn")}
           </button>
         </form>
 
         <p className="login-note">
-          Remember your password? <Link to="/login" className="login-link">Login</Link>
+          {t("resetPw.rememberPw")} <Link to="/login" className="login-link">{t("nav.login")}</Link>
         </p>
       </section>
     </div>

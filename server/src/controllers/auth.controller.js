@@ -1,7 +1,10 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import { User } from "../models/user.model.js"; 
 import { ENV } from "../config/env.js";
+
+const isProduction = ENV.NODE_ENV === "production";
 
 const generateToken = (userId) => {
   return jwt.sign(
@@ -9,6 +12,52 @@ const generateToken = (userId) => {
     ENV.JWT_SECRET,
     { expiresIn: "7d" }
   );
+};
+
+const getCookieOptions = () => ({
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "strict",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+
+const createPasswordResetToken = () => {
+  const token = crypto.randomBytes(32).toString("hex");
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  return { token, hashedToken };
+};
+
+const sendPasswordResetEmail = async ({ to, resetLink }) => {
+  if (!ENV.RESEND_API_KEY || !ENV.EMAIL_FROM) {
+    return false;
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${ENV.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: ENV.EMAIL_FROM,
+      to: [to],
+      subject: "Reset your Rooted password",
+      html: `
+        <p>You requested a password reset for Rooted.</p>
+        <p><a href="${resetLink}">Reset your password</a></p>
+        <p>This link expires in 1 hour.</p>
+        <p>If you did not request this, you can ignore this email.</p>
+      `,
+    }),
+    signal: AbortSignal.timeout(15000),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(`Email delivery failed: ${message}`);
+  }
+
+  return true;
 };
 
 
@@ -39,12 +88,7 @@ export const register = async (req, res) => {
 
     const token = generateToken(user._id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, 
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    res.cookie("token", token, getCookieOptions());
 
     res.status(201).json({
       message: "User registered successfully",
@@ -68,7 +112,11 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    if (!email?.trim() || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -80,12 +128,7 @@ export const login = async (req, res) => {
 
     const token = generateToken(user._id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, 
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    res.cookie("token", token, getCookieOptions());
 
     res.status(200).json({
       message: "Login successful",
@@ -97,15 +140,17 @@ export const login = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Login error:", error);
+    res.status(500).json({ message: error.message || "Login failed" });
   }
 };
 
 export const logout = async (req, res) => {
   try {
     res.cookie("token", "", {
-      httpOnly: true,
+      ...getCookieOptions(),
       expires: new Date(0),
+      maxAge: 0,
     });
 
     res.status(200).json({ message: "Logged out successfully" });
@@ -130,20 +175,38 @@ export const forgotPassword = async (req, res) => {
       return res.status(200).json({ message: "If an account exists, a reset link has been sent" });
     }
 
-    // Generate random token
-    const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    
-    // Save token to user (expires in 1 hour)
-    user.resetPasswordToken = resetToken;
+    const { token, hashedToken } = createPasswordResetToken();
+
+    user.resetPasswordToken = hashedToken;
     user.resetPasswordExpires = new Date(Date.now() + 3600000); // 1 hour
     await user.save();
 
-    // In production, send email here. For now, return the token
-    res.status(200).json({
-      message: "Password reset token generated",
-      resetToken: resetToken, // In production, send this via email instead
-      note: "In production, this token would be sent to your email"
+    const resetLink = `${ENV.APP_BASE_URL.replace(/\/$/, "")}/reset-password?token=${token}`;
+    const emailSent = await sendPasswordResetEmail({
+      to: user.email,
+      resetLink,
+    }).catch((error) => {
+      console.error("Password reset email error:", error.message);
+      return false;
     });
+
+    const response = {
+      message: emailSent
+        ? "If an account exists, a reset link has been sent"
+        : "Password reset requested. Email delivery is not configured.",
+    };
+
+    if (!emailSent && !isProduction) {
+      console.log(`[Password Reset] ${user.email}: ${resetLink}`);
+    }
+
+    if (ENV.ALLOW_INSECURE_RESET_TOKEN_RESPONSE && !isProduction) {
+      response.debugResetToken = token;
+      response.debugResetLink = resetLink;
+      response.message = "Password reset token generated for local development";
+    }
+
+    res.status(200).json(response);
 
   } catch (error) {
     console.error("Forgot password error:", error);
@@ -164,8 +227,10 @@ export const resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Password must be at least 6 characters" });
     }
 
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
     const user = await User.findOne({
-      resetPasswordToken: token,
+      resetPasswordToken: hashedToken,
       resetPasswordExpires: { $gt: new Date() }
     });
 

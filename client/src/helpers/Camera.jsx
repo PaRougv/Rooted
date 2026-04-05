@@ -1,15 +1,23 @@
 import React , { useEffect, useRef , useState } from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Map, { Marker, NavigationControl } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./Camera.css"
 import FlashCard from "./FlashCard.jsx";
 import BackButton from "../components/BackButton.jsx";
 import axios from 'axios'
 
+const MAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
+const DEFAULT_MAP_CENTER = { lat: 20.5937, lng: 78.9629 };
+
 const Camera = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation();
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
+    const fileInputRef = useRef(null);
     const streamRef = useRef(null);
     const [image , setImage] = useState(null);
     const [flashMessage, setFlashMessage] = useState("");
@@ -18,6 +26,31 @@ const Camera = () => {
     const [identification, setIdentification] = useState(null);
     const [isIdentifying, setIsIdentifying] = useState(false);
     const [isCheckingSafety, setIsCheckingSafety] = useState(false);
+    const [cnnResult, setCnnResult] = useState(null);
+    const [userLocation, setUserLocation] = useState(null);
+    const [locationMode, setLocationMode] = useState("none");
+    const [manualLocation, setManualLocation] = useState(null);
+    const [showLocationModal, setShowLocationModal] = useState(false);
+    const [mapView, setMapView] = useState({
+        longitude: DEFAULT_MAP_CENTER.lng,
+        latitude: DEFAULT_MAP_CENTER.lat,
+        zoom: 4,
+    });
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+                () => setUserLocation(null)
+            );
+        }
+    }, []);
+
+    useEffect(() => {
+        if (userLocation && locationMode === "none") {
+            setLocationMode("current");
+        }
+    }, [userLocation, locationMode]);
     
     // Get selected family member from Dashboard
     const selectedFamilyMember = location.state?.selectedFamilyMember;
@@ -27,6 +60,29 @@ const Camera = () => {
         setFlashType(type);
         setShowFlash(true);
     }
+
+    const resetResults = () => {
+        setIdentification(null);
+        setCnnResult(null);
+    };
+
+    const selectedLocation =
+        locationMode === "current"
+            ? userLocation
+            : locationMode === "manual"
+                ? manualLocation
+                : null;
+
+    const mapCenter = manualLocation || userLocation || DEFAULT_MAP_CENTER;
+
+    useEffect(() => {
+        if (locationMode !== "manual") return;
+        setMapView({
+            longitude: mapCenter.lng,
+            latitude: mapCenter.lat,
+            zoom: manualLocation || userLocation ? 11 : 4,
+        });
+    }, [locationMode, mapCenter.lat, mapCenter.lng, manualLocation, userLocation]);
 
     const stopCamera = () => {
         if (streamRef.current) {
@@ -39,9 +95,56 @@ const Camera = () => {
         }
     }
 
+    const createPreviewImage = (source) => new Promise((resolve, reject) => {
+        if (source instanceof HTMLVideoElement) {
+            resolve(source);
+            return;
+        }
+
+        const previewImage = new Image();
+        previewImage.onload = () => resolve(previewImage);
+        previewImage.onerror = () => reject(new Error("Could not read selected image"));
+        previewImage.src = source;
+    });
+
+    const convertImageToDataUrl = async (source) => {
+        const previewImage = await createPreviewImage(source);
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+
+        let w = source instanceof HTMLVideoElement ? source.videoWidth : previewImage.width;
+        let h = source instanceof HTMLVideoElement ? source.videoHeight : previewImage.height;
+        const maxDim = 1024;
+        if (w > maxDim || h > maxDim) {
+            if (w > h) {
+                h = (h / w) * maxDim;
+                w = maxDim;
+            } else {
+                w = (w / h) * maxDim;
+                h = maxDim;
+            }
+        }
+
+        canvas.width = w;
+        canvas.height = h;
+        context.drawImage(previewImage, 0, 0, w, h);
+
+        return canvas.toDataURL("image/jpeg", 0.85);
+    };
+
     const handleConfirm = async () => {
+        if (!image || typeof image !== "string" || !image.startsWith("data:image/")) {
+            triggerFlash("Please capture or upload a valid image before continuing.", "error");
+            return;
+        }
+
         setIsIdentifying(true);
-        setIdentification(null);
+        resetResults();
+
+        // Run CNN classifier in parallel (silent fail)
+        axios.post('/api/ml/classify', { image }, { withCredentials: true })
+            .then(res => { if (res.data?.plant_predictions?.length) setCnnResult(res.data); })
+            .catch(() => {});
         try {
             const response = await axios.post('/camera/uploadphoto' , {
                 image: image
@@ -49,6 +152,7 @@ const Camera = () => {
 
             if (response.data?.success && response.data?.plant) {
                 const plantData = response.data;
+                setIdentification(plantData);
                 
                 // If family member is pre-selected, auto-check safety
                 if (selectedFamilyMember) {
@@ -60,8 +164,11 @@ const Camera = () => {
                             "/api/safety/check",
                             {
                                 plantName: plantData.plant.name,
+                                plantCommonNames: plantData.plant.commonNames || [],
                                 probability: plantData.plant.probability,
-                                familyMemberId: selectedFamilyMember._id || selectedFamilyMember.id
+                                familyMemberId: selectedFamilyMember._id || selectedFamilyMember.id,
+                                lat: selectedLocation?.lat ?? null,
+                                lng: selectedLocation?.lng ?? null
                             },
                             { withCredentials: true }
                         );
@@ -91,7 +198,8 @@ const Camera = () => {
                     navigate("/plant-safety", {
                         state: {
                             identification: plantData,
-                            capturedImage: image
+                            capturedImage: image,
+                            selectedLocation
                         }
                     });
                 }
@@ -123,36 +231,83 @@ const Camera = () => {
 
     const capturePhoto = async () => {
         const video = videoRef.current;
-        const canvas = canvasRef.current;
-        const context = canvas.getContext("2d");
-
-        let w = video.videoWidth;
-        let h = video.videoHeight;
-        const maxDim = 1024;
-        if (w > maxDim || h > maxDim) {
-            if (w > h) {
-                h = (h / w) * maxDim;
-                w = maxDim;
-            } else {
-                w = (w / h) * maxDim;
-                h = maxDim;
-            }
+        if (!video || !video.videoWidth || !video.videoHeight) {
+            triggerFlash("Start the camera before capturing a photo.", "error");
+            return;
         }
 
-        canvas.width = w;
-        canvas.height = h;
-        context.drawImage(video, 0, 0, w, h);
-
-        const imageData = canvas.toDataURL("image/jpeg", 0.85);
+        const imageData = await convertImageToDataUrl(videoRef.current);
+        resetResults();
         setImage(imageData);
         stopCamera();
+        setShowLocationModal(true);
     }
+
+    const openFilePicker = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            triggerFlash("Please choose an image file.", "error");
+            e.target.value = "";
+            return;
+        }
+
+        try {
+            stopCamera();
+            resetResults();
+            const objectUrl = URL.createObjectURL(file);
+            const imageData = await convertImageToDataUrl(objectUrl);
+            URL.revokeObjectURL(objectUrl);
+            setImage(imageData);
+            setShowLocationModal(true);
+        } catch (error) {
+            console.error(error);
+            triggerFlash("Could not read the selected image.", "error");
+        } finally {
+            e.target.value = "";
+        }
+    };
 
     const handleRetake = async () => {
         setImage(null);
-        setIdentification(null);
+        resetResults();
         await startCamera();
     }
+
+    const handleUseCurrentLocation = () => {
+        if (!userLocation) {
+            triggerFlash("Current location is not available yet. You can still pick a point on the map.", "error");
+            return;
+        }
+        setLocationMode("current");
+    };
+
+    const handleUseManualLocation = () => {
+        setLocationMode("manual");
+        if (!manualLocation) {
+            setManualLocation(userLocation || DEFAULT_MAP_CENTER);
+        }
+    };
+
+    const handleSkipLocation = () => {
+        setLocationMode("none");
+    };
+
+    const handleMapPick = (event) => {
+        const nextLocation = {
+            lat: event.lngLat.lat,
+            lng: event.lngLat.lng,
+        };
+        setManualLocation(nextLocation);
+        if (locationMode !== "manual") {
+            setLocationMode("manual");
+        }
+    };
 
     const getSuggestions = () => {
         if (!identification) return [];
@@ -199,7 +354,7 @@ const Camera = () => {
 
   return (
     <div className="camera-page">
-        <BackButton to="/dashboard" label="Back to Dashboard" className="back-button--fixed" />
+        <BackButton to="/dashboard" label={t("nav.dashboard")} className="back-button--fixed" />
         <FlashCard
             message={flashMessage}
             type={flashType}
@@ -208,13 +363,13 @@ const Camera = () => {
         />
         <div className="camera-shell">
             <header className="camera-header">
-                <p className="camera-kicker">Studio Mode</p>
-                <h2>Capture The Moment</h2>
-                <p>Use your camera, frame your shot, and save a crisp still preview.</p>
+                <p className="camera-kicker">{t("camera.kicker")}</p>
+                <h2>{t("camera.title")}</h2>
+                <p>{t("camera.subtitle")}</p>
                 {selectedFamilyMember && (
                     <div className="camera-selected-member">
                         <span className="camera-member-badge">
-                            👤 Scanning for: <strong>{selectedFamilyMember.name}</strong>
+                            {t("camera.scanningFor")} <strong>{selectedFamilyMember.name}</strong>
                             {selectedFamilyMember.anyOtherCondition && (
                                 <span className="camera-member-condition"> ({selectedFamilyMember.anyOtherCondition})</span>
                             )}
@@ -238,28 +393,150 @@ const Camera = () => {
             <div className="camera-actions">
                 {image ? (
                     <div className="camera-captured-actions">
-                        <button className="camera-button camera-button--primary" onClick={handleRetake} disabled={isIdentifying}>Retake</button>
+                        <button className="camera-button camera-button--primary" onClick={handleRetake} disabled={isIdentifying}>{t("camera.retake")}</button>
                         <button className="camera-button camera-button--secondary" type="button" onClick={handleConfirm} disabled={isIdentifying || isCheckingSafety}>
-                            {isCheckingSafety 
-                                ? `Checking safety for ${selectedFamilyMember?.name}...` 
-                                : isIdentifying 
-                                    ? "Identifying…" 
-                                    : `🔍 Identify for ${selectedFamilyMember?.name}`}
+                            {isCheckingSafety
+                                ? t("camera.checkingSafety", { name: selectedFamilyMember?.name })
+                                : isIdentifying
+                                    ? t("camera.identifying")
+                                    : selectedFamilyMember?.name
+                                        ? t("camera.identifyFor", { name: selectedFamilyMember.name })
+                                        : t("camera.identifyPlant")}
                         </button>
                     </div>
                 ) : (
                     <>
-                        <button className="camera-button camera-button--primary" onClick={startCamera}>Start Camera</button>
-                        <button className="camera-button camera-button--secondary" onClick={capturePhoto}>Capture Photo</button>
+                        <button className="camera-button camera-button--primary" onClick={startCamera}>{t("camera.startCamera")}</button>
+                        <button className="camera-button camera-button--secondary" onClick={capturePhoto}>{t("camera.capturePhoto")}</button>
+                        <button className="camera-button camera-button--ghost" type="button" onClick={openFilePicker}>{t("camera.uploadImage")}</button>
                     </>
                 )}
             </div>
 
+            <input
+                ref={fileInputRef}
+                className="camera-file-input"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+            />
             <canvas ref={canvasRef} style={{ display: "none" }} />
 
             {image && (
                 <div className="camera-captured">
-                    <h3>Preview Ready</h3>
+                    <h3>{t("camera.previewReady")}</h3>
+                </div>
+            )}
+
+            {image && (
+                <section className="camera-location-card">
+                    <div className="camera-location-header">
+                        <div>
+                            <p className="camera-location-kicker">{t("camera.mapsTag")}</p>
+                            <h3>{t("camera.chooseLocation")}</h3>
+                            <p>
+                                {t("camera.locationDesc")}
+                            </p>
+                        </div>
+                        <span className="camera-location-status">
+                            {selectedLocation
+                                ? `${selectedLocation.lat.toFixed(4)}, ${selectedLocation.lng.toFixed(4)}`
+                                : t("camera.noLocation")}
+                        </span>
+                    </div>
+
+                    <div className="camera-location-actions">
+                        <button
+                            type="button"
+                            className={`camera-location-chip ${locationMode === "current" ? "camera-location-chip--active" : ""}`}
+                            onClick={handleUseCurrentLocation}
+                            disabled={!userLocation}
+                        >
+                            {t("camera.useCurrent")}
+                        </button>
+                        <button
+                            type="button"
+                            className={`camera-location-chip ${locationMode === "manual" ? "camera-location-chip--active" : ""}`}
+                            onClick={handleUseManualLocation}
+                        >
+                            {t("camera.pickOnMap")}
+                        </button>
+                        <button
+                            type="button"
+                            className={`camera-location-chip ${locationMode === "none" ? "camera-location-chip--active" : ""}`}
+                            onClick={handleSkipLocation}
+                        >
+                            {t("camera.skipLocation")}
+                        </button>
+                    </div>
+
+                    {locationMode === "manual" && (
+                        <div className="camera-location-map">
+                            <Map
+                                {...mapView}
+                                style={{ width: "100%", height: "100%" }}
+                                mapStyle={MAP_STYLE}
+                                onMove={(event) => setMapView(event.viewState)}
+                                onClick={handleMapPick}
+                            >
+                                <NavigationControl position="top-right" />
+                                {manualLocation && (
+                                    <Marker longitude={manualLocation.lng} latitude={manualLocation.lat} anchor="bottom">
+                                        <div className="camera-location-marker" />
+                                    </Marker>
+                                )}
+                            </Map>
+                            <p className="camera-location-help">
+                                {t("camera.mapHelp")}
+                            </p>
+                        </div>
+                    )}
+                </section>
+            )}
+
+            {/* Location confirmation modal */}
+            {showLocationModal && (
+                <div className="camera-location-modal-overlay" onClick={() => setShowLocationModal(false)}>
+                    <div className="camera-location-modal" onClick={(e) => e.stopPropagation()}>
+                        <h3 className="camera-location-modal-title">{t("camera.foundHere")}</h3>
+                        <p className="camera-location-modal-sub">{t("camera.tagLocation")}</p>
+                        {userLocation && (
+                            <p className="camera-location-modal-coords">
+                                📍 {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
+                            </p>
+                        )}
+                        <div className="camera-location-modal-actions">
+                            <button
+                                className="camera-location-modal-btn camera-location-modal-btn--primary"
+                                onClick={() => {
+                                    if (userLocation) setLocationMode("current");
+                                    setShowLocationModal(false);
+                                }}
+                                disabled={!userLocation}
+                            >
+                                {t("camera.yesUseLocation")}
+                            </button>
+                            <button
+                                className="camera-location-modal-btn camera-location-modal-btn--secondary"
+                                onClick={() => {
+                                    setLocationMode("manual");
+                                    if (!manualLocation) setManualLocation(userLocation || DEFAULT_MAP_CENTER);
+                                    setShowLocationModal(false);
+                                }}
+                            >
+                                {t("camera.pickOnMap")}
+                            </button>
+                            <button
+                                className="camera-location-modal-btn camera-location-modal-btn--ghost"
+                                onClick={() => {
+                                    setLocationMode("none");
+                                    setShowLocationModal(false);
+                                }}
+                            >
+                                {t("camera.skip")}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
 
@@ -267,7 +544,7 @@ const Camera = () => {
                 <div className="camera-results">
                     {getSuggestions().length > 0 ? (
                         <>
-                            <h3 className="camera-results-title">Plant identification</h3>
+                            <h3 className="camera-results-title">{t("camera.plantId")}</h3>
                             <div className="camera-results-list">
                                 {getSuggestions().slice(0, 5).map((s, i) => {
                                     const details = getPlantDetails(s);
@@ -290,14 +567,14 @@ const Camera = () => {
                                                 <p className="camera-result-desc">{description.slice(0, 300)}{description.length > 300 ? "…" : ""}</p>
                                             )}
                                             {wikiUrl && (
-                                                <a href={wikiUrl} target="_blank" rel="noopener noreferrer" className="camera-result-link">Learn more on Wikipedia</a>
+                                                <a href={wikiUrl} target="_blank" rel="noopener noreferrer" className="camera-result-link">{t("camera.learnMore")}</a>
                                             )}
                                             <button
                                                 type="button"
                                                 className="camera-result-view-btn"
                                                 onClick={() => navigate("/plant", { state: { identification, selectedIndex: i, capturedImage: image } })}
                                             >
-                                                View full plant details →
+                                                {t("camera.viewDetails")}
                                             </button>
                                         </div>
                                     );
@@ -307,10 +584,35 @@ const Camera = () => {
                     ) : (
                         <p className="camera-results-empty">
                             {identification?.result?.is_plant?.binary === false
-                                ? "No plant detected in this image."
-                                : "Could not identify a plant. Try a clearer photo focused on the leaves or flowers."}
+                                ? t("camera.noPlantDetected")
+                                : t("camera.tryAgain")}
                         </p>
                     )}
+                </div>
+            )}
+
+            {/* CNN Model Results */}
+            {cnnResult && (
+                <div className="camera-results camera-cnn-results">
+                    <h3 className="camera-results-title">
+                        {t("camera.cnnAnalysis")}
+                        <span className="camera-cnn-badge">{cnnResult.model?.split('(')[0].trim()}</span>
+                    </h3>
+                    <p className="camera-cnn-note">{cnnResult.note}</p>
+                    <div className="camera-cnn-bars">
+                        {cnnResult.plant_predictions.map((p, i) => (
+                            <div key={i} className="camera-cnn-bar-row">
+                                <span className="camera-cnn-plant">{p.plant}</span>
+                                <div className="camera-cnn-bar-track">
+                                    <div
+                                        className="camera-cnn-bar-fill"
+                                        style={{ width: `${Math.round(p.confidence * 100)}%` }}
+                                    />
+                                </div>
+                                <span className="camera-cnn-pct">{Math.round(p.confidence * 100)}%</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

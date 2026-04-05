@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { Sparkles } from "lucide-react";
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";
 import "./PlantSafetyCheck.css";
 
 const PlantSafetyCheck = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const { identification, capturedImage } = location.state || {};
+  const { identification, capturedImage, selectedLocation } = location.state || {};
 
   const [familyMembers, setFamilyMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
@@ -18,6 +21,8 @@ const PlantSafetyCheck = () => {
   const [flashMessage, setFlashMessage] = useState("");
   const [flashType, setFlashType] = useState("success");
   const [showFlash, setShowFlash] = useState(false);
+  const [aiSummary, setAiSummary] = useState("");
+  const [isFetchingSummary, setIsFetchingSummary] = useState(false);
 
   const plantName = identification?.plant?.name || "Unknown Plant";
   const probability = identification?.plant?.probability || 0;
@@ -54,7 +59,7 @@ const PlantSafetyCheck = () => {
 
   const handleCheckSafety = async () => {
     if (!selectedMember) {
-      triggerFlash("Please select a family member", "error");
+      triggerFlash(t("safetyCheck.pleaseSelect"), "error");
       return;
     }
 
@@ -65,14 +70,16 @@ const PlantSafetyCheck = () => {
         {
           plantName,
           probability,
-          familyMemberId: selectedMember._id || selectedMember.id
+          familyMemberId: selectedMember._id || selectedMember.id,
+          lat: selectedLocation?.lat ?? null,
+          lng: selectedLocation?.lng ?? null
         },
         { withCredentials: true }
       );
 
       if (response.data?.success) {
         setSafetyResult(response.data.data);
-        triggerFlash("Safety check completed!", "success");
+        triggerFlash(t("safetyCheck.completed"), "success");
       } else {
         triggerFlash(response.data?.message || "Safety check failed", "error");
       }
@@ -87,29 +94,34 @@ const PlantSafetyCheck = () => {
     }
   };
 
-  const getSafetyColor = (rating) => {
-    switch (rating) {
-      case "SAFE":
-        return "#22c55e"; // Green
-      case "CAUTION":
-        return "#f59e0b"; // Orange/Yellow
-      case "AVOID":
-        return "#ef4444"; // Red
-      default:
-        return "#6b7280"; // Gray
-    }
-  };
-
-  const getSafetyIcon = (rating) => {
-    switch (rating) {
-      case "SAFE":
-        return "✅";
-      case "CAUTION":
-        return "⚠️";
-      case "AVOID":
-        return "❌";
-      default:
-        return "❓";
+  const handleGetSummary = async () => {
+    if (!safetyResult || !selectedMember) return;
+    setIsFetchingSummary(true);
+    setAiSummary("");
+    try {
+      const response = await axios.post(
+        "/api/input/summary",
+        {
+          familyMemberId: selectedMember._id || selectedMember.id,
+          plantName,
+          safetyRating: safetyResult.safetyRating,
+          warnings: safetyResult.warnings,
+          medicinalUses: safetyResult.medicinalUses,
+        },
+        { withCredentials: true }
+      );
+      if (response.data?.success) {
+        setAiSummary(response.data.data.summary);
+      } else {
+        triggerFlash(response.data?.message || "Failed to generate summary", "error");
+      }
+    } catch (error) {
+      triggerFlash(
+        error.response?.data?.message || "Failed to generate summary",
+        "error"
+      );
+    } finally {
+      setIsFetchingSummary(false);
     }
   };
 
@@ -117,13 +129,13 @@ const PlantSafetyCheck = () => {
     return (
       <div className="safety-page">
         <div className="safety-card">
-          <h2>No plant identified</h2>
-          <p>Please scan a plant first.</p>
+          <h2>{t("safetyCheck.noPlant")}</h2>
+          <p>{t("safetyCheck.scanFirst")}</p>
           <button
             className="safety-btn safety-btn--primary"
             onClick={() => navigate("/camera")}
           >
-            Go to Camera
+            {t("safetyCheck.goCamera")}
           </button>
         </div>
       </div>
@@ -132,7 +144,7 @@ const PlantSafetyCheck = () => {
 
   return (
     <div className="safety-page">
-      <BackButton to="/camera" label="Back to Camera" />
+      <BackButton to="/camera" label={t("safetyCheck.backCamera")} />
       <FlashCard
         message={flashMessage}
         type={flashType}
@@ -143,7 +155,7 @@ const PlantSafetyCheck = () => {
       <div className="safety-container">
         {/* Plant Info Card */}
         <div className="safety-plant-card">
-          <h2 className="safety-title">🌿 Plant Identified</h2>
+          <h2 className="safety-title">{t("safetyCheck.plantIdentified")}</h2>
           {capturedImage && (
             <img
               src={capturedImage}
@@ -154,7 +166,7 @@ const PlantSafetyCheck = () => {
           <div className="safety-plant-info">
             <h3 className="safety-plant-name">{plantName}</h3>
             <p className="safety-confidence">
-              Confidence: {(probability * 100).toFixed(1)}%
+              {t("safetyCheck.confidence")} {(probability * 100).toFixed(1)}%
             </p>
           </div>
         </div>
@@ -162,17 +174,17 @@ const PlantSafetyCheck = () => {
         {/* Family Member Selection */}
         {!safetyResult && (
           <div className="safety-member-section">
-            <h3>👤 Select Family Member</h3>
+            <h3>{t("safetyCheck.selectMember")}</h3>
             {isLoadingMembers ? (
-              <p>Loading family members...</p>
+              <p>{t("safetyCheck.loadingMembers")}</p>
             ) : familyMembers.length === 0 ? (
               <div className="safety-no-members">
-                <p>No family members found.</p>
+                <p>{t("safetyCheck.noMembers")}</p>
                 <button
                   className="safety-btn safety-btn--secondary"
                   onClick={() => navigate("/dashboard")}
                 >
-                  Add Family Member
+                  {t("dashboard.addFamily")}
                 </button>
               </div>
             ) : (
@@ -206,8 +218,8 @@ const PlantSafetyCheck = () => {
                   disabled={isChecking || !selectedMember}
                 >
                   {isChecking
-                    ? "Checking Safety..."
-                    : "🔍 Check Safety for This Member"}
+                    ? t("safetyCheck.checking")
+                    : t("safetyCheck.checkBtn")}
                 </button>
               </>
             )}
@@ -219,26 +231,21 @@ const PlantSafetyCheck = () => {
           <div className="safety-result-card">
             <div
               className="safety-rating-banner"
-              style={{
-                backgroundColor: getSafetyColor(safetyResult.safetyRating)
-              }}
+              data-rating={safetyResult.safetyRating}
             >
-              <span className="safety-rating-icon">
-                {getSafetyIcon(safetyResult.safetyRating)}
-              </span>
               <span className="safety-rating-text">
                 {safetyResult.safetyRating}
               </span>
             </div>
 
             <div className="safety-for">
-              For: <strong>{safetyResult.familyMemberName}</strong>
+              {t("safetyCheck.for")} <strong>{safetyResult.familyMemberName}</strong>
             </div>
 
             {/* Warnings */}
             {safetyResult.warnings && safetyResult.warnings.length > 0 && (
               <div className="safety-section">
-                <h4>⚠️ Warnings & Interactions</h4>
+                <h4>{t("safetyCheck.warnings")}</h4>
                 <ul className="safety-list safety-list--warnings">
                   {safetyResult.warnings.map((warning, index) => (
                     <li key={index}>{warning}</li>
@@ -251,7 +258,7 @@ const PlantSafetyCheck = () => {
             {safetyResult.medicinalUses &&
               safetyResult.medicinalUses.length > 0 && (
                 <div className="safety-section">
-                  <h4>🌱 Medicinal Uses</h4>
+                  <h4>{t("safetyCheck.uses")}</h4>
                   <ul className="safety-list">
                     {safetyResult.medicinalUses.map((use, index) => (
                       <li key={index}>{use}</li>
@@ -264,7 +271,7 @@ const PlantSafetyCheck = () => {
             {safetyResult.preparationMethods &&
               safetyResult.preparationMethods.length > 0 && (
                 <div className="safety-section">
-                  <h4>🍵 How to Use</h4>
+                  <h4>{t("safetyCheck.howToUse")}</h4>
                   <ul className="safety-list">
                     {safetyResult.preparationMethods.map((method, index) => (
                       <li key={index}>{method}</li>
@@ -277,7 +284,7 @@ const PlantSafetyCheck = () => {
             {safetyResult.recommendations &&
               safetyResult.recommendations.length > 0 && (
                 <div className="safety-section">
-                  <h4>📋 Recommendations</h4>
+                  <h4>{t("safetyCheck.recommendations")}</h4>
                   <ul className="safety-list safety-list--recommendations">
                     {safetyResult.recommendations.map((rec, index) => (
                       <li key={index}>{rec}</li>
@@ -286,19 +293,38 @@ const PlantSafetyCheck = () => {
                 </div>
               )}
 
+            {/* AI Summary */}
+            {aiSummary && (
+              <div className="safety-section safety-ai-summary">
+                <h4>
+                  <Sparkles size={14} />
+                  {t("safetyCheck.aiSummary")}
+                </h4>
+                <p className="safety-ai-summary-text">{aiSummary}</p>
+              </div>
+            )}
+
             {/* Action Buttons */}
             <div className="safety-actions">
               <button
-                className="safety-btn safety-btn--secondary"
-                onClick={() => setSafetyResult(null)}
+                className="safety-btn safety-btn--ai"
+                onClick={handleGetSummary}
+                disabled={isFetchingSummary}
               >
-                Check Another Family Member
+                <Sparkles size={15} />
+                {isFetchingSummary ? t("safetyCheck.generating") : aiSummary ? t("safetyCheck.regenerate") : t("safetyCheck.getSummary")}
+              </button>
+              <button
+                className="safety-btn safety-btn--secondary"
+                onClick={() => { setSafetyResult(null); setAiSummary(""); }}
+              >
+                {t("safetyCheck.checkAnother")}
               </button>
               <button
                 className="safety-btn safety-btn--primary"
                 onClick={() => navigate("/dashboard")}
               >
-                Back to Dashboard
+                {t("nav.dashboard")}
               </button>
             </div>
           </div>

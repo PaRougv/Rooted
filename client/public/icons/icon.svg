@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#52b788"/>
+  <g transform="translate(256,280)">
+    <!-- stem -->
+    <rect x="-8" y="-40" width="16" height="160" rx="8" fill="#2d6a4f"/>
+    <!-- left leaf -->
+    <ellipse cx="-60" cy="-80" rx="50" ry="80" transform="rotate(25,-60,-80)" fill="#40916c"/>
+    <!-- right leaf -->
+    <ellipse cx="60" cy="-80" rx="50" ry="80" transform="rotate(-25,60,-80)" fill="#40916c"/>
+    <!-- center leaf -->
+    <ellipse cx="0" cy="-120" rx="40" ry="75" fill="#52b788"/>
+    <!-- leaf vein left -->
+    <line x1="-60" y1="-80" x2="-30" y2="-130" stroke="#2d6a4f" stroke-width="2" opacity="0.4"/>
+    <!-- leaf vein right -->
+    <line x1="60" y1="-80" x2="30" y2="-130" stroke="#2d6a4f" stroke-width="2" opacity="0.4"/>
+    <!-- leaf vein center -->
+    <line x1="0" y1="-45" x2="0" y2="-180" stroke="#2d6a4f" stroke-width="2" opacity="0.4"/>
+    <!-- soil -->
+    <ellipse cx="0" cy="120" rx="80" ry="20" fill="#774936"/>
+  </g>
+  <!-- text -->
+  <text x="256" y="470" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="700" fill="#fff">ROOTED</text>
+</svg>

@@ -1,58 +1,66 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+.plant-details-page,
+.plant-details-page * { box-sizing: border-box; }
 
 .plant-details-page {
   min-height: 100vh;
-  padding: clamp(20px, 4vw, 40px);
+  padding: clamp(20px, 4vw, 46px);
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(circle at 10% 8%, rgba(192, 246, 205, 0.3) 0%, rgba(192, 246, 205, 0) 40%),
-    radial-gradient(circle at 90% 84%, rgba(139, 221, 165, 0.25) 0%, rgba(139, 221, 165, 0) 42%),
-    linear-gradient(135deg, #103625 0%, #1e5a40 55%, #2f7a56 100%);
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  background: var(--gradient-hero);
+  font-family: var(--font-body);
+  transition: background var(--ease-slow);
 }
 
 .plant-details-card {
-  width: min(100%, 720px);
-  position: relative;
-  border-radius: 24px;
-  padding: clamp(24px, 4vw, 40px);
-  border: 1px solid rgba(229, 255, 237, 0.38);
-  background: linear-gradient(160deg, rgba(248, 255, 250, 0.96) 0%, rgba(229, 246, 234, 0.9) 100%);
-  box-shadow: 0 30px 70px rgba(3, 28, 14, 0.35);
+  width: min(100%, 740px);
+  border-radius: var(--radius-xl);
+  padding: clamp(24px, 4vw, 44px);
+  border: 1px solid var(--border-subtle);
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: background var(--ease-slow), border-color var(--ease-slow);
+}
+
+[data-theme="dark"] .plant-details-card {
+  box-shadow: var(--shadow-xl), 0 0 50px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .plant-details-header {
   text-align: center;
   margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(95, 154, 116, 0.25);
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .plant-details-header h1 {
   margin: 0;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
-  color: #1a4732;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .plant-details-scientific {
-  margin: 8px 0 4px;
+  margin: 10px 0 6px;
   font-size: 1rem;
-  color: #2e6548;
+  color: var(--text-muted);
   font-style: italic;
 }
 
 .plant-details-match {
   display: inline-block;
-  margin-top: 10px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: rgba(77, 167, 116, 0.2);
-  color: #1f5239;
-  font-size: 0.9rem;
+  margin-top: 12px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 0.88rem;
   font-weight: 700;
+  border: 1px solid var(--border);
 }
+
+[data-theme="dark"] .plant-details-match { color: var(--accent-light); }
 
 .plant-details-content {
   display: flex;
@@ -62,9 +70,9 @@
 
 .plant-details-image-wrap {
   width: 100%;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid rgba(95, 154, 116, 0.2);
+  border: 1px solid var(--border);
 }
 
 .plant-details-image {
@@ -76,191 +84,126 @@
 
 .plant-details-section h2 {
   margin: 0 0 10px;
-  font-size: 1rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #2a7a52;
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
+
+[data-theme="dark"] .plant-details-section h2 { color: var(--accent-light); }
 
 .plant-details-section p {
   margin: 0;
-  color: #2d4a3a;
-  font-size: 0.98rem;
-  line-height: 1.65;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+  line-height: 1.68;
 }
 
 .plant-details-taxonomy {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .plant-details-taxonomy span {
   padding: 8px 14px;
-  border-radius: 10px;
-  background: rgba(77, 167, 116, 0.1);
-  color: #1f5239;
-  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.88rem;
 }
 
 .plant-details-taxonomy strong {
+  color: var(--text-primary);
   margin-right: 4px;
 }
 
-.plant-details-desc {
-  text-align: justify;
-}
+.plant-details-desc { text-align: justify; }
 
 .plant-details-wiki-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 12px 20px;
-  border-radius: 12px;
-  background: linear-gradient(120deg, #286f4b 0%, #38a96f 100%);
-  color: #f3fff8;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-btn);
+  color: var(--text-on-accent);
+  font-family: var(--font-body);
   font-weight: 700;
+  font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-btn);
+  transition: transform var(--ease-spring), box-shadow var(--ease-base), background var(--ease-base);
+  border: none;
 }
 
 .plant-details-wiki-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(29, 104, 66, 0.35);
+  background: var(--gradient-btn-h);
+  box-shadow: var(--shadow-btn-hover);
 }
 
-.plant-details-others ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+.plant-details-others ul { margin: 0; padding: 0; list-style: none; }
 
 .plant-details-other-btn {
   display: block;
   width: 100%;
   padding: 12px 16px;
   margin-bottom: 8px;
-  border: 1px solid #bce6cb;
-  border-radius: 10px;
-  background: #f5fff7;
-  color: #20573d;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
   font: inherit;
   font-weight: 600;
+  font-size: 0.92rem;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background var(--ease-base), border-color var(--ease-base), color var(--ease-base);
 }
 
 .plant-details-other-btn:hover {
-  background: #e8f8ed;
+  background: var(--accent-subtle);
+  border-color: var(--accent-light);
+  color: var(--accent);
 }
 
-.plant-details-empty {
-  text-align: center;
-  color: #547464;
-  margin-bottom: 20px;
-}
+.plant-details-empty { text-align: center; color: var(--text-muted); margin-bottom: 20px; }
 
 .plant-details-btn {
   display: block;
   margin: 0 auto;
-  padding: 12px 24px;
-  border: 0;
-  border-radius: 12px;
-  background: linear-gradient(120deg, #286f4b 0%, #38a96f 100%);
-  color: #f3fff8;
+  padding: 12px 26px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-btn);
+  color: var(--text-on-accent);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: transform var(--ease-spring), box-shadow var(--ease-base);
 }
 
+.plant-details-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-btn-hover); }
+
 @media (max-width: 640px) {
-  .plant-details-page {
-    padding: 16px;
-    padding-top: 70px;
-    align-items: start;
-  }
-
-  .plant-details-card {
-    border-radius: 20px;
-    padding: 24px 20px;
-  }
-
-  .plant-details-header {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-  }
-
-  .plant-details-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .plant-details-scientific {
-    font-size: 0.9rem;
-  }
-
-  .plant-details-match {
-    font-size: 0.85rem;
-    padding: 5px 12px;
-  }
-
-  .plant-details-content {
-    gap: 20px;
-  }
-
-  .plant-details-image {
-    max-height: 280px;
-  }
-
-  .plant-details-section h2 {
-    font-size: 0.9rem;
-  }
-
-  .plant-details-section p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .plant-details-taxonomy {
-    gap: 8px;
-  }
-
-  .plant-details-taxonomy span {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-  }
-
-  .plant-details-wiki-link {
-    width: 100%;
-    justify-content: center;
-    padding: 14px 20px;
-    font-size: 0.95rem;
-  }
-
-  .plant-details-other-btn {
-    padding: 14px;
-    font-size: 0.9rem;
-  }
-
-  .plant-details-btn {
-    width: 100%;
-    padding: 14px 20px;
-  }
+  .plant-details-page { padding: 16px; padding-top: 56px; align-items: start; }
+  .plant-details-card { border-radius: var(--radius-lg); padding: 22px 18px; }
+  .plant-details-header { margin-bottom: 20px; padding-bottom: 16px; }
+  .plant-details-header h1 { font-size: 1.65rem; }
+  .plant-details-image { max-height: 280px; }
+  .plant-details-taxonomy { gap: 8px; }
+  .plant-details-taxonomy span { padding: 6px 12px; font-size: 0.84rem; }
+  .plant-details-wiki-link { width: 100%; justify-content: center; padding: 14px 20px; }
+  .plant-details-other-btn { padding: 14px; }
+  .plant-details-btn { width: 100%; padding: 14px 20px; }
 }
 
 @media (max-width: 380px) {
-  .plant-details-page {
-    padding: 12px;
-    padding-top: 65px;
-  }
-
-  .plant-details-card {
-    padding: 20px 16px;
-    border-radius: 18px;
-  }
-
-  .plant-details-header h1 {
-    font-size: 1.4rem;
-  }
+  .plant-details-page { padding: 12px; padding-top: 48px; }
+  .plant-details-card { padding: 18px 14px; border-radius: var(--radius-md); }
+  .plant-details-header h1 { font-size: 1.45rem; }
 }

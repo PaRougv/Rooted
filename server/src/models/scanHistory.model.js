@@ -19,6 +19,13 @@ const scanHistorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    scientificName: {
+        type: String,
+        default: null
+    },
+    commonNames: [{
+        type: String
+    }],
     probability: {
         type: Number,
         required: true
@@ -39,7 +46,11 @@ const scanHistorySchema = new mongoose.Schema({
     }],
     preparationMethods: [{
         type: String
-    }]
+    }],
+    location: {
+        lat: { type: Number, default: null },
+        lng: { type: Number, default: null }
+    }
 },{
     timestamps: true
 });

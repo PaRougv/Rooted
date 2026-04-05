@@ -1,0 +1,14 @@
+{
+  "name": "Rooted — Plant Safety",
+  "short_name": "Rooted",
+  "description": "AI-powered plant identification with personalized safety checks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8faf5",
+  "theme_color": "#52b788",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

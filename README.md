@@ -1,4 +1,4 @@
--# Rooted: Smart Plant Companion
+# Rooted: Smart Plant Companion
 
 ## Project Overview
 
@@ -7,10 +7,18 @@ Rooted is a comprehensive full-stack web application designed to help users iden
 ### Core Features
 - **User Authentication**: Secure JWT-based authentication with password reset functionality
 - **Family Health Profiles**: Create and manage multiple family member profiles with health data
-- **AI Plant Identification**: Integration with Plant.id API for accurate plant recognition
-- **Safety Assessment**: Check plant safety against family health conditions and medications
-- **Responsive Design**: Fully mobile-responsive interface with password visibility toggles
-- **Scan History**: Track all plant identifications and safety checks
+- **AI Plant Identification**: Integration with Plant.id API and custom CNN (EfficientNet-B0) for accurate plant recognition
+- **Safety Assessment**: Check plant safety against family health conditions, medications, vitals, and BMI
+- **Plant Search by Name**: Search for any plant by name and run safety checks without scanning
+- **AI Chat Assistant**: Claude-powered conversational AI for plant and health queries
+- **Plant Journal**: Track plant usage, effects, dosage, and ratings over time
+- **Scan History**: Track all plant identifications and safety checks with expandable details
+- **Results & Analysis**: Interactive charts and statistics from scan data (pie, bar, radar)
+- **Nearby Maps**: Ola Maps integration for nearby places and community plant sightings
+- **Rural First Aid**: Offline-friendly first aid guide for plant-related emergencies
+- **Multi-language Support**: English, Hindi, Tamil, and Malayalam (i18n)
+- **Dark/Light Theme**: Persistent theme toggle with design tokens
+- **Responsive Design**: Fully mobile-responsive interface
 
 ---
 
@@ -23,109 +31,125 @@ Rooted is a comprehensive full-stack web application designed to help users iden
 | Vite | 7.3.1 | Build tool and dev server with HMR |
 | React Router DOM | 7.13.0 | Client-side routing with protected routes |
 | Axios | 1.13.5 | HTTP client for API requests |
-| CSS3 | - | Modular CSS with responsive breakpoints |
+| Recharts | 3.8.0 | Interactive charts (bar, pie, radar) |
+| i18next | 26.0.3 | Internationalization framework |
+| react-i18next | 17.0.2 | React bindings for i18n |
+| Leaflet / MapLibre GL | 1.9.4 / 5.21.0 | Map rendering |
+| Lucide React | 1.0.1 | Icon library |
+| jsPDF + html2canvas | 4.2.1 / 1.4.1 | PDF export |
+| CSS3 | - | Modular CSS with design tokens and theme support |
 
 ### Backend Architecture
 | Technology | Version | Purpose |
 |------------|---------|---------|
 | Node.js | ES Modules | Runtime environment |
-| Express | 5.2.1 | Web framework for REST API |
+| Express | 5.x | Web framework for REST API |
 | MongoDB Atlas | Cloud | NoSQL database hosting |
-| Mongoose | 9.2.1 | MongoDB ODM for schema modeling |
-| JWT | 9.0.3 | Authentication tokens |
-| bcryptjs | 3.0.3 | Password hashing (10 salt rounds) |
-| cookie-parser | 1.4.7 | HTTP cookie handling |
-| cors | 2.8.6 | Cross-origin resource sharing |
-| dotenv | 17.2.4 | Environment variable management |
-| axios | 1.13.5 | HTTP client for Plant.id API |
+| Mongoose | 9.x | MongoDB ODM for schema modeling |
+| JWT | 9.x | Authentication tokens |
+| bcryptjs | 3.x | Password hashing (10 salt rounds) |
+| @anthropic-ai/sdk | latest | Claude AI chat integration |
+| cookie-parser | 1.x | HTTP cookie handling |
+| cors | 2.x | Cross-origin resource sharing |
+| dotenv | 17.x | Environment variable management |
+
+### ML Service
+| Technology | Purpose |
+|------------|---------|
+| Python / FastAPI | CNN classification microservice |
+| EfficientNet-B0 | Plant image classification model |
 
 ### Third-Party APIs
 - **Plant.id API v3** - AI-powered plant identification from images
-  - Endpoint: `https://plant.id/api/v3/identification`
-  - Supports base64 image encoding
-  - Returns taxonomy, common names, descriptions, and Wikipedia links
+- **Anthropic Claude API** - Conversational AI assistant for plant/health queries
+- **Ola Maps API** - Nearby places search and map rendering
 
 ---
 
 ## Project Structure
 
 ```
-Rooted fail 2/
-├── .git/                          # Git version control
-├── .gitignore                     # Git ignore rules
-├── README.md                      # This file
+Rooted/
+├── README.md
 │
 ├── client/                        # FRONTEND (React + Vite)
-│   ├── index.html                 # HTML entry point with viewport meta
-│   ├── package.json               # Frontend dependencies
+│   ├── index.html
+│   ├── package.json
 │   ├── vite.config.js             # Vite config with API proxy
-│   ├── eslint.config.js           # ESLint configuration
-│   ├── README.md                  # React/Vite default readme
-│   ├── public/                    # Static public assets
 │   └── src/
-│       ├── main.jsx               # React entry point (StrictMode)
-│       ├── App.jsx                # Main router with all routes
-│       ├── App.css                # Global app styles
-│       ├── index.css              # Base CSS variables and reset
-│       ├── assets/                # Static images
-│       │   ├── plant.png          # Favicon and logo
-│       │   └── react.svg          # React logo
+│       ├── main.jsx               # Entry point (i18n init + StrictMode)
+│       ├── App.jsx                # Router with all routes
+│       ├── index.css              # Base CSS + theme import
+│       ├── styles/
+│       │   └── tokens.css         # Design tokens (light + dark themes)
+│       ├── i18n/
+│       │   ├── index.js           # i18next setup with language detector
+│       │   ├── en.json            # English translations
+│       │   ├── hi.json            # Hindi translations
+│       │   ├── ta.json            # Tamil translations
+│       │   └── ml.json            # Malayalam translations
 │       ├── Security/
-│       │   └── ProtectedRoutes.jsx    # JWT route protection wrapper
-│       ├── components/            # Page components
-│       │   ├── HomePage.jsx       # Landing page with hero section
-│       │   ├── HomePage.css       # Gradient background, glassmorphism
-│       │   ├── Login.jsx          # Login form with password toggle
-│       │   ├── Login.css          # Form styling, password visibility
-│       │   ├── Register.jsx       # Registration form
-│       │   ├── Register.css       # Registration-specific styles
-│       │   ├── ForgotPassword.jsx # Password reset request
-│       │   ├── ResetPassword.jsx  # New password with toggles
-│       │   ├── Dashboard.jsx      # Main dashboard, family profiles
-│       │   ├── Dashboard.css      # Card layouts, grid systems
-│       │   ├── PlantDetails.jsx   # Detailed plant info display
-│       │   ├── PlantDetails.css   # Image layouts, taxonomy display
-│       │   ├── PlantSafetyCheck.jsx   # Safety check component
-│       │   ├── PlantSafetyCheck.css   # Safety rating styles
-│       │   ├── BackButton.jsx     # Reusable back navigation
-│       │   └── BackButton.css     # Fixed positioning, hover effects
-│       └── helpers/               # Reusable helper components
-│           ├── Camera.jsx         # Camera capture & identification
-│           ├── Camera.css         # Preview styling, button layouts
-│           ├── FlashCard.jsx      # Toast notification component
-│           └── FlashCard.css      # Slide-in animations, positioning
+│       │   └── ProtectedRoutes.jsx
+│       ├── components/
+│       │   ├── HomePage.jsx / .css
+│       │   ├── Login.jsx / .css
+│       │   ├── Register.jsx / .css
+│       │   ├── ForgotPassword.jsx
+│       │   ├── Dashboard.jsx / .css       # Family profiles + navigation hub
+│       │   ├── PlantDetails.jsx / .css
+│       │   ├── PlantSafetyCheck.jsx / .css
+│       │   ├── PlantSafetyResult.jsx
+│       │   ├── PlantSearch.jsx / .css     # Search plant by name + safety check
+│       │   ├── ChatBot.jsx / .css         # AI chat assistant
+│       │   ├── Journal.jsx / .css         # Plant usage journal (CRUD)
+│       │   ├── ScanHistoryPage.jsx / .css
+│       │   ├── ResultsAnalysis.jsx / .css # Charts & statistics
+│       │   ├── Maps.jsx / .css            # Ola Maps nearby places
+│       │   ├── RuralFirstAid.jsx / .css
+│       │   ├── ThemeToggle.jsx / .css     # Dark/light mode
+│       │   ├── LanguageSelector.jsx / .css # Language switcher (EN/HI/TA/ML)
+│       │   ├── BackButton.jsx / .css
+│       │   └── ResetPassword.jsx
+│       └── helpers/
+│           ├── Camera.jsx / .css
+│           └── FlashCard.jsx / .css
 │
-└── server/                        # BACKEND (Express + MongoDB)
-    ├── server.js                  # Entry point, starts server
-    ├── package.json               # Backend dependencies
-    ├── package-lock.json          # Locked dependency versions
-    ├── .env                       # Environment variables
-    ├── .DS_Store                  # macOS metadata
-    └── src/                       # Source code
-        ├── app.js                 # Express app configuration
-        ├── config/                # Configuration files
-        │   ├── env.js             # Environment variable exports
-        │   └── db.js              # MongoDB connection logic
-        ├── middleware/            # Express middleware
-        │   └── auth.middleware.js # JWT verification middleware
-        ├── models/                # Mongoose schemas
-        │   ├── user.model.js      # User schema with reset tokens
-        │   ├── healthdata.model.js    # Family health profiles
-        │   └── scanHistory.model.js   # Plant scan records
-        ├── controllers/           # Route controllers
-        │   ├── auth.controller.js     # Login, register, reset
-        │   ├── health.controller.js   # Family profile CRUD
-        │   ├── upload.controller.js   # Plant.id API integration
-        │   ├── safety.controller.js   # Plant safety assessment
-        │   └── verification.controller.js
-        ├── routes/                # Express routers
-        │   ├── auth.routes.js         # /api/auth/* routes
-        │   ├── inputllm.route.js      # /api/input/* routes
-        │   ├── camera.router.js       # /camera/* routes
-        │   ├── safety.routes.js       # /api/safety/* routes
-        │   └── verification.routes.js # /api/verification/* routes
-        └── data/                  # Static data files
-            └── herbDrugInteractions.js    # Plant safety database
+├── server/                        # BACKEND (Express + MongoDB)
+│   ├── server.js                  # Entry point
+│   ├── package.json
+│   ├── .env                       # Environment variables
+│   └── src/
+│       ├── app.js                 # Express app, routes, proxies
+│       ├── config/
+│       │   ├── env.js             # Environment variable exports
+│       │   └── db.js              # MongoDB connection
+│       ├── middleware/
+│       │   └── auth.middleware.js  # JWT verification
+│       ├── models/
+│       │   ├── user.model.js
+│       │   ├── healthdata.model.js
+│       │   ├── scanHistory.model.js
+│       │   └── journal.model.js   # Plant journal entries
+│       ├── controllers/
+│       │   ├── auth.controller.js
+│       │   ├── health.controller.js
+│       │   ├── upload.controller.js   # Plant.id API integration
+│       │   ├── safety.controller.js   # Safety engine + plant search
+│       │   ├── chat.controller.js     # Claude AI chat
+│       │   └── journal.controller.js  # Journal CRUD
+│       ├── routes/
+│       │   ├── auth.routes.js
+│       │   ├── inputllm.route.js
+│       │   ├── camera.router.js
+│       │   ├── safety.routes.js       # Safety check, search, history, sightings
+│       │   ├── chat.routes.js         # AI chat endpoint
+│       │   └── journal.routes.js      # Journal CRUD endpoints
+│       └── data/
+│           └── herbDrugInteractions.js  # 80+ plant safety database
+│
+└── server/ml/                     # ML SERVICE (Python + FastAPI)
+    ├── main.py                    # FastAPI server for CNN classification
+    └── requirements.txt
 ```
 
 ---
@@ -135,17 +159,30 @@ Rooted fail 2/
 Create a `.env` file in the `server/` directory:
 
 ```env
-# Server Configuration
+# Server
 PORT=3000
 
-# MongoDB Connection (Atlas)
-MONGODB_URI=mongodb+srv://athul1810:Athulkrishna1810lol%2A@rootedtest.jpwuwbt.mongodb.net/rooted?retryWrites=true&w=majority&appName=Rootedtest
+# MongoDB
+MONGODB_URI=your_mongodb_connection_string
 
-# JWT Secret (change in production)
-JWT_SECRET=your-jwt-secret-change-in-production
+# Auth
+JWT_SECRET=your-jwt-secret
 
-# Plant.id API Key (from https://plant.id/)
-PLANT_ID_API_KEY=j87F2aRWAnTdyG4mPleKkYaa8q6WcTNQSI8MwEwl7nwx7iRLTm
+# Plant.id API (https://plant.id/)
+PLANT_ID_API_KEY=your_plant_id_key
+
+# Ola Maps API
+OLA_MAPS_KEY=your_ola_maps_key
+
+# Anthropic Claude API (for AI Chat)
+ANTHROPIC_API_KEY=your_anthropic_api_key
+
+# Email (for password reset)
+RESEND_API_KEY=your_resend_key
+EMAIL_FROM=noreply@yourdomain.com
+
+# Development only
+ALLOW_INSECURE_RESET_TOKEN_RESPONSE=true
 ```
 
 ---
@@ -154,303 +191,75 @@ PLANT_ID_API_KEY=j87F2aRWAnTdyG4mPleKkYaa8q6WcTNQSI8MwEwl7nwx7iRLTm
 
 ### Authentication Routes (`/api/auth`)
 
-#### POST `/api/auth/register`
-Register a new user account.
-
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword123"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "User registered successfully",
-  "user": {
-    "id": "65f123abc...",
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-}
-```
-
-**Errors:**
-- 400: Missing fields, invalid email, password < 6 chars
-- 400: User already exists
-- 500: Database error
-
----
-
-#### POST `/api/auth/login`
-Authenticate user and set JWT cookie.
-
-**Request Body:**
-```json
-{
-  "email": "john@example.com",
-  "password": "securepassword123"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "Login successful",
-  "user": {
-    "id": "65f123abc...",
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-}
-```
-
-**Cookie Set:** `token` (httpOnly, 7 days)
-
----
-
-#### GET `/api/auth/logout`
-Clear authentication cookie.
-
-**Response:**
-```json
-{
-  "message": "Logged out successfully"
-}
-```
-
----
-
-#### POST `/api/auth/forgot-password`
-Request password reset token.
-
-**Request Body:**
-```json
-{
-  "email": "john@example.com"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "Password reset token generated",
-  "resetToken": "abc123xyz...",
-  "note": "In production, this token would be sent to your email"
-}
-```
-
----
-
-#### POST `/api/auth/reset-password`
-Reset password using token.
-
-**Request Body:**
-```json
-{
-  "token": "abc123xyz...",
-  "newPassword": "newpassword123"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "Password reset successfully"
-}
-```
-
----
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login and set JWT cookie |
+| GET | `/api/auth/logout` | Clear auth cookie |
+| POST | `/api/auth/forgot-password` | Request password reset |
+| POST | `/api/auth/reset-password` | Reset password with token |
 
 ### Family Profiles (`/api/input`)
 
 All routes require authentication via JWT cookie.
 
-#### GET `/api/input/takeuser`
-Get all family profiles for logged-in user.
-
-**Response:**
-```json
-{
-  "message": "Profiles fetched",
-  "data": [
-    {
-      "id": "65f456def...",
-      "name": "Mom",
-      "weight": 65,
-      "height": 165,
-      "bloodPressure": "120/80",
-      "heartRate": 72,
-      "anyOtherCondition": "Diabetes"
-    }
-  ]
-}
-```
-
----
-
-#### POST `/api/input/takeuser`
-Create new family profile.
-
-**Request Body:**
-```json
-{
-  "name": "Dad",
-  "weight": "80",
-  "height": "175",
-  "bloodpressure": "130/85",
-  "heartrate": "68",
-  "anyothercondition": "Hypertension"
-}
-```
-
-**Response:**
-```json
-{
-  "message": "Profile created successfully",
-  "data": {
-    "id": "65f789ghi...",
-    "name": "Dad",
-    "weight": 80,
-    "height": 175,
-    "bloodPressure": "130/85",
-    "heartRate": 68,
-    "anyOtherCondition": "Hypertension"
-  }
-}
-```
-
----
-
-#### PUT `/api/input/takeuser/:id`
-Update existing profile.
-
-**Request Body:** Same as POST (all fields optional)
-
-**Response:** Updated profile object
-
----
-
-#### DELETE `/api/input/takeuser/:id`
-Delete family profile.
-
-**Response:**
-```json
-{
-  "message": "Profile deleted successfully"
-}
-```
-
----
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/input/takeuser` | Get all family profiles |
+| POST | `/api/input/takeuser` | Create new profile |
+| PUT | `/api/input/takeuser/:id` | Update profile |
+| DELETE | `/api/input/takeuser/:id` | Delete profile |
+| POST | `/api/input/summary` | Get AI summary for a safety check |
 
 ### Plant Identification (`/camera`)
 
-#### POST `/camera/uploadphoto`
-Upload image for plant identification via Plant.id API.
-
-**Request Body:**
-```json
-{
-  "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ..."
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "plant": {
-    "name": "Aloe vera",
-    "probability": 0.9876
-  },
-  "identification": {
-    "result": {
-      "classification": {
-        "suggestions": [
-          {
-            "name": "Aloe vera",
-            "probability": 0.9876,
-            "details": {
-              "common_names": ["Aloe", "Medicinal Aloe"],
-              "description": {
-                "value": "Aloe vera is a succulent plant..."
-              },
-              "taxonomy": {
-                "family": "Asphodelaceae",
-                "genus": "Aloe"
-              }
-            }
-          }
-        ]
-      }
-    }
-  }
-}
-```
-
----
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/camera/uploadphoto` | Upload image for Plant.id identification |
 
 ### Plant Safety (`/api/safety`)
 
 All routes require authentication.
 
-#### POST `/api/safety/check`
-Check plant safety against family member's health profile.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/safety/check` | Check plant safety against health profile |
+| GET | `/api/safety/history` | Get scan history (optional `?familyMemberId=`) |
+| GET | `/api/safety/history/:id` | Get specific scan by ID |
+| GET | `/api/safety/search?q=` | Search plants by name in database |
+| GET | `/api/safety/plants` | Get all plants in database |
+| GET | `/api/safety/community-sightings` | Get anonymized community scan locations |
 
-**Request Body:**
-```json
-{
-  "plantName": "Aloe vera",
-  "probability": 0.9876,
-  "familyMemberId": "65f456def..."
-}
-```
+### AI Chat (`/api/chat`)
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "plantName": "Aloe vera",
-    "familyMemberName": "Mom",
-    "probability": 0.9876,
-    "safetyRating": "CAUTION",
-    "warnings": [
-      "⚠️ Avoid: Aloe vera is not recommended for people with diabetes",
-      "💊 Drug Interactions: May interact with diabetes medications"
-    ],
-    "recommendations": [
-      "⚠️ Consult a healthcare provider before using this plant..."
-    ],
-    "medicinalUses": ["Skin healing", "Digestive aid"],
-    "preparationMethods": ["Gel topical application", "Juice"],
-    "scannedAt": "2024-03-21T10:30:00.000Z"
-  }
-}
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/chat/message` | Send message to Claude AI assistant |
 
-**Safety Ratings:**
-- `SAFE` - No contraindications found
-- `CAUTION` - Some warnings, consult healthcare provider
-- `AVOID` - Contraindicated for this profile
+Request body: `{ "message": "...", "conversationHistory": [...] }`
 
----
+The AI has context about the user's family profiles, recent scans, and the full plant safety database.
 
-#### GET `/api/safety/history`
-Get scan history for user.
+### Plant Journal (`/api/journal`)
 
-**Query Parameters:**
-- `familyMemberId` (optional) - Filter by specific family member
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/journal` | Get all journal entries (optional `?plantName=&familyMemberId=`) |
+| POST | `/api/journal` | Create journal entry |
+| PUT | `/api/journal/:id` | Update journal entry |
+| DELETE | `/api/journal/:id` | Delete journal entry |
 
-**Response:** Array of scan history objects
+### ML Classification (`/api/ml`)
 
----
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/ml/classify` | Classify plant image via CNN (proxied to Python service) |
 
-#### GET `/api/safety/history/:id`
-Get specific scan by ID.
+### Maps (`/api/places`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/places/nearby?lat=&lng=&radius=` | Nearby places via Ola Maps (server-side proxy) |
 
 ---
 
@@ -458,73 +267,37 @@ Get specific scan by ID.
 
 | Route | Component | Access | Description |
 |-------|-----------|--------|-------------|
-| `/` | `HomePage` | Public | Landing page with hero section, login/register buttons |
-| `/login` | `Login` | Public | Email/password login with eye toggle, flash messages |
-| `/register` | `Register` | Public | Registration form with validation |
-| `/forgot-password` | `ForgotPassword` | Public | Email input for reset token |
-| `/reset-password` | `ResetPassword` | Public | New password with confirmation toggle |
-| `/dashboard` | `Dashboard` | Protected | Family profiles, add/edit/delete, health summaries |
-| `/camera` | `Camera` | Protected | Live camera, capture, plant identification results |
-| `/plant` | `PlantDetails` | Protected | Detailed plant info from identification |
+| `/` | HomePage | Public | Landing page |
+| `/login` | Login | Public | Login form |
+| `/register` | Register | Public | Registration form |
+| `/forgot-password` | ForgotPassword | Public | Password reset request |
+| `/reset-password` | ResetPassword | Public | Reset with token |
+| `/dashboard` | Dashboard | Protected | Family profiles + navigation hub |
+| `/camera` | Camera | Protected | Live camera + plant identification |
+| `/plant` | PlantDetails | Protected | Detailed plant info |
+| `/plant-safety` | PlantSafetyCheck | Protected | Safety check for scanned plant |
+| `/plant-safety-result` | PlantSafetyResult | Protected | Safety result display |
+| `/plant-search` | PlantSearch | Protected | Search plant by name + safety check |
+| `/chat` | ChatBot | Protected | AI chat assistant |
+| `/journal` | Journal | Protected | Plant usage journal |
+| `/history` | ScanHistoryPage | Protected | Scan history with filters |
+| `/results` | ResultsAnalysis | Protected | Charts and analytics |
+| `/maps` | Maps | Protected | Nearby places map |
+| `/first-aid` | RuralFirstAid | Protected | First aid guide |
 
 ---
 
-## Component Details
+## Safety Engine
 
-### HomePage (`/client/src/components/HomePage.jsx`)
-- Glassmorphism card design with gradient background
-- Hero section with value proposition
-- Login/Register CTAs
-- Responsive: buttons stack on mobile
+The safety engine (`safety.controller.js`) performs multi-layered checks:
 
-### Login (`/client/src/components/Login.jsx`)
-- Email/password form
-- Password visibility toggle (eye icon)
-- FlashCard integration for errors/success
-- Links to Register and Forgot Password
-- Responsive padding and font sizes
+1. **Plant Database Lookup** - Matches plant name against 80+ entries (common names, scientific names, aliases)
+2. **Condition Matching** - Maps user health conditions to known contraindications using synonym matching
+3. **Drug Interaction Check** - Cross-references plant with known herb-drug interactions
+4. **Vital Signs Analysis** - Checks blood pressure, heart rate, BMI against plant effects
+5. **Rating Assignment** - SAFE / CAUTION / AVOID based on aggregate risk
 
-### Register (`/client/src/components/Register.jsx`)
-- Name, email, password fields
-- Password visibility toggle
-- Auto-redirect to dashboard on success
-
-### Dashboard (`/client/src/components/Dashboard.jsx`)
-- Logout button (top-right)
-- Add Family Member form (conditional display)
-- Profile tabs with Edit/Remove actions
-- Health summary cards (weight, height, BP, etc.)
-- Navigation: Camera, Plant Details, Maps
-- Fully responsive grid layouts
-
-### Camera (`/client/src/helpers/Camera.jsx`)
-- Video preview with live camera
-- Start Camera / Capture Photo buttons
-- Retake and Identify buttons after capture
-- Displays Plant.id results with confidence scores
-- "View full plant details" navigation
-
-### PlantDetails (`/client/src/components/PlantDetails.jsx`)
-- Displays plant name and scientific name
-- Match percentage badge
-- Taxonomy information (genus, family, order, class)
-- Common names list
-- Description from Wikipedia
-- External Wikipedia link
-- Alternative suggestions if low confidence
-
-### BackButton (`/client/src/components/BackButton.jsx`)
-- Reusable navigation component
-- Supports `to` prop (Link) or navigate(-1)
-- Fixed positioning option
-- Responsive sizing
-
-### FlashCard (`/client/src/helpers/FlashCard.jsx`)
-- Toast notification component
-- Auto-dismiss after 3 seconds
-- Types: success (green), error (red)
-- Fixed top-right positioning
-- Mobile: full width at top
+The same engine powers both camera-based identification and manual plant search.
 
 ---
 
@@ -532,338 +305,151 @@ Get specific scan by ID.
 
 ### User Model
 ```javascript
-{
-  name: String,           // required, trimmed
-  email: String,          // required, unique, lowercase
-  password: String,       // required, bcrypt hashed
-  resetPasswordToken: String,      // nullable
-  resetPasswordExpires: Date,      // nullable
-  createdAt: Date,        // auto
-  updatedAt: Date         // auto
-}
+{ name, email, password, resetPasswordToken, resetPasswordExpires, timestamps }
 ```
 
 ### HealthData Model (Family Profiles)
 ```javascript
-{
-  user: ObjectId,         // ref: User, required
-  name: String,           // trimmed
-  weight: Number,
-  height: Number,
-  bloodPressure: String,
-  heartRate: Number,
-  anyOtherCondition: String,
-  createdAt: Date,
-  updatedAt: Date
-}
+{ user (ref), name, weight, height, bloodPressure, heartRate, anyOtherCondition, medications[], timestamps }
 ```
 
 ### ScanHistory Model
 ```javascript
-{
-  user: ObjectId,         // ref: User
-  familyMemberId: ObjectId,
-  familyMemberName: String,
-  plantName: String,
-  probability: Number,
-  safetyRating: String,   // SAFE | CAUTION | AVOID
-  warnings: [String],
-  recommendations: [String],
-  medicinalUses: [String],
-  preparationMethods: [String],
-  createdAt: Date
-}
+{ user, familyMemberId, familyMemberName, plantName, scientificName, commonNames[],
+  probability, safetyRating, warnings[], recommendations[], medicinalUses[],
+  preparationMethods[], location { lat, lng }, timestamps }
+```
+
+### JournalEntry Model
+```javascript
+{ user, plantName, familyMemberId, familyMemberName, usageType (enum),
+  dosage, notes, effectsObserved, rating (1-5), sideEffects, wouldUseAgain, timestamps }
 ```
 
 ---
 
-## Key Implementation Details
+## Multi-language Support (i18n)
 
-### Plant.id API Integration
-```javascript
-// server/src/controllers/upload.controller.js
-const axios = require('axios');
+The app supports 4 languages via `i18next`:
 
-const uploadImage = async (req, res) => {
-    const { image } = req.body;
-    const base64Image = image.replace(/^data:image\/\w+;base64,/, "");
-    
-    const response = await axios.post(
-        "https://plant.id/api/v3/identification",
-        {
-            images: [base64Image],
-            similar_images: true
-        },
-        {
-            headers: {
-                "Api-Key": process.env.PLANT_ID_API_KEY,
-                "Content-Type": "application/json"
-            }
-        }
-    );
-    
-    // Return full identification data to frontend
-    return res.status(200).json({
-        success: true,
-        identification: response.data
-    });
-};
-```
+| Code | Language | Script |
+|------|----------|--------|
+| `en` | English | Latin |
+| `hi` | Hindi | Devanagari |
+| `ta` | Tamil | Tamil |
+| `ml` | Malayalam | Malayalam |
 
-### JWT Authentication Flow
-```javascript
-// Login: Generate token
-const token = jwt.sign(
-    { id: user._id },
-    ENV.JWT_SECRET,
-    { expiresIn: "7d" }
-);
-
-res.cookie("token", token, {
-    httpOnly: true,
-    secure: false,        // Set to true in production (HTTPS)
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days
-});
-
-// Middleware: Verify token
-export const authMiddleware = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) return res.status(401).json({ message: "No token" });
-    
-    try {
-        const decoded = jwt.verify(token, ENV.JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch {
-        return res.status(401).json({ message: "Invalid token" });
-    }
-};
-```
-
-### Password Visibility Toggle (React)
-```javascript
-const [showPassword, setShowPassword] = useState(false);
-
-<div className="password-input-wrapper">
-    <input
-        type={showPassword ? "text" : "password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-    />
-    <button
-        type="button"
-        className="password-toggle-btn"
-        onClick={() => setShowPassword(!showPassword)}
-    >
-        {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
-    </button>
-</div>
-```
-
-### MongoDB Connection with Deprecation Suppression
-```javascript
-// server/src/config/db.js
-import mongoose from "mongoose";
-
-// Suppress Mongoose deprecation warnings
-const originalEmit = process.emit;
-process.emit = function (name, data, ...args) {
-    if (name === "warning" && data?.message?.includes("findOneAndUpdate")) {
-        return false;
-    }
-    return originalEmit.apply(process, [name, data, ...args]);
-};
-
-export const connectDB = async () => {
-    try {
-        await mongoose.connect(ENV.MONGODB_URI);
-        console.log(`connected to mongoDB !!!!!`);
-    } catch (error) {
-        console.log(error);
-    }
-};
-```
+Language selection is available via a floating button (bottom-left corner). The preference is persisted in `localStorage` under `rooted-lang`.
 
 ---
 
-## Responsive Design
+## Theming
 
-### Breakpoints
-```css
-/* Tablet and below */
-@media (max-width: 760px) { }
+Two themes available — **Light** and **Dark** — using CSS custom properties defined in `tokens.css`. Toggle is a floating button (bottom-right). Persisted in `localStorage` under `rooted-theme`.
 
-/* Large phones */
-@media (max-width: 640px) { }
-
-/* Phones */
-@media (max-width: 600px) { }
-
-/* Small phones */
-@media (max-width: 560px) { }
-
-/* Extra small phones */
-@media (max-width: 380px) { }
-```
-
-### Fluid Typography
-```css
-font-size: clamp(1.9rem, 4vw, 2.45rem);
-padding: clamp(22px, 4vw, 36px);
-```
-
-### Mobile Optimizations
-- Password inputs: `font-size: 16px` (prevents iOS zoom)
-- Touch targets: minimum 44px height
-- Stack layouts on narrow screens
-- Top padding for fixed back button clearance
+Design system: Manrope (body) + Fraunces (display), consistent radius/shadow/gradient tokens.
 
 ---
 
 ## Development Setup
 
 ### Prerequisites
-- Node.js 18+ installed
-- MongoDB Atlas account (free tier works)
+- Node.js 18+
+- MongoDB Atlas account
 - Plant.id API key (free tier: 50 requests/day)
+- Anthropic API key (for AI chat)
+- Python 3.9+ (optional, for CNN service)
 
 ### Installation
 
 ```bash
-# 1. Navigate to project
-cd "Rooted fail 2"
-
-# 2. Setup Backend
+# Backend
 cd server
 npm install
-
 # Create .env file (see Environment Variables section)
-echo "PORT=3000" > .env
-echo "MONGODB_URI=your_mongodb_uri" >> .env
-echo "JWT_SECRET=your_secret_key" >> .env
-echo "PLANT_ID_API_KEY=your_api_key" >> .env
-
 npm run dev        # Starts on http://localhost:3000
 
-# 3. Setup Frontend (new terminal)
+# Frontend (new terminal)
 cd client
 npm install
 npm run dev        # Starts on http://localhost:5173
+
+# ML Service (optional, new terminal)
+cd server/ml
+pip install -r requirements.txt
+python main.py     # Starts on http://localhost:8000
 ```
 
 ### Vite Proxy Configuration
 ```javascript
 // client/vite.config.js
-export default defineConfig({
-    plugins: [react()],
-    server: {
-        proxy: {
-            '/api': 'http://localhost:3000',
-            '/camera': 'http://localhost:3000',
-        },
-    },
-});
+server: {
+  proxy: {
+    '/api': 'http://localhost:3000',
+    '/camera': 'http://localhost:3000',
+  }
+}
 ```
 
 ---
 
 ## Features Checklist
 
-### ✅ Fully Implemented
-- [x] User registration with email validation
-- [x] User login with JWT cookies
+### Fully Implemented
+- [x] User registration, login, logout (JWT + cookies)
 - [x] Password reset flow (token-based)
-- [x] Password visibility toggle (all password fields)
-- [x] Protected routes with authentication check
-- [x] Family member profile creation
-- [x] Family member profile editing
-- [x] Family member profile deletion
-- [x] Health data storage (weight, height, BP, heart rate, conditions)
-- [x] Live camera access and preview
-- [x] Photo capture and base64 encoding
-- [x] Plant identification via Plant.id API
-- [x] Plant details display (taxonomy, description, Wikipedia)
-- [x] Flash notifications (success/error)
-- [x] Back button navigation
+- [x] Protected routes with authentication
+- [x] Family member CRUD with health data
+- [x] Live camera capture + Plant.id identification
+- [x] CNN classification via EfficientNet-B0 (Python microservice)
+- [x] Plant safety engine (80+ plants, drug interactions, vitals, BMI)
+- [x] Plant search by name with safety check
+- [x] AI chat assistant (Claude-powered, context-aware)
+- [x] Plant usage journal (CRUD with ratings)
+- [x] Scan history with expandable details
+- [x] Results & Analysis dashboard (pie, bar, radar charts)
+- [x] Nearby places map (Ola Maps)
+- [x] Community plant sightings
+- [x] Rural first aid guide
+- [x] AI-generated safety summaries
+- [x] Multi-language (English, Hindi, Tamil, Malayalam)
+- [x] Dark/Light theme with persistent toggle
+- [x] Flash notifications
 - [x] Responsive mobile design
-- [x] Logout functionality
+- [x] PDF export capability
 
-### ⚠️ Partially Implemented
-- [ ] **Plant Safety Check**: Backend API complete (`/api/safety/check`), frontend component exists (`PlantSafetyCheck.jsx`) but not integrated into main flow
-- [ ] **Maps**: Button exists on Dashboard, no implementation
-- [ ] **LLM Integration**: Empty controller function placeholder
-
-### ❌ Not Implemented
-- [ ] Email service for password reset (currently shows token in UI)
-- [ ] Scan history frontend page (backend API ready at `/api/safety/history`)
-- [ ] Image file upload (camera-only currently)
-- [ ] Push notifications
-- [ ] Offline support/PWA
+### Production Recommendations
+- [ ] Set `secure: true` for cookies (HTTPS)
+- [ ] Add rate limiting (express-rate-limit)
+- [ ] Add helmet.js for security headers
+- [ ] Configure production email service
+- [ ] Set up CI/CD pipeline
+- [ ] Add push notifications / PWA support
 
 ---
 
-## Security Considerations
+## Security
 
-### Implemented
-- ✅ Password hashing with bcrypt (10 salt rounds)
-- ✅ JWT tokens in httpOnly cookies (XSS protection)
-- ✅ CORS configured for localhost
-- ✅ Input validation on all controllers
-- ✅ Protected API routes with JWT verification
-- ✅ MongoDB injection protection via Mongoose
-
-### Production Recommendations
-- Set `secure: true` for cookies (HTTPS only)
-- Add rate limiting (express-rate-limit)
-- Add helmet.js for security headers
-- Implement email service for password reset
-- Add request logging and monitoring
-- Set up CI/CD pipeline
+- Password hashing with bcrypt (10 salt rounds)
+- JWT tokens in httpOnly cookies (XSS protection)
+- CORS configured for localhost origins
+- Input validation on all controllers
+- Protected API routes with JWT verification
+- MongoDB injection protection via Mongoose
+- API keys kept server-side (Ola Maps, Plant.id proxied)
 
 ---
 
 ## Troubleshooting
 
-### MongoDB Connection Failed
-- Check `MONGODB_URI` in `.env`
-- Ensure IP whitelist includes current IP in Atlas
-- Verify network connectivity
-
-### Plant.id API Errors
-- Check `PLANT_ID_API_KEY` is valid
-- Free tier limited to 50 requests/day
-- Ensure base64 image is properly formatted
-
-### CORS Errors
-- Ensure backend running on port 3000
-- Check Vite proxy configuration
-- Verify CORS origin settings in `app.js`
-
-### Camera Not Working
-- Requires HTTPS in production (localhost exempt)
-- Check browser permissions
-- Ensure camera not in use by another app
-
----
-
-## Next Steps / Roadmap
-
-### Priority 1 (Core Features)
-1. Integrate PlantSafetyCheck with Dashboard/Camera flow
-2. Build Scan History frontend page
-3. Add image file upload option
-
-### Priority 2 (Enhancements)
-4. Implement Maps with plant location tracking
-5. Add email service (SendGrid/AWS SES)
-6. Build LLM integration for personalized advice
-
-### Priority 3 (Advanced)
-7. Mobile app (React Native)
-8. Push notifications
-9. Offline mode/PWA
-10. Social sharing features
+| Issue | Solution |
+|-------|----------|
+| MongoDB connection failed | Check `MONGODB_URI` in `.env`, whitelist IP in Atlas |
+| Plant.id API errors | Verify `PLANT_ID_API_KEY`, free tier is 50 req/day |
+| CORS errors | Ensure backend on port 3000, check Vite proxy config |
+| Camera not working | Requires HTTPS in production (localhost exempt), check browser permissions |
+| AI Chat not responding | Ensure `ANTHROPIC_API_KEY` is set in server `.env` |
+| CNN service offline | Start with `cd server/ml && python main.py` |
 
 ---
 

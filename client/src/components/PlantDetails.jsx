@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BackButton from "./BackButton.jsx";
 import "./PlantDetails.css";
 
@@ -18,6 +19,7 @@ const getDescription = (details) => {
 };
 
 const PlantDetails = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const { identification, selectedIndex = 0, capturedImage } = location.state || {};
@@ -44,9 +46,9 @@ const PlantDetails = () => {
       <main className="plant-details-page">
         <BackButton to="/camera" className="back-button--fixed" />
         <div className="plant-details-card">
-          <p className="plant-details-empty">No plant data found. Identify a plant from the camera first.</p>
+          <p className="plant-details-empty">{t("plantDetail.noData")}</p>
           <button type="button" className="plant-details-btn" onClick={() => navigate("/camera")}>
-            Go to Camera
+            {t("plantDetail.goCamera")}
           </button>
         </div>
       </main>
@@ -58,12 +60,12 @@ const PlantDetails = () => {
       <BackButton to="/camera" className="back-button--fixed" />
       <div className="plant-details-card">
         <header className="plant-details-header">
-          <h1>{getPlantName(suggestion) || suggestion.name || "Unknown Plant"}</h1>
+          <h1>{getPlantName(suggestion) || suggestion.name || t("plantDetail.unknown")}</h1>
           {suggestion.name && getPlantName(suggestion) !== suggestion.name && (
             <p className="plant-details-scientific">{suggestion.name}</p>
           )}
           {suggestion.probability != null && (
-            <span className="plant-details-match">{(suggestion.probability * 100).toFixed(0)}% match</span>
+            <span className="plant-details-match">{t("plantDetail.match", { pct: (suggestion.probability * 100).toFixed(0) })}</span>
           )}
         </header>
 
@@ -80,26 +82,26 @@ const PlantDetails = () => {
 
           {taxonomy && (
             <section className="plant-details-section">
-              <h2>Taxonomy</h2>
+              <h2>{t("plantDetail.taxonomy")}</h2>
               <div className="plant-details-taxonomy">
-                {taxonomy.genus && <span><strong>Genus:</strong> {taxonomy.genus}</span>}
-                {taxonomy.family && <span><strong>Family:</strong> {taxonomy.family}</span>}
-                {taxonomy.order && <span><strong>Order:</strong> {taxonomy.order}</span>}
-                {taxonomy.class && <span><strong>Class:</strong> {taxonomy.class}</span>}
+                {taxonomy.genus && <span><strong>{t("plantDetail.genus")}</strong> {taxonomy.genus}</span>}
+                {taxonomy.family && <span><strong>{t("plantDetail.family")}</strong> {taxonomy.family}</span>}
+                {taxonomy.order && <span><strong>{t("plantDetail.order")}</strong> {taxonomy.order}</span>}
+                {taxonomy.class && <span><strong>{t("plantDetail.class")}</strong> {taxonomy.class}</span>}
               </div>
             </section>
           )}
 
           {Array.isArray(commonNames) && commonNames.length > 1 && (
             <section className="plant-details-section">
-              <h2>Also known as</h2>
+              <h2>{t("plantDetail.alsoKnown")}</h2>
               <p>{commonNames.join(", ")}</p>
             </section>
           )}
 
           {description && (
             <section className="plant-details-section">
-              <h2>Description</h2>
+              <h2>{t("plantDetail.description")}</h2>
               <p className="plant-details-desc">{description}</p>
             </section>
           )}
@@ -111,13 +113,13 @@ const PlantDetails = () => {
               rel="noopener noreferrer"
               className="plant-details-wiki-link"
             >
-              Read more on Wikipedia →
+              {t("plantDetail.wikiLink")}
             </a>
           )}
 
           {suggestions.length > 1 && (
             <section className="plant-details-section plant-details-others">
-              <h2>Other possibilities</h2>
+              <h2>{t("plantDetail.otherPossibilities")}</h2>
               <ul>
                 {suggestions.slice(1, 5).map((s, i) => (
                   <li key={i}>

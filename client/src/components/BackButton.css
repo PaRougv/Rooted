@@ -2,27 +2,29 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.95);
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
   font: inherit;
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background var(--ease-base), border-color var(--ease-base), color var(--ease-base), transform var(--ease-fast);
+  box-shadow: var(--shadow-xs);
 }
 
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--accent-subtle);
+  border-color: var(--accent-light);
+  color: var(--accent);
   transform: translateX(-2px);
 }
 
-.back-button__arrow {
-  font-size: 1.1rem;
-}
+.back-button__arrow { font-size: 1.05rem; }
 
 .back-button--fixed {
   position: fixed;
@@ -32,29 +34,11 @@
 }
 
 @media (max-width: 560px) {
-  .back-button {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
-
-  .back-button--fixed {
-    top: 12px;
-    left: 12px;
-  }
-
-  .back-button__arrow {
-    font-size: 1rem;
-  }
+  .back-button { padding: 7px 12px; font-size: 0.83rem; }
+  .back-button--fixed { top: 12px; left: 12px; }
 }
 
 @media (max-width: 380px) {
-  .back-button {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
-
-  .back-button--fixed {
-    top: 10px;
-    left: 10px;
-  }
+  .back-button { padding: 6px 10px; font-size: 0.78rem; }
+  .back-button--fixed { top: 10px; left: 10px; }
 }
