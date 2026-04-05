@@ -223,6 +223,7 @@ const Maps = () => {
         const res = await axios.get("https://nominatim.openstreetmap.org/search", {
           params: { q: val, format: "json", limit: 7, addressdetails: 1, countrycodes: "" },
           headers: { "Accept-Language": "en" },
+          withCredentials: false,
         });
         setLocResults(res.data || []);
       } catch { setLocResults([]); }
