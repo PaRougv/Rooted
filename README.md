@@ -16,9 +16,16 @@ Rooted is a comprehensive full-stack web application designed to help users iden
 - **Results & Analysis**: Interactive charts and statistics from scan data (pie, bar, radar)
 - **Nearby Maps**: Ola Maps integration for nearby places and community plant sightings
 - **Rural First Aid**: Offline-friendly first aid guide for plant-related emergencies
+- **Dosage Calculator**: Personalized dosage estimates based on weight, age, and family member profiles
+- **Plant of the Day**: Daily rotating spotlight on Indian medicinal plants with usage tips
+- **Bookmark/Favorites**: Save and organize plants with personal notes for quick reference
+- **Emergency Mode**: GPS-based nearby hospital finder, poison helpline, exportable emergency reports
+- **Plant Comparison**: Side-by-side comparison of two plants' properties and safety profiles
+- **Seasonal Calendar**: Month-by-month availability guide for medicinal plants
 - **Multi-language Support**: English, Hindi, Tamil, and Malayalam (i18n)
 - **Dark/Light Theme**: Persistent theme toggle with design tokens
-- **Responsive Design**: Fully mobile-responsive interface
+- **PWA & Offline Support**: Installable web app with service worker caching for offline access
+- **Responsive Design**: Fully mobile-responsive interface with breakpoints for phone, tablet, and desktop
 
 ---
 
@@ -107,6 +114,13 @@ Rooted/
 │       │   ├── Maps.jsx / .css            # Ola Maps nearby places
 │       │   ├── RuralFirstAid.jsx / .css
 │       │   ├── ThemeToggle.jsx / .css     # Dark/light mode
+│       │   ├── PlantCompare.jsx / .css    # Side-by-side plant comparison
+│       │   ├── SeasonalCalendar.jsx / .css # Monthly plant availability
+│       │   ├── DosageCalculator.jsx / .css # Weight-based dosage guide
+│       │   ├── PlantOfTheDay.jsx / .css   # Daily plant spotlight widget
+│       │   ├── Bookmarks.jsx / .css       # Saved/favorite plants
+│       │   ├── EmergencyMode.jsx / .css   # Emergency hospital finder
+│       │   ├── OfflineBar.jsx / .css      # Offline detection banner
 │       │   ├── LanguageSelector.jsx / .css # Language switcher (EN/HI/TA/ML)
 │       │   ├── BackButton.jsx / .css
 │       │   └── ResetPassword.jsx
@@ -129,21 +143,24 @@ Rooted/
 │       │   ├── user.model.js
 │       │   ├── healthdata.model.js
 │       │   ├── scanHistory.model.js
-│       │   └── journal.model.js   # Plant journal entries
+│       │   ├── journal.model.js   # Plant journal entries
+│       │   └── bookmark.model.js  # Saved/favorite plants
 │       ├── controllers/
 │       │   ├── auth.controller.js
 │       │   ├── health.controller.js
 │       │   ├── upload.controller.js   # Plant.id API integration
 │       │   ├── safety.controller.js   # Safety engine + plant search
 │       │   ├── chat.controller.js     # Claude AI chat
-│       │   └── journal.controller.js  # Journal CRUD
+│       │   ├── journal.controller.js  # Journal CRUD
+│       │   └── bookmark.controller.js # Bookmark CRUD
 │       ├── routes/
 │       │   ├── auth.routes.js
 │       │   ├── inputllm.route.js
 │       │   ├── camera.router.js
 │       │   ├── safety.routes.js       # Safety check, search, history, sightings
 │       │   ├── chat.routes.js         # AI chat endpoint
-│       │   └── journal.routes.js      # Journal CRUD endpoints
+│       │   ├── journal.routes.js      # Journal CRUD endpoints
+│       │   └── bookmark.routes.js     # Bookmark CRUD endpoints
 │       └── data/
 │           └── herbDrugInteractions.js  # 80+ plant safety database
 │
@@ -249,6 +266,14 @@ The AI has context about the user's family profiles, recent scans, and the full 
 | PUT | `/api/journal/:id` | Update journal entry |
 | DELETE | `/api/journal/:id` | Delete journal entry |
 
+### Bookmarks (`/api/bookmarks`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/bookmarks` | Get all bookmarks for current user |
+| POST | `/api/bookmarks` | Add a plant to bookmarks |
+| DELETE | `/api/bookmarks/:id` | Remove a bookmark |
+
 ### ML Classification (`/api/ml`)
 
 | Method | Endpoint | Description |
@@ -284,6 +309,11 @@ The AI has context about the user's family profiles, recent scans, and the full 
 | `/results` | ResultsAnalysis | Protected | Charts and analytics |
 | `/maps` | Maps | Protected | Nearby places map |
 | `/first-aid` | RuralFirstAid | Protected | First aid guide |
+| `/compare` | PlantCompare | Protected | Side-by-side plant comparison |
+| `/calendar` | SeasonalCalendar | Protected | Monthly plant availability |
+| `/dosage` | DosageCalculator | Protected | Personalized dosage guide |
+| `/bookmarks` | Bookmarks | Protected | Saved/favorite plants |
+| `/emergency` | EmergencyMode | Protected | Emergency hospital finder |
 
 ---
 
@@ -324,6 +354,12 @@ The same engine powers both camera-based identification and manual plant search.
 ```javascript
 { user, plantName, familyMemberId, familyMemberName, usageType (enum),
   dosage, notes, effectsObserved, rating (1-5), sideEffects, wouldUseAgain, timestamps }
+```
+
+### Bookmark Model
+```javascript
+{ userId (ref), plantName, notes, timestamps }
+// Compound unique index on (userId, plantName)
 ```
 
 ---
@@ -414,8 +450,16 @@ server: {
 - [x] AI-generated safety summaries
 - [x] Multi-language (English, Hindi, Tamil, Malayalam)
 - [x] Dark/Light theme with persistent toggle
+- [x] Dosage calculator (weight/age-based, per family member)
+- [x] Plant of the Day (daily rotating Indian medicinal plants)
+- [x] Bookmark/Favorites (save plants with notes)
+- [x] Emergency Mode (GPS hospital finder, poison helpline, report export)
+- [x] Plant comparison (side-by-side)
+- [x] Seasonal calendar (monthly plant availability)
+- [x] PWA with offline support (service worker, installable)
+- [x] Offline detection bar
 - [x] Flash notifications
-- [x] Responsive mobile design
+- [x] Responsive mobile design (phone, tablet, desktop breakpoints)
 - [x] PDF export capability
 
 ### Production Recommendations
@@ -424,7 +468,6 @@ server: {
 - [ ] Add helmet.js for security headers
 - [ ] Configure production email service
 - [ ] Set up CI/CD pipeline
-- [ ] Add push notifications / PWA support
 
 ---
 
