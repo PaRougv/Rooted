@@ -1614,6 +1614,590 @@ export const plantMedicinalInfo = {
         uses: ["Liver protection and hepatitis support", "Digestive bitter tonic", "Fever management (anti-pyretic)", "Immune modulation"],
         preparation: ["Low-dose capsules of standardised picroside extract", "Traditional powder in honey (very small amounts — intensely bitter)", "Tablets"],
         dosage: "100–400 mg standardised picroside extract/day — precise dosing critical due to narrow therapeutic window"
+    },
+
+    // ── Ayurvedic / Indian ────────────────────────────────────────────────────
+    "Calotropis": {
+        uses: ["Skin diseases and eczema (external)", "Joint pain and arthritis (topical)", "Digestive stimulant (small doses)", "Fever management in traditional medicine"],
+        preparation: ["Leaf paste applied externally for skin issues", "Latex diluted and applied topically for joint pain", "Under strict Ayurvedic practitioner guidance only"],
+        dosage: "External use only for home remedies; internal use requires Ayurvedic practitioner supervision"
+    },
+    "Triphala Guggul": {
+        uses: ["Digestive cleansing and detox", "Weight management support", "Cholesterol and lipid balance", "Joint and tissue rejuvenation"],
+        preparation: ["Tablets or capsules with warm water", "Powder mixed with honey", "Take 30 minutes before meals"],
+        dosage: "500 mg–2 g twice daily with warm water; reduce if loose stools occur"
+    },
+    "Guggul": {
+        uses: ["Cholesterol management", "Arthritis and joint inflammation", "Weight management", "Thyroid support (hypothyroidism)"],
+        preparation: ["Standardised guggulsterone capsules", "Traditional resin dissolved in warm water", "Combined formulations with other Ayurvedic herbs"],
+        dosage: "500 mg–1 g standardised extract (2.5% guggulsterones) twice daily"
+    },
+    "Shilajit": {
+        uses: ["Energy and stamina enhancement", "Male reproductive health", "Anti-aging and rejuvenation", "Iron deficiency support", "Cognitive function"],
+        preparation: ["Dissolve pea-sized resin in warm milk or water", "Capsules or tablets", "Take on empty stomach or with milk"],
+        dosage: "300–500 mg purified shilajit resin/day; avoid raw/unpurified forms"
+    },
+    "Haritaki": {
+        uses: ["Bowel regulation and laxative", "Detoxification", "Digestive tonic", "Oral health (gargling)", "Eye health (wash)"],
+        preparation: ["Powder with warm water at bedtime", "Decoction boiled with water", "Triphala combination (with Amla and Bibhitaki)"],
+        dosage: "3–5 g powder at bedtime with warm water; or 500 mg–1 g capsule"
+    },
+    "Bibhitaki": {
+        uses: ["Respiratory health and cough", "Digestive support", "Liver health", "Hair and scalp nourishment", "Detox (part of Triphala)"],
+        preparation: ["Powder in warm water", "Triphala formulation", "Decoction for gargling"],
+        dosage: "3–5 g powder in warm water daily; or as part of Triphala formula"
+    },
+    "Vidanga": {
+        uses: ["Anti-parasitic and deworming", "Digestive issues and flatulence", "Skin disorders", "Nervous system tonic"],
+        preparation: ["Powder with honey or warm water", "Decoction", "Capsules with Ayurvedic formulations"],
+        dosage: "1–3 g powder twice daily with honey or warm water under practitioner guidance"
+    },
+    "Chitraka": {
+        uses: ["Digestive stimulant and carminative", "Metabolic support and weight management", "Arthritis and joint pain", "Liver function improvement"],
+        preparation: ["Small amounts of root powder with honey", "Decoction", "Ayurvedic tablets (e.g., Chitrakadi Vati)"],
+        dosage: "250–500 mg root powder with honey twice daily; start with lowest dose"
+    },
+    "Pippali": {
+        uses: ["Respiratory conditions (asthma, cough)", "Digestive fire enhancement", "Bioavailability enhancer for other herbs", "Cold and flu management"],
+        preparation: ["Powder mixed with honey", "Warm milk with pippali and ginger", "Combined formulas (Trikatu)"],
+        dosage: "250–500 mg powder twice daily with honey; or as part of Trikatu formula"
+    },
+    "Karpura Valli": {
+        uses: ["Cough and cold relief", "Respiratory support", "Skin conditions (topical)", "Digestive health"],
+        preparation: ["Fresh leaf juice with honey for cough", "Leaf decoction", "Leaf paste applied topically"],
+        dosage: "2–5 ml fresh leaf juice with honey twice daily for cough"
+    },
+    "Punarnava Root": {
+        uses: ["Kidney and urinary tract support", "Oedema and water retention", "Liver detoxification", "Anaemia management", "Anti-inflammatory"],
+        preparation: ["Root decoction boiled in water", "Capsules or powder with water", "Juice of fresh plant"],
+        dosage: "3–6 g root powder or 20–30 ml decoction twice daily"
+    },
+    "Vacha": {
+        uses: ["Memory and cognitive enhancement", "Speech disorders", "Epilepsy support (adjunct)", "Digestive stimulant", "Nervous system tonic"],
+        preparation: ["Small amounts of powder with honey", "Decoction", "Oil for external application on scalp"],
+        dosage: "250–500 mg powder twice daily with honey; do NOT exceed recommended dose"
+    },
+    "Kalonji": {
+        uses: ["Immune system support", "Respiratory health (asthma, allergies)", "Blood sugar management", "Anti-inflammatory and antioxidant", "Hair growth (oil)"],
+        preparation: ["Half teaspoon seeds with honey", "Black seed oil (1 tsp) with honey or warm water", "Seeds added to food"],
+        dosage: "1–3 g seeds/day or 2.5–5 ml oil daily"
+    },
+    "Henna": {
+        uses: ["Hair conditioning and colouring (external)", "Cooling effect on scalp and skin", "Anti-fungal for skin conditions (topical)", "Wound healing (traditional external)"],
+        preparation: ["Leaf paste with water applied to hair/skin", "Powder mixed with water, lemon juice, or tea", "External use only"],
+        dosage: "Topical use only; apply paste for 1–3 hours, rinse thoroughly"
+    },
+    "Bael": {
+        uses: ["Diarrhoea and dysentery treatment", "Digestive tonic", "Fever management", "Constipation relief (ripe fruit)", "Diabetes support"],
+        preparation: ["Unripe fruit pulp decoction for diarrhoea", "Ripe fruit juice or sherbet", "Leaf tea for fever"],
+        dosage: "50–100 ml bael sherbet daily; or 20–30 ml decoction of unripe fruit twice daily"
+    },
+    "Manjistha": {
+        uses: ["Blood purifier and skin disorders", "Anti-inflammatory", "Lymphatic system support", "Wound healing", "Joint health"],
+        preparation: ["Powder with warm water or milk", "Capsules", "Paste applied topically for skin conditions"],
+        dosage: "1–3 g powder twice daily with warm water or milk"
+    },
+    "Lodhra": {
+        uses: ["Women's reproductive health (leucorrhoea, menorrhagia)", "Skin tightening (topical)", "Diarrhoea and digestive disorders", "Anti-inflammatory for eyes"],
+        preparation: ["Powder with honey", "Decoction", "Bark paste applied topically"],
+        dosage: "3–6 g powder twice daily with honey or warm water"
+    },
+    "Gokshura": {
+        uses: ["Urinary tract health and kidney stones", "Male sexual health and testosterone support", "Athletic performance", "Diuretic effect"],
+        preparation: ["Powder with warm water or milk", "Capsules", "Decoction of seeds and fruit"],
+        dosage: "500 mg–1 g powder twice daily with milk or warm water"
+    },
+    "Yashtimadhu": {
+        uses: ["Gastric ulcer and acidity relief", "Throat and respiratory soothing", "Adrenal fatigue support", "Anti-inflammatory", "Skin lightening (topical)"],
+        preparation: ["Powder mixed with honey or ghee", "Decoction for gargling", "Licorice tea"],
+        dosage: "1–3 g powder twice daily; limit to 4–6 weeks continuous use"
+    },
+    "Kutaja": {
+        uses: ["Acute diarrhoea and dysentery", "Intestinal parasites", "Irritable bowel syndrome", "Fever management"],
+        preparation: ["Bark decoction", "Standardised Kutajarishta formulation", "Powder with buttermilk"],
+        dosage: "15–30 ml Kutajarishta after meals; or 3–6 g bark powder twice daily"
+    },
+    "Daruharidra": {
+        uses: ["Anti-inflammatory and antimicrobial", "Eye disorders (conjunctivitis)", "Skin diseases", "Digestive disorders", "Fever management"],
+        preparation: ["Bark decoction for internal use", "Paste applied topically", "Eye wash (diluted decoction)"],
+        dosage: "1–3 g bark powder twice daily with warm water"
+    },
+    "Berberine": {
+        uses: ["Blood sugar regulation (diabetes support)", "Cholesterol management", "Gut health and antimicrobial", "Heart health support", "PCOS management"],
+        preparation: ["Standardised capsules", "With meals to reduce GI side effects"],
+        dosage: "500 mg two to three times daily with meals"
+    },
+    "Shatapushpa": {
+        uses: ["Digestive carminative and gas relief", "Women's menstrual regulation", "Lactation enhancement", "Colic and abdominal pain"],
+        preparation: ["Seeds boiled as tea (dill water)", "Powder with warm water", "Added to food as spice"],
+        dosage: "1–3 g seeds as tea or powder twice daily"
+    },
+    "Khadira": {
+        uses: ["Oral health (dental caries, gum disease)", "Skin diseases and eczema", "Blood purification", "Anti-fungal properties"],
+        preparation: ["Bark decoction for gargling", "Paste applied to skin", "Khadira khanda formulation"],
+        dosage: "20–40 ml decoction for gargling; or 1–3 g powder with honey internally"
+    },
+    "Tagetes": {
+        uses: ["Eye health (macular degeneration — lutein source)", "Anti-inflammatory (topical)", "Wound healing", "Digestive support"],
+        preparation: ["Lutein/zeaxanthin supplement capsules", "Flower tea", "Topical poultice from fresh flowers"],
+        dosage: "6–20 mg lutein supplement daily for eye health; flower tea 1–2 cups/day"
+    },
+    "Alstonia": {
+        uses: ["Malaria and fever management (traditional)", "Digestive tonic", "Respiratory support", "Anti-inflammatory"],
+        preparation: ["Bark decoction under practitioner supervision", "Standardised extracts"],
+        dosage: "Under Ayurvedic/traditional practitioner guidance only due to alkaloid content"
+    },
+    "Patala": {
+        uses: ["Respiratory disorders (asthma, bronchitis)", "Liver and spleen disorders", "Anti-inflammatory", "Wound healing"],
+        preparation: ["Root bark decoction", "Powder with honey", "Syrup formulations"],
+        dosage: "3–6 g root powder twice daily with honey"
+    },
+    "Jatamansi": {
+        uses: ["Anxiety and stress relief", "Sleep disorders and insomnia", "Memory enhancement", "Hair growth (oil)", "Hysteria and epilepsy support"],
+        preparation: ["Powder with warm milk at bedtime", "Scalp oil application", "Decoction"],
+        dosage: "250–500 mg powder twice daily with warm milk; spikenard oil topically"
+    },
+    "Chirata": {
+        uses: ["Fever and malaria (anti-pyretic)", "Digestive bitter tonic", "Blood sugar regulation", "Liver detox", "Anti-inflammatory"],
+        preparation: ["Cold infusion overnight", "Powder with honey", "Bitter tonic tea"],
+        dosage: "1–3 g powder or 20–40 ml cold infusion twice daily"
+    },
+    "Bhui Amla": {
+        uses: ["Liver protection (hepatitis B, fatty liver)", "Kidney stone dissolution", "Urinary tract health", "Blood sugar regulation", "Anti-viral"],
+        preparation: ["Fresh plant juice (10–15 ml)", "Powder with warm water", "Capsules"],
+        dosage: "10–20 ml fresh juice or 1–3 g powder twice daily"
+    },
+    "Parijat": {
+        uses: ["Arthritis and joint pain", "Fever and anti-malarial", "Cough and respiratory disorders", "Anti-fungal and antibacterial (topical)"],
+        preparation: ["Leaf decoction", "Flower tea", "Leaf paste applied topically"],
+        dosage: "20–40 ml leaf decoction twice daily; or as directed by Ayurvedic practitioner"
+    },
+    "Agathi": {
+        uses: ["Headache and fever relief", "Laxative effect", "Rich in vitamins (nutritional)", "Skin and eye health", "Anti-inflammatory"],
+        preparation: ["Fresh leaves cooked as vegetable", "Leaf juice", "Flower decoction"],
+        dosage: "Leaves as food; 10–20 ml fresh leaf juice once daily for medicinal use"
+    },
+    "Jamun": {
+        uses: ["Blood sugar regulation (diabetes management)", "Digestive health", "Mouth ulcers (bark gargle)", "Antioxidant", "Liver health"],
+        preparation: ["Seed powder with water", "Fresh fruit juice", "Bark decoction for gargling"],
+        dosage: "1–3 g seed powder twice daily before meals for diabetes support"
+    },
+    "Jackfruit Leaf": {
+        uses: ["Blood sugar regulation", "Wound healing (topical)", "Anti-inflammatory", "Skin conditions (external)"],
+        preparation: ["Young leaf tea", "Leaf paste applied topically", "Dried leaf powder with water"],
+        dosage: "2–3 cups young leaf tea daily; topical paste as needed"
+    },
+    "Kadamba": {
+        uses: ["Fever management", "Skin diseases (topical)", "Anti-inflammatory", "Diarrhoea relief"],
+        preparation: ["Bark decoction", "Bark paste applied topically", "Flower infusion"],
+        dosage: "20–40 ml bark decoction twice daily; topical paste for skin"
+    },
+    "Sitaphal Leaf": {
+        uses: ["Anti-cancer research properties", "Wound healing", "Lice treatment (topical)", "Anti-inflammatory", "Digestive support"],
+        preparation: ["Leaf paste applied to wounds or scalp", "Seed paste for lice (external only)", "Leaf decoction"],
+        dosage: "Topical use: leaf paste applied directly; internal: 20–30 ml leaf decoction once daily"
+    },
+    "Baheda": {
+        uses: ["Respiratory health (cough, bronchitis)", "Eye health", "Hair nourishment", "Digestive tonic", "Part of Triphala"],
+        preparation: ["Powder with honey for cough", "Triphala combination", "Bark decoction"],
+        dosage: "3–5 g powder daily with honey; or as part of Triphala"
+    },
+    "Teak": {
+        uses: ["Wound healing (bark paste)", "Diabetes support (traditional)", "Hair loss prevention", "Dysentery and diarrhoea"],
+        preparation: ["Bark decoction", "Seed oil for hair application", "Bark paste for wounds"],
+        dosage: "External: bark paste applied to wounds; internal: 20–30 ml bark decoction under guidance"
+    },
+    "Silk Cotton Tree": {
+        uses: ["Dysentery and diarrhoea (bark)", "Aphrodisiac properties (roots)", "Wound healing (resin)", "Anaemia (flowers)"],
+        preparation: ["Bark decoction", "Flower juice", "Gum/resin dissolved in water"],
+        dosage: "20–40 ml bark decoction twice daily; under Ayurvedic practitioner guidance"
+    },
+    "Indian Laburnum": {
+        uses: ["Laxative effect (pods)", "Fever management", "Skin disorders", "Liver and digestive support"],
+        preparation: ["Pod pulp in small amounts as laxative", "Flower infusion for fever", "Bark decoction"],
+        dosage: "5–10 g pod pulp as gentle laxative; seek guidance for prolonged use"
+    },
+    "Kathal": {
+        uses: ["Blood sugar regulation (seeds)", "Digestive health", "Ulcer prevention", "Rich in potassium and fibre"],
+        preparation: ["Seeds boiled and consumed", "Raw jackfruit curry", "Leaf tea for blood sugar"],
+        dosage: "Seeds as food (30–50 g/day); leaf tea: 2 cups daily"
+    },
+
+    // ── Indian Kitchen / Spice Plants ─────────────────────────────────────────
+    "Drumstick Leaf": {
+        uses: ["Nutritional supplement (vitamins, minerals)", "Blood sugar regulation", "Anti-inflammatory", "Lactation enhancement", "Anaemia support"],
+        preparation: ["Fresh leaves added to dal/curry", "Moringa leaf powder in smoothies", "Leaf tea"],
+        dosage: "1–2 tsp powder daily; or fresh leaves as food; 7 g leaf powder max/day"
+    },
+    "Brahmi Leaves": {
+        uses: ["Memory and cognitive enhancement", "Anxiety and stress reduction", "ADHD support", "Epilepsy adjunct therapy", "Anti-inflammatory"],
+        preparation: ["Fresh leaf juice (5–10 ml)", "Brahmi churna with warm milk", "Brahmi tea"],
+        dosage: "300–450 mg standardised extract/day or 5–10 ml fresh juice twice daily"
+    },
+    "Curry Leaf Tree": {
+        uses: ["Digestive health and stomach disorders", "Blood sugar regulation", "Hair growth stimulation", "Cholesterol management", "Anti-oxidant"],
+        preparation: ["Leaves added fresh to cooking", "Curry leaf powder with buttermilk", "Hair oil infused with leaves"],
+        dosage: "8–10 fresh leaves daily on empty stomach; or 1 tsp dried powder"
+    },
+    "Pudina": {
+        uses: ["Digestive issues, IBS and bloating", "Headache relief (topical menthol)", "Nausea and morning sickness", "Respiratory decongestant", "Oral health"],
+        preparation: ["Peppermint tea (fresh or dried leaves)", "Mint chutney or added to food", "Menthol oil applied to temples"],
+        dosage: "1–2 cups peppermint tea daily; peppermint oil 0.2–0.4 ml in enteric-coated capsule"
+    },
+    "Dhania": {
+        uses: ["Digestive carminative and gas relief", "Blood sugar lowering", "Anti-inflammatory", "Cholesterol management", "Heavy metal chelation"],
+        preparation: ["Coriander seed tea (boil 1 tsp seeds in water)", "Fresh leaves in food", "Seed powder with warm water"],
+        dosage: "1–2 tsp seeds as tea 2–3 times daily; leaves as food freely"
+    },
+    "Jeera": {
+        uses: ["Digestive stimulant and carminative", "Anaemia support (iron-rich)", "Blood sugar regulation", "Anti-inflammatory", "Immune support"],
+        preparation: ["Jeera water (soak 1 tsp overnight, drink morning)", "Roasted seeds with food", "Cumin tea"],
+        dosage: "1–3 g seeds/day as food or tea; 300–600 mg cumin extract supplement"
+    },
+    "Methi Leaf": {
+        uses: ["Blood sugar management (type 2 diabetes)", "Cholesterol reduction", "Milk production (lactation)", "Appetite and digestive health", "Testosterone support"],
+        preparation: ["Soaked seeds (1 tsp) with warm water morning", "Fresh leaves in food", "Seed powder with water before meals"],
+        dosage: "5–50 g seeds/day; 1 tsp seed powder before meals for blood sugar"
+    },
+    "Ajwain": {
+        uses: ["Digestive carminative and anti-flatulent", "Respiratory disorders (cough, bronchitis)", "Acidity and indigestion", "Antimicrobial properties", "Renal colic relief"],
+        preparation: ["Boil 1 tsp seeds in water, strain and drink", "Ajwain ark (distilled water)", "Chew seeds directly with salt for instant relief"],
+        dosage: "1–2 g seeds 2–3 times daily with warm water"
+    },
+    "Hing": {
+        uses: ["Powerful digestive and anti-flatulent", "IBS and colic relief", "Respiratory conditions (bronchitis)", "Anti-epileptic (traditional)", "Anti-bacterial"],
+        preparation: ["Tiny pinch dissolved in warm water", "Added to cooking (tadka)", "Hing water for colic"],
+        dosage: "30–120 mg in warm water; very small culinary amounts safe for most adults"
+    },
+    "Tejpat": {
+        uses: ["Blood sugar regulation", "Cholesterol management", "Digestive health", "Anti-inflammatory", "Respiratory support"],
+        preparation: ["Bay leaf tea (boil 2–3 leaves)", "Powder in warm water", "Added to cooking"],
+        dosage: "1–3 g powder/day or 2–3 cups bay leaf tea daily"
+    },
+    "Imli": {
+        uses: ["Digestive laxative and cleanse", "Fever and anti-oxidant", "Blood sugar regulation", "Anti-inflammatory", "Rich in tartaric acid (digestive)"],
+        preparation: ["Tamarind water (diluted paste)", "Added to food as souring agent", "Tamarind candy/concentrate"],
+        dosage: "10 g tamarind pulp daily; as souring agent in cooking freely"
+    },
+
+    // ── TCM Plants ────────────────────────────────────────────────────────────
+    "Astragalus": {
+        uses: ["Immune system modulation", "Anti-aging and adaptogenic", "Heart health support", "Kidney protective", "Cancer adjunct therapy"],
+        preparation: ["Root decoction (boil 15–30 g dried root)", "Capsules or standardised extract", "Combined with other TCM herbs"],
+        dosage: "9–30 g dried root/day in decoction; or 500 mg–2 g standardised extract"
+    },
+    "Dong Quai": {
+        uses: ["Menstrual irregularity and dysmenorrhoea", "Menopausal symptoms", "Blood tonic (anaemia)", "Cardiovascular health", "Anti-inflammatory"],
+        preparation: ["Root tea or decoction", "Capsules", "TCM formulations (Ba Zhen Wan)"],
+        dosage: "3–15 g dried root/day; 500 mg–2 g extract twice daily"
+    },
+    "Bupleurum": {
+        uses: ["Liver support and detoxification", "Fever management", "Anti-inflammatory", "Immune modulation", "Depression support (adjunct)"],
+        preparation: ["Root decoction", "Combined TCM formulas (Xiao Chai Hu Tang)", "Capsules"],
+        dosage: "3–9 g dried root/day; 300–500 mg extract twice daily"
+    },
+    "Schisandra": {
+        uses: ["Liver protection and detoxification", "Adaptogen for stress", "Cognitive function and memory", "Respiratory support", "Athletic endurance"],
+        preparation: ["Berry tea or decoction", "Dried berry powder in smoothies", "Schisandra tincture"],
+        dosage: "1.5–6 g dried berries/day; 500 mg–2 g extract"
+    },
+    "Codonopsis": {
+        uses: ["Energy and qi tonification (gentle ginseng alternative)", "Digestive support", "Blood tonic (anaemia)", "Lung health", "Immune support"],
+        preparation: ["Root decoction (boil 9–30 g)", "Soup with other tonics", "Capsules"],
+        dosage: "9–30 g dried root/day in decoction; 1–3 g extract"
+    },
+    "Poria": {
+        uses: ["Digestive tonic and anti-diarrhoeal", "Anxiety and insomnia", "Immune system support", "Cognitive support", "Kidney tonic"],
+        preparation: ["Powder in warm water or tea", "Combined in TCM soups", "Capsules"],
+        dosage: "9–15 g/day in decoction; 1–3 g powder"
+    },
+    "Jujube": {
+        uses: ["Insomnia and anxiety relief", "Digestive health", "Blood tonic and anaemia", "Immune support", "Anti-stress adaptogen"],
+        preparation: ["Dried fruit tea (simmer 10–12 dates)", "Eaten as food", "Suan Zao Ren formula for insomnia"],
+        dosage: "6–15 g dried fruit/day; 3–5 jujubes as snack"
+    },
+    "Chrysanthemum": {
+        uses: ["Eye health (dryness, redness)", "Fever and headache relief", "Liver heat clearing", "Blood pressure support", "Anti-inflammatory"],
+        preparation: ["Flower tea (steep 8–10 dried flowers)", "Combined with goji berries in tea", "Eye wash (diluted cool tea)"],
+        dosage: "9–15 g dried flowers as tea daily; 2–3 cups/day"
+    },
+    "Eucommia": {
+        uses: ["Bone and joint strength", "Blood pressure regulation", "Kidney and liver tonic", "Testosterone and libido support", "Pregnancy safety (traditional)"],
+        preparation: ["Bark decoction", "Capsules", "Combined TCM formulas"],
+        dosage: "6–15 g bark/day in decoction; 500 mg–1.5 g extract"
+    },
+    "Ligustrum": {
+        uses: ["Immune system enhancement", "Anti-aging and longevity", "Liver and kidney tonic", "Hair darkening (traditional)", "Antioxidant"],
+        preparation: ["Berry decoction or tea", "Combined with astragalus", "Capsules"],
+        dosage: "9–15 g dried berries/day; 500 mg–1 g extract"
+    },
+    "Magnolia Bark": {
+        uses: ["Anxiety and stress relief", "Digestive issues (bloating, gas)", "Anti-inflammatory", "Sleep support", "Oral health (antimicrobial)"],
+        preparation: ["Bark tea (simmer 3–9 g)", "Capsules or standardised extract", "Combined in TCM formulas"],
+        dosage: "3–9 g bark/day; 200–400 mg standardised extract (honokiol/magnolol)"
+    },
+    "Pueraria": {
+        uses: ["Hangover prevention and alcohol metabolism", "Menopausal symptom relief", "Blood pressure support", "Migraine prevention", "Neck and shoulder tension"],
+        preparation: ["Root powder in warm water or tea", "Capsules (kudzu extract)", "Combined TCM formulas"],
+        dosage: "1.5–3 g root/day; 100–300 mg isoflavone extract"
+    },
+    "Acanthopanax": {
+        uses: ["Adaptogen for physical and mental stress", "Immune modulation", "Athletic performance", "Anti-inflammatory", "Cognitive support"],
+        preparation: ["Root bark tincture or tea", "Capsules", "Combined with ginseng formulas"],
+        dosage: "2–3 g dried bark/day; 300–600 mg extract"
+    },
+    "Goji Berry": {
+        uses: ["Antioxidant and anti-aging", "Eye health (macular degeneration)", "Immune support", "Blood sugar regulation", "Liver protection"],
+        preparation: ["Eaten dried as snack", "Goji tea (steep 10–15 berries)", "Added to smoothies, porridge"],
+        dosage: "15–30 g dried berries/day as food; 300 mg–1 g extract"
+    },
+    "Chinese Yam": {
+        uses: ["Digestive tonic (IBS, diarrhoea)", "Lung and kidney tonic", "Diabetes support", "Immune enhancement", "Reproductive health"],
+        preparation: ["Cooked as food in soups and stir-fries", "Root powder in warm water", "Combined in TCM tonics"],
+        dosage: "15–30 g cooked yam daily; 3–6 g powder"
+    },
+    "Angelica Dahurica": {
+        uses: ["Headache and sinus congestion", "Skin disorders (anti-inflammatory)", "Toothache relief", "Menstrual pain", "Cold and flu"],
+        preparation: ["Root decoction", "Powder", "Combined TCM formulas"],
+        dosage: "3–9 g root/day in decoction; under TCM practitioner guidance"
+    },
+    "White Peony": {
+        uses: ["Muscle cramps and spasms", "Menstrual pain and irregularity", "Liver support", "Anti-inflammatory", "Blood tonic"],
+        preparation: ["Root decoction (boil 6–15 g)", "Combined in Si Wu Tang blood tonic", "Capsules"],
+        dosage: "6–15 g dried root/day in decoction; 1–3 g standardised extract"
+    },
+    "Coptis": {
+        uses: ["Antibacterial and antimicrobial (berberine-rich)", "Digestive infections and diarrhoea", "Blood sugar regulation", "Anti-inflammatory", "Heart health"],
+        preparation: ["Root decoction (small amounts — very bitter)", "Standardised berberine capsules", "Huang Lian formulas"],
+        dosage: "1.5–3 g dried root/day; 500 mg berberine extract twice daily with meals"
+    },
+    "Fritillaria": {
+        uses: ["Cough and respiratory disorders (expectorant)", "Chest congestion and bronchitis", "Phlegm clearance", "Anti-inflammatory for lungs"],
+        preparation: ["Bulb powder in pear and honey syrup", "Decoction", "Chuan Bei Pipa Gao syrup (traditional formula)"],
+        dosage: "3–9 g/day in decoction; standardised formulas as labelled"
+    },
+
+    // ── African Medicinal Plants ──────────────────────────────────────────────
+    "Devil's Claw": {
+        uses: ["Arthritis and joint pain", "Back pain (lower back)", "Digestive bitters (appetite stimulant)", "Fever reduction", "Anti-inflammatory"],
+        preparation: ["Capsules or tablets (standardised harpagoside)", "Tea from dried root", "Tincture"],
+        dosage: "600–1200 mg standardised extract (2–3% harpagoside) twice daily"
+    },
+    "Sutherlandia": {
+        uses: ["Immune system support (HIV adjunct)", "Adaptogen and anti-stress", "Cancer adjunct therapy", "Diabetes support", "Anti-inflammatory"],
+        preparation: ["Tea from dried leaves", "Capsules or tincture", "Traditional decoction"],
+        dosage: "300–600 mg extract twice daily; use under practitioner guidance for serious conditions"
+    },
+    "Buchu": {
+        uses: ["Urinary tract infections and cystitis", "Kidney support and diuretic", "Digestive disorders", "Anti-inflammatory", "Gout"],
+        preparation: ["Leaf tea (steep 1–2 tsp dried leaves)", "Tincture", "Capsules"],
+        dosage: "1–2 cups buchu tea daily; or 1–3 ml tincture three times daily"
+    },
+    "Pelargonium": {
+        uses: ["Upper respiratory infections (cold, sinusitis)", "Bronchitis and sore throat", "Immune stimulation", "Anti-bacterial properties"],
+        preparation: ["Standardised extract capsules (Umckaloabo brand)", "Root tea", "Syrup for children"],
+        dosage: "EPs 7630 extract: 30 mg three times daily for 5–10 days for respiratory infection"
+    },
+    "African Wild Ginger": {
+        uses: ["Respiratory infections and cough", "Digestive disorders", "Anti-inflammatory", "Rheumatism (topical)", "Fever management"],
+        preparation: ["Root decoction", "Fresh root in warm water", "Topical poultice"],
+        dosage: "20–30 ml root decoction twice daily; topical paste as needed"
+    },
+    "Rooibos": {
+        uses: ["Antioxidant and anti-aging", "Allergy relief (anti-histamine properties)", "Digestive health", "Bone health", "Caffeine-free relaxation"],
+        preparation: ["Steep 1–2 tsp dried herb in boiling water for 5–10 min", "Cold brew", "Rooibos latte with milk"],
+        dosage: "2–6 cups daily; considered very safe with no known toxicity"
+    },
+    "Pygeum": {
+        uses: ["Benign prostatic hyperplasia (BPH)", "Urinary flow improvement", "Prostate health", "Libido support (traditional)", "Anti-inflammatory"],
+        preparation: ["Standardised bark extract capsules", "Bark decoction (traditional)"],
+        dosage: "100–200 mg standardised extract/day in divided doses"
+    },
+    "Witch Hazel": {
+        uses: ["Skin inflammation and eczema (topical)", "Haemorrhoids treatment", "Bruises and minor wounds", "Oily skin and acne", "Varicose veins (topical)"],
+        preparation: ["Distilled witch hazel applied with cotton pad", "Witch hazel cream or ointment", "Sitz bath for haemorrhoids"],
+        dosage: "Topical: apply 2–3 times daily to affected area"
+    },
+    "Slippery Elm": {
+        uses: ["Sore throat and cough soothing", "Gastric ulcer and GERD relief", "IBS and Crohn's disease support", "Nutritional supplement for illness recovery"],
+        preparation: ["Powder mixed into porridge with water", "Lozenges", "Capsules with plenty of water"],
+        dosage: "4 g powder in 200 ml water 3–4 times daily; or 400–500 mg capsules"
+    },
+    "Mullein": {
+        uses: ["Respiratory expectorant (cough, bronchitis)", "Ear infections (topical oil)", "Anti-inflammatory", "Lymph support", "Anti-viral for herpes (topical)"],
+        preparation: ["Leaf tea (steep 1–2 tsp in hot water, strain well)", "Mullein ear oil drops", "Capsules"],
+        dosage: "1–2 cups leaf tea 3 times daily; ear oil: 5–10 drops in affected ear"
+    },
+    "Comfrey": {
+        uses: ["Wound healing and fracture support (topical)", "Muscle and joint pain relief (topical)", "Bruises and sprains (external)", "Anti-inflammatory (topical)"],
+        preparation: ["Topical cream or ointment", "Fresh leaf poultice", "Root salve"],
+        dosage: "Topical use only — apply cream 2–3 times daily; maximum 10 days continuous; NEVER take internally"
+    },
+    "Plantain Herb": {
+        uses: ["Wound healing and insect bites (topical)", "Cough and mucous membrane soothing", "Urinary tract support", "Anti-inflammatory", "Digestive aid"],
+        preparation: ["Fresh leaf poultice applied directly", "Leaf tea (2 tsp dried leaves)", "Tincture"],
+        dosage: "2–3 cups tea daily; fresh leaf poultice applied as needed"
+    },
+    "Black Cohosh": {
+        uses: ["Menopausal symptoms (hot flushes, night sweats)", "PMS and menstrual cramps", "Bone health", "Mood and anxiety in menopause"],
+        preparation: ["Standardised extract capsules", "Root tea (not recommended as main form)", "Remifemin (standardised product)"],
+        dosage: "20–40 mg standardised extract (2.5% triterpene glycosides) twice daily; limit to 6 months"
+    },
+    "Goldenseal": {
+        uses: ["Antimicrobial (infections of mucous membranes)", "Digestive infections", "Eye infections (eyewash)", "Anti-inflammatory", "Immune support"],
+        preparation: ["Capsules or tincture", "Diluted tincture as eyewash", "Combined with echinacea"],
+        dosage: "500–1000 mg dried root extract 3 times daily for short term (max 3 weeks)"
+    },
+    "Oregon Grape": {
+        uses: ["Skin conditions (eczema, psoriasis — topical)", "Digestive infections and diarrhoea", "Antimicrobial (berberine-containing)", "Liver support", "Bile stimulation"],
+        preparation: ["Topical cream or ointment for skin", "Root decoction for internal use", "Capsules"],
+        dosage: "Topical: apply 10% mahonia cream 2–3 times daily; internal: 500 mg extract three times daily"
+    },
+    "Barberry": {
+        uses: ["Digestive infections and diarrhoea", "Blood sugar regulation", "Liver support", "Skin conditions (topical)", "Antimicrobial"],
+        preparation: ["Bark decoction", "Standardised berberine capsules", "Tincture"],
+        dosage: "500 mg dried root bark extract 2–3 times daily; or 500 mg berberine twice daily"
+    },
+
+    // ── Western Herbal / European ─────────────────────────────────────────────
+    "Grapefruit": {
+        uses: ["Antioxidant (naringenin, vitamin C)", "Weight management support", "Blood pressure reduction", "Cholesterol improvement", "Immune support"],
+        preparation: ["Fresh fruit or juice", "Grapefruit seed extract (GSE) capsules", "Half a grapefruit before meals"],
+        dosage: "Half to one grapefruit daily; GSE: 100–200 mg extract; CAUTION — interacts with many drugs"
+    },
+    "Cranberry": {
+        uses: ["Urinary tract infection prevention", "Antioxidant", "Dental health (anti-adhesion)", "H. pylori prevention", "Anti-inflammatory"],
+        preparation: ["Unsweetened cranberry juice (240 ml)", "Cranberry capsules", "Dried cranberries as food"],
+        dosage: "300–400 mg concentrated cranberry extract twice daily; or 300 ml unsweetened juice/day"
+    },
+    "Cat's Claw": {
+        uses: ["Anti-inflammatory (arthritis)", "Immune system enhancement", "Anti-viral properties", "Digestive support", "Anti-cancer research properties"],
+        preparation: ["Bark tea (simmer 1 g in 250 ml water)", "Capsules or tablets", "Tincture"],
+        dosage: "20–60 mg standardised extract/day; or 1 g bark in tea twice daily"
+    },
+    "Pau D'Arco": {
+        uses: ["Anti-fungal and antibacterial", "Immune system support", "Anti-inflammatory", "Cancer adjunct research", "Candida overgrowth"],
+        preparation: ["Inner bark tea (simmer 2 tsp in 500 ml water for 20 min)", "Capsules", "Tincture"],
+        dosage: "1–3 cups bark tea daily; 500 mg–1 g capsule 3 times daily; limit to 6 weeks"
+    },
+    "Kava Kava": {
+        uses: ["Anxiety and stress relief", "Insomnia", "Muscle relaxation", "Social anxiety", "Menopausal anxiety"],
+        preparation: ["Traditional water extraction of root", "Standardised extract capsules", "Kava tea"],
+        dosage: "70–250 mg kavalactones/day; limit use to short courses (max 4 weeks)"
+    },
+    "Saw Palmetto": {
+        uses: ["Benign prostatic hyperplasia (BPH)", "Male hair loss (DHT inhibitor)", "Prostate health", "Urinary flow improvement", "PCOS support (women)"],
+        preparation: ["Standardised liposterolic extract capsules", "Tea (less effective)", "Oil-based soft gel capsules"],
+        dosage: "160 mg standardised extract (85–95% fatty acids) twice daily"
+    },
+    "Feverfew": {
+        uses: ["Migraine prevention", "Anti-inflammatory", "Fever reduction (traditional)", "Arthritis pain", "Menstrual pain"],
+        preparation: ["Fresh or freeze-dried leaf capsules", "Feverfew tea", "Parthenolide standardised extract"],
+        dosage: "50–150 mg freeze-dried leaf daily (0.2–0.4% parthenolide) for migraine prevention"
+    },
+    "Willow Bark": {
+        uses: ["Pain relief (headache, back pain)", "Fever reduction", "Anti-inflammatory", "Osteoarthritis", "Flu symptoms"],
+        preparation: ["Bark decoction (boil 1–2 tsp in water)", "Standardised salicin extract capsules", "Willow bark tea"],
+        dosage: "240 mg salicin/day; or 1–3 cups bark decoction"
+    },
+    "Horse Chestnut": {
+        uses: ["Chronic venous insufficiency (varicose veins)", "Leg swelling and oedema", "Haemorrhoids", "Sports injuries (topical gel)", "Anti-inflammatory"],
+        preparation: ["Standardised extract capsules (aescin)", "Topical gel for varicose veins", "Seed extract tablets"],
+        dosage: "300 mg standardised extract (50 mg aescin) twice daily; topical: apply 2 times/day"
+    },
+    "Ginkgo Biloba": {
+        uses: ["Cognitive function and memory (dementia support)", "Circulation improvement", "Tinnitus management", "Eye health (glaucoma, macular degeneration)", "Anxiety"],
+        preparation: ["Standardised leaf extract capsules", "Ginkgo biloba tea", "EGb 761 standardised product"],
+        dosage: "120–240 mg standardised extract (24% flavonoids, 6% terpenes) in divided doses daily"
+    },
+    "Bilberry": {
+        uses: ["Eye health and vision improvement", "Antioxidant (anthocyanins)", "Blood sugar regulation", "Circulation improvement", "Anti-inflammatory"],
+        preparation: ["Fresh or dried berries eaten as food", "Standardised extract capsules", "Bilberry tea"],
+        dosage: "80–160 mg standardised extract (25% anthocyanins) twice daily; or 20–60 g fresh berries"
+    },
+    "Horsetail": {
+        uses: ["Bone health (silica-rich)", "Urinary tract support and diuretic", "Hair and nail strengthening", "Wound healing (topical)", "Kidney stone prevention"],
+        preparation: ["Horsetail tea (1–2 tsp dried herb)", "Capsules", "Topical wash for wounds"],
+        dosage: "1–2 cups tea daily; or 300 mg dried extract 3 times daily; limit to 6 weeks"
+    },
+    "Marshmallow Root": {
+        uses: ["Sore throat and cough soothing (demulcent)", "Gastric ulcer and GERD relief", "Urinary tract soothing", "Dry mouth relief", "IBS support"],
+        preparation: ["Cold infusion (soak overnight in cold water — preserves mucilage)", "Capsules", "Syrup"],
+        dosage: "5 g root in 200 ml cold water as infusion, 3 times daily; or 500 mg–1 g capsule"
+    },
+    "Bladderwrack": {
+        uses: ["Thyroid support (iodine-rich)", "Weight management", "Digestive health", "Anti-inflammatory", "Antioxidant"],
+        preparation: ["Dried seaweed added to food", "Capsules or powder", "Bladderwrack tea"],
+        dosage: "500 mg–1 g dried herb daily; caution — iodine content varies widely"
+    },
+
+    // ── More Ayurvedic / Indian ───────────────────────────────────────────────
+    "Indian Cork Tree": {
+        uses: ["Respiratory disorders (asthma, bronchitis)", "Anti-fungal and anti-bacterial (bark)", "Headache relief", "Wound healing (topical)", "Fever management"],
+        preparation: ["Bark decoction for respiratory use", "Leaf tea", "Bark paste applied topically"],
+        dosage: "20–40 ml bark decoction twice daily under Ayurvedic guidance"
+    },
+    "Bhringraj Oil": {
+        uses: ["Hair growth stimulation and hair loss prevention", "Scalp health and dandruff", "Premature greying prevention", "Sleep aid (head massage)", "Liver support (internal)"],
+        preparation: ["Warm oil massage on scalp 30 min before wash", "2–3 drops internal with milk (traditional)", "Nasal drops (nasya)"],
+        dosage: "Topical: massage 10–15 ml warm oil into scalp 3 times/week; internal: 5 ml with milk twice daily"
+    },
+    "Neem Leaf": {
+        uses: ["Blood purification", "Skin diseases (acne, eczema — internal and topical)", "Dental health (twigs as brush)", "Anti-diabetic support", "Anti-malarial (traditional)"],
+        preparation: ["Fresh leaf juice (10–20 ml) on empty stomach", "Boiled leaf water for skin wash", "Neem powder capsules"],
+        dosage: "10–20 ml fresh juice or 500 mg–1 g dried leaf extract twice daily"
+    },
+    "Gotu Kola": {
+        uses: ["Wound healing acceleration", "Cognitive function and memory", "Anxiety and stress reduction", "Varicose veins and circulation", "Skin rejuvenation (topical)"],
+        preparation: ["Fresh leaf juice or tea", "Standardised extract capsules (asiaticoside)", "Topical cream for wounds and skin"],
+        dosage: "500 mg–1 g standardised extract twice daily; or 60 mg asiaticoside/day"
+    },
+    "Kutki Root": {
+        uses: ["Liver protection (hepatitis, fatty liver)", "Immune stimulation (picrorrhiza)", "Anti-asthmatic", "Digestive bitter", "Anti-inflammatory"],
+        preparation: ["Standardised picroside capsules", "Traditional powder in honey (very small amounts)", "Decoction under supervision"],
+        dosage: "100–400 mg standardised picroside-II extract/day — use under guidance"
+    },
+    "Ashwagandha Root": {
+        uses: ["Adaptogen for chronic stress and anxiety", "Testosterone and male fertility enhancement", "Muscle strength and athletic recovery", "Thyroid function support", "Sleep improvement"],
+        preparation: ["Root powder with warm milk and honey (Ashwagandha Latte)", "Capsules or tablets", "KSM-66 or Sensoril standardised extracts"],
+        dosage: "300–600 mg standardised root extract/day; or 3–6 g raw root powder with milk"
+    },
+
+    // ── Additional ────────────────────────────────────────────────────────────
+    "Hoodia": {
+        uses: ["Appetite suppression and weight management", "Thirst suppression (traditional use by San people)"],
+        preparation: ["Standardised capsules", "Raw cactus plant (traditional — difficult to source)"],
+        dosage: "400–800 mg standardised extract/day; limited evidence — use cautiously"
+    },
+    "Khat": {
+        uses: ["Stimulant (traditional social use)", "Appetite suppressant", "Fatigue management (traditional)"],
+        preparation: ["Fresh leaves chewed (traditional)", "Tea from fresh leaves"],
+        dosage: "Restricted/controlled substance in many countries — traditional use only; not recommended as health supplement"
+    },
+    "Rehmannia": {
+        uses: ["Kidney and liver tonic (TCM)", "Blood sugar regulation", "Bone marrow and blood production", "Anti-inflammatory", "Adrenal fatigue support"],
+        preparation: ["Root decoction (prepared/cooked form — Shu Di Huang)", "Combined in Liu Wei Di Huang Wan formula", "Capsules"],
+        dosage: "9–30 g prepared root/day in decoction; or 500 mg–2 g extract"
+    },
+    "Cornus": {
+        uses: ["Kidney and liver tonic (TCM)", "Urinary frequency and incontinence", "Sweating and night sweats", "Blood sugar regulation", "Bone strength"],
+        preparation: ["Decoction of dried fruit (Shan Zhu Yu)", "Liu Wei Di Huang Wan formula", "Capsules"],
+        dosage: "6–12 g dried fruit/day in decoction; or 500 mg–1 g extract"
+    },
+    "Arnica": {
+        uses: ["Bruises and muscle soreness (topical)", "Sprain and injury recovery", "Post-surgical swelling reduction", "Arthritis pain relief (topical)", "Scalp stimulation"],
+        preparation: ["Arnica gel or cream applied to skin", "Diluted tincture (1:10) as topical compress", "Homeopathic arnica tablets"],
+        dosage: "Topical only — apply gel/cream 2–3 times daily to intact skin; NEVER apply to broken skin or take internally"
+    },
+    "African Potato": {
+        uses: ["Immune system support (HIV adjunct — traditional)", "Urinary tract health", "Anti-inflammatory", "Prostate health (traditional)"],
+        preparation: ["Corm decoction (boil in water)", "Standardised extract capsules (hypoxoside)", "Traditional infusion"],
+        dosage: "Under healthcare practitioner guidance only — drug interactions are significant; traditional: 30–50 ml decoction daily"
+    },
+    "Jatropha": {
+        uses: ["Wound healing (latex topically)", "Toothache relief (bark/latex topical)", "Anti-fungal (external application)", "Skin infections (traditional topical)"],
+        preparation: ["Latex applied sparingly to affected area (topical only)", "Bark decoction for wound wash (diluted)"],
+        dosage: "Topical external use only — internal use is toxic; apply small amount of diluted latex to wounds"
     }
 };
 
