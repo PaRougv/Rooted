@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import { Sparkles } from "lucide-react";
 import FlashCard from "../helpers/FlashCard.jsx";
 import BackButton from "./BackButton.jsx";

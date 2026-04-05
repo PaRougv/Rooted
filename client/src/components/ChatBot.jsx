@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import { Send, Loader2 } from "lucide-react";
 import BackButton from "./BackButton.jsx";
 import "./ChatBot.css";

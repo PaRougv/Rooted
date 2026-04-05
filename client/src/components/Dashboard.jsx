@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import {
   Camera, Search, Leaf, Map, Clock, Heart, BarChart3,
   MessageCircle, BookOpen, Calendar, GitCompare, LogOut,

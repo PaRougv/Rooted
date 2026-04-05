@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import { Plus, Trash2, Edit3, Star, ChevronDown, ChevronUp } from "lucide-react";
 import BackButton from "./BackButton.jsx";
 import FlashCard from "../helpers/FlashCard.jsx";

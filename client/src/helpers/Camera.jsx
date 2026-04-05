@@ -6,7 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "./Camera.css"
 import FlashCard from "./FlashCard.jsx";
 import BackButton from "../components/BackButton.jsx";
-import axios from 'axios'
+import axios from "../api.js"
 
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/positron";
 const DEFAULT_MAP_CENTER = { lat: 20.5937, lng: 78.9629 };

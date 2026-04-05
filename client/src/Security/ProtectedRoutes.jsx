@@ -1,6 +1,6 @@
 import { useState , useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import axios from "axios";
+import axios from "../api.js";
 
 const ProtectedRoutes = ({ children }) => {
     const [auth , setAuth] = useState(null);

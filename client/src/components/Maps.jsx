@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Map, { Marker, Popup, NavigationControl } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import axios from "axios";
+import axios from "../api.js";
 import {
   Store, MapPin, Globe, Leaf, Search, Crosshair, X,
   Navigation, LocateFixed, ChevronRight, Clock, Phone,

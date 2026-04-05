@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import { GitCompare, Search, ChevronDown, Shield, AlertTriangle, Leaf, Pill } from "lucide-react";
 import BackButton from "./BackButton.jsx";
 import "./PlantCompare.css";

@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
 } from "recharts";
-import axios from "axios";
+import axios from "../api.js";
 import { Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import BackButton from "./BackButton.jsx";

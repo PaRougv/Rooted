@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+import axios from "../api.js";
 import { Leaf, Trash2, Plus, Pencil, Check } from "lucide-react";
 import BackButton from "./BackButton.jsx";
 import FlashCard from "../helpers/FlashCard.jsx";
