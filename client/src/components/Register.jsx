@@ -39,7 +39,7 @@ const Register = () => {
         }
       );
 
-      console.log(response.data);
+      if (response.data.token) localStorage.setItem("token", response.data.token);
       triggerFlash(t("register.success"), "success");
       setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {

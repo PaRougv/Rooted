@@ -2,7 +2,8 @@ import { ENV } from "../config/env.js";
 import jwt from "jsonwebtoken";
 
 export const authMiddleware = (req, res, next) => {
-  const token = req.cookies.token;
+  const authHeader = req.headers.authorization;
+  const token = (authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null) || req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ message: "No token" });

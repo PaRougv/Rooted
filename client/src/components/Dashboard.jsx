@@ -112,6 +112,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await axios.get("/api/auth/logout", { withCredentials: true });
+      localStorage.removeItem("token");
       flash("Logged out");
       setTimeout(() => navigate("/login"), 400);
     } catch (error) {
