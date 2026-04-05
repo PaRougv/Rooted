@@ -1,6 +1,7 @@
 import React , { useCallback, useEffect, useRef , useState } from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { RefreshCw } from "lucide-react";
 import Map, { Marker, NavigationControl } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./Camera.css"
@@ -29,6 +30,7 @@ const Camera = () => {
     const [cnnResult, setCnnResult] = useState(null);
     const [facingMode, setFacingMode] = useState("environment");
     const [cameraActive, setCameraActive] = useState(false);
+    const [flipping, setFlipping] = useState(false);
     const [userLocation, setUserLocation] = useState(null);
     const [locationMode, setLocationMode] = useState("none");
     const [manualLocation, setManualLocation] = useState(null);
@@ -232,9 +234,12 @@ const Camera = () => {
     }, [facingMode]);
 
     const flipCamera = async () => {
+        if (flipping) return;
+        setFlipping(true);
         const next = facingMode === "environment" ? "user" : "environment";
         setFacingMode(next);
         await startCamera(next);
+        setTimeout(() => setFlipping(false), 400);
     };
 
     const capturePhoto = async () => {
@@ -394,11 +399,16 @@ const Camera = () => {
                         <video ref={videoRef} autoPlay playsInline />
                         {cameraActive && (
                             <button
-                                className="camera-flip-btn"
+                                className={`camera-flip-btn${flipping ? " camera-flip-btn--spinning" : ""}`}
                                 onClick={flipCamera}
+                                disabled={flipping}
                                 title={facingMode === "environment" ? "Switch to front camera" : "Switch to back camera"}
+                                aria-label="Flip camera"
                             >
-                                🔄
+                                <RefreshCw size={18} strokeWidth={2.2} />
+                                <span className="camera-flip-label">
+                                    {facingMode === "environment" ? "Front" : "Back"}
+                                </span>
                             </button>
                         )}
                     </>

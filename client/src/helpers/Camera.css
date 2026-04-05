@@ -79,25 +79,55 @@
 
 .camera-flip-btn {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  border: none;
-  cursor: pointer;
-  font-size: 1.3rem;
+  bottom: 14px;
+  right: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-  transition: background 0.2s;
+  gap: 6px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.18s, transform 0.12s;
   z-index: 10;
+  user-select: none;
 }
 
-.camera-flip-btn:hover {
-  background: rgba(0, 0, 0, 0.75);
+.camera-flip-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.72);
+  transform: scale(1.04);
+}
+
+.camera-flip-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.camera-flip-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.camera-flip-btn svg {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.camera-flip-btn--spinning svg {
+  transform: rotate(180deg);
+}
+
+.camera-flip-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .camera-preview video,
