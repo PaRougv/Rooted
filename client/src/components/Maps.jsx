@@ -278,6 +278,7 @@ out body center;`;
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           timeout: 25000,
+          withCredentials: false,
         }
       );
       const elements = res.data?.elements || [];
