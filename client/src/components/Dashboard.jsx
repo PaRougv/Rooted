@@ -14,9 +14,19 @@ import "./Dashboard.css";
 
 const API_BASE = "/api/input/takeuser";
 
+const CONDITIONS = [
+  "Diabetes", "High blood pressure", "Low blood pressure", "Heart condition",
+  "Kidney disease", "Liver disease", "Thyroid disorder", "Autoimmune disease",
+  "Bleeding disorder", "Seizure disorder", "Pregnancy", "Hormone-sensitive condition",
+];
+
 const emptyForm = () => ({
   name: "", weight: "", height: "",
-  bloodpressure: "", heartrate: "", anyothercondition: ""
+  bloodpressure: "", heartrate: "",
+  selectedConditions: [],
+  medications: [],
+  medicationDraft: { name: "", dosage: "", frequency: "" },
+  anyothercondition: "",
 });
 
 const Dashboard = () => {
@@ -33,6 +43,7 @@ const Dashboard = () => {
   const [isLoadingHealth, setIsLoadingHealth] = useState(true);
   const [showFamily, setShowFamily] = useState(false);
   const [recentScans, setRecentScans] = useState([]);
+  const [formStep, setFormStep] = useState(1);
   const userName = localStorage.getItem("userName") || "";
 
   const loadProfiles = async () => {
@@ -61,18 +72,61 @@ const Dashboard = () => {
 
   const selectedProfile = profiles.find((p) => (p.id || p._id) === selectedId) || profiles[0];
 
-  const openAddForm = () => { setForm(emptyForm()); setEditId(null); setShowInfoForm(true); setShowFamily(true); };
+  const openAddForm = () => { setForm(emptyForm()); setEditId(null); setShowInfoForm(true); setShowFamily(true); setFormStep(1); };
   const openEditForm = (profile) => {
+    const existingCondition = profile.anyOtherCondition ?? "";
+    const matched = CONDITIONS.filter((c) =>
+      existingCondition.toLowerCase().includes(c.toLowerCase())
+    );
+    let remaining = existingCondition;
+    matched.forEach((c) => { remaining = remaining.replace(new RegExp(c, "gi"), ""); });
+    remaining = remaining.replace(/,\s*/g, ",").replace(/^,|,$/g, "").replace(/,,+/g, ",").trim();
+
     setForm({
-      name: profile.name ?? "", weight: profile.weight ?? "", height: profile.height ?? "",
-      bloodpressure: profile.bloodPressure ?? "", heartrate: profile.heartRate ?? "",
-      anyothercondition: profile.anyOtherCondition ?? ""
+      name: profile.name ?? "",
+      weight: profile.weight ?? "",
+      height: profile.height ?? "",
+      bloodpressure: profile.bloodPressure ?? "",
+      heartrate: profile.heartRate ?? "",
+      selectedConditions: matched,
+      medications: profile.medications || [],
+      medicationDraft: { name: "", dosage: "", frequency: "" },
+      anyothercondition: remaining,
     });
     setEditId(profile.id || profile._id);
     setShowInfoForm(true);
     setShowFamily(true);
+    setFormStep(1);
   };
-  const closeForm = () => { setShowInfoForm(false); setEditId(null); setForm(emptyForm()); };
+  const closeForm = () => { setShowInfoForm(false); setEditId(null); setForm(emptyForm()); setFormStep(1); };
+
+  const toggleCondition = (c) => {
+    setForm((f) => ({
+      ...f,
+      selectedConditions: f.selectedConditions.includes(c)
+        ? f.selectedConditions.filter((x) => x !== c)
+        : [...f.selectedConditions, c],
+    }));
+  };
+
+  const addMedication = () => {
+    const { name, dosage, frequency } = form.medicationDraft;
+    if (!name.trim()) return;
+    setForm((f) => ({
+      ...f,
+      medications: [...f.medications, { name: name.trim(), dosage: dosage.trim(), frequency: frequency.trim() }],
+      medicationDraft: { name: "", dosage: "", frequency: "" },
+    }));
+  };
+
+  const removeMedication = (index) => {
+    setForm((f) => ({ ...f, medications: f.medications.filter((_, i) => i !== index) }));
+  };
+
+  const nextStep = () => {
+    if (formStep === 1 && !form.name.trim()) { flash(t("dashboard.nameRequired"), "error"); return; }
+    setFormStep((s) => s + 1);
+  };
 
   const flash = (msg, type = "success") => { setFlashMessage(msg); setFlashType(type); setShowFlash(true); };
 
@@ -80,10 +134,16 @@ const Dashboard = () => {
     e.preventDefault();
     if (!form.name.trim()) { flash(t("dashboard.nameRequired"), "error"); return; }
     try {
+      const compiledCondition = [
+        ...form.selectedConditions,
+        form.anyothercondition.trim(),
+      ].filter(Boolean).join(", ");
+
       const payload = {
         name: form.name, weight: form.weight, height: form.height,
         bloodpressure: form.bloodpressure, heartrate: form.heartrate,
-        anyothercondition: form.anyothercondition
+        anyothercondition: compiledCondition,
+        medications: form.medications,
       };
       if (editId) {
         await axios.put(`${API_BASE}/${editId}`, payload, { withCredentials: true });
@@ -258,40 +318,153 @@ const Dashboard = () => {
             })}
           </div>
 
-          {/* Inline form */}
+          {/* Inline form — multi-step */}
           {showInfoForm && (
             <div className="dash-form-card">
               <div className="dash-form-top">
-                <h4>{editId ? t("dashboard.editFamily") : t("dashboard.addFamily")}</h4>
+                <div>
+                  <h4>{editId ? t("dashboard.editFamily") : t("dashboard.addFamily")}</h4>
+                  <p className="dash-form-step-label">
+                    {formStep === 1 ? "Basic info" : formStep === 2 ? "Health conditions" : "Medications & notes"}
+                  </p>
+                </div>
                 <button className="dash-form-x" onClick={closeForm}><X size={16} /></button>
               </div>
+
+              <div className="dash-form-stepper">
+                {[1, 2, 3].map((s) => (
+                  <div key={s} className={`dash-form-stepper-dot ${formStep >= s ? "active" : ""}`} />
+                ))}
+              </div>
+
               <form className="dash-form" onSubmit={handleSaveInfo}>
-                <label><span>{t("dashboard.name")} *</span>
-                  <input type="text" placeholder={t("dashboard.namePlaceholder")} value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required />
-                </label>
-                <div className="dash-form-row">
-                  <label><span>{t("dashboard.weight")}</span>
-                    <input type="text" placeholder="kg" value={form.weight} onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))} />
-                  </label>
-                  <label><span>{t("dashboard.height")}</span>
-                    <input type="text" placeholder="cm" value={form.height} onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))} />
-                  </label>
-                </div>
-                <div className="dash-form-row">
-                  <label><span>{t("dashboard.bloodPressure")}</span>
-                    <input type="text" placeholder={t("dashboard.bpPlaceholder")} value={form.bloodpressure} onChange={(e) => setForm((f) => ({ ...f, bloodpressure: e.target.value }))} />
-                  </label>
-                  <label><span>{t("dashboard.heartRate")}</span>
-                    <input type="text" placeholder="bpm" value={form.heartrate} onChange={(e) => setForm((f) => ({ ...f, heartrate: e.target.value }))} />
-                  </label>
-                </div>
-                <label><span>{t("dashboard.conditions")}</span>
-                  <input type="text" placeholder={t("dashboard.condPlaceholder")} value={form.anyothercondition} onChange={(e) => setForm((f) => ({ ...f, anyothercondition: e.target.value }))} />
-                </label>
+
+                {/* ── Step 1: Basic Info ── */}
+                {formStep === 1 && (
+                  <>
+                    <label><span>{t("dashboard.name")} *</span>
+                      <input type="text" placeholder={t("dashboard.namePlaceholder")} value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+                    </label>
+                    <div className="dash-form-row">
+                      <label><span>{t("dashboard.weight")}</span>
+                        <input type="text" placeholder="kg" value={form.weight} onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))} />
+                      </label>
+                      <label><span>{t("dashboard.height")}</span>
+                        <input type="text" placeholder="cm" value={form.height} onChange={(e) => setForm((f) => ({ ...f, height: e.target.value }))} />
+                      </label>
+                    </div>
+                    <div className="dash-form-row">
+                      <label><span>{t("dashboard.bloodPressure")}</span>
+                        <input type="text" placeholder={t("dashboard.bpPlaceholder")} value={form.bloodpressure} onChange={(e) => setForm((f) => ({ ...f, bloodpressure: e.target.value }))} />
+                      </label>
+                      <label><span>{t("dashboard.heartRate")}</span>
+                        <input type="text" placeholder="bpm" value={form.heartrate} onChange={(e) => setForm((f) => ({ ...f, heartrate: e.target.value }))} />
+                      </label>
+                    </div>
+                  </>
+                )}
+
+                {/* ── Step 2: Health Conditions ── */}
+                {formStep === 2 && (
+                  <div className="dash-form-conditions">
+                    <p className="dash-form-hint">Select any that apply to {form.name || "this person"}:</p>
+                    <div className="dash-condition-grid">
+                      {CONDITIONS.map((c) => (
+                        <button
+                          type="button"
+                          key={c}
+                          className={`dash-condition-chip ${form.selectedConditions.includes(c) ? "selected" : ""}`}
+                          onClick={() => toggleCondition(c)}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                    {form.selectedConditions.length > 0 && (
+                      <p className="dash-form-hint dash-form-hint--selected">
+                        Selected: {form.selectedConditions.join(", ")}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* ── Step 3: Medications & Notes ── */}
+                {formStep === 3 && (
+                  <>
+                    <div className="dash-form-meds">
+                      <p className="dash-form-hint">Current medications (optional):</p>
+                      {form.medications.length > 0 && (
+                        <div className="dash-med-tags">
+                          {form.medications.map((m, i) => (
+                            <span key={i} className="dash-med-tag">
+                              {m.name}{m.dosage ? ` · ${m.dosage}` : ""}{m.frequency ? ` · ${m.frequency}` : ""}
+                              <button type="button" className="dash-med-tag-remove" onClick={() => removeMedication(i)}>
+                                <X size={10} />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      <div className="dash-med-add-row">
+                        <input
+                          type="text"
+                          placeholder="Medication name"
+                          value={form.medicationDraft.name}
+                          onChange={(e) => setForm((f) => ({ ...f, medicationDraft: { ...f.medicationDraft, name: e.target.value } }))}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Dosage"
+                          value={form.medicationDraft.dosage}
+                          onChange={(e) => setForm((f) => ({ ...f, medicationDraft: { ...f.medicationDraft, dosage: e.target.value } }))}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Frequency"
+                          value={form.medicationDraft.frequency}
+                          onChange={(e) => setForm((f) => ({ ...f, medicationDraft: { ...f.medicationDraft, frequency: e.target.value } }))}
+                        />
+                        <button type="button" className="dash-med-add-btn" onClick={addMedication}>
+                          <Plus size={14} />
+                        </button>
+                      </div>
+                    </div>
+
+                    <label>
+                      <span>Anything else?</span>
+                      <input
+                        type="text"
+                        placeholder="Allergies, other conditions..."
+                        value={form.anyothercondition}
+                        onChange={(e) => setForm((f) => ({ ...f, anyothercondition: e.target.value }))}
+                      />
+                    </label>
+                  </>
+                )}
+
+                {/* ── Nav buttons ── */}
                 <div className="dash-form-btns">
-                  <button type="submit" className="dash-form-save">{editId ? t("dashboard.updateProfile") : t("dashboard.saveProfile")}</button>
-                  <button type="button" className="dash-form-cancel" onClick={closeForm}>{t("dashboard.cancel")}</button>
+                  {formStep > 1 && (
+                    <button type="button" className="dash-form-cancel" onClick={() => setFormStep((s) => s - 1)}>
+                      Back
+                    </button>
+                  )}
+                  {formStep < 3 ? (
+                    <button type="button" className="dash-form-save" onClick={nextStep}>
+                      Next
+                    </button>
+                  ) : (
+                    <button type="submit" className="dash-form-save">
+                      {editId ? t("dashboard.updateProfile") : t("dashboard.saveProfile")}
+                    </button>
+                  )}
+                  {formStep === 1 && (
+                    <button type="button" className="dash-form-cancel" onClick={closeForm}>
+                      {t("dashboard.cancel")}
+                    </button>
+                  )}
                 </div>
+
               </form>
             </div>
           )}

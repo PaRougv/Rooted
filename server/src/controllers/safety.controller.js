@@ -70,6 +70,30 @@ const addUnique = (arr, message) => {
     if (!arr.includes(message)) arr.push(message);
 };
 
+// Cross-check saved medications against plant's known interactions
+const checkMedicationInteractions = (savedMedications, plantInteractions) => {
+    const matched = [];
+    const unmatched = [];
+
+    for (const interaction of (plantInteractions || [])) {
+        const interactionLower = interaction.toLowerCase();
+        let found = false;
+
+        for (const med of (savedMedications || [])) {
+            const medName = (med.name || "").toLowerCase().trim();
+            if (medName && interactionLower.includes(medName)) {
+                matched.push({ medication: med.name, detail: interaction });
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) unmatched.push(interaction);
+    }
+
+    return { matched, unmatched };
+};
+
 const normalizeLocation = (location) => {
     const lat = Number(location?.lat);
     const lng = Number(location?.lng);
@@ -253,9 +277,24 @@ export const checkPlantSafety = async (req, res) => {
             warnings.push(...vitalAssessment.warnings);
             recommendations.push(...vitalAssessment.recommendations);
             
-            // Check herb-drug interactions
+            // Check herb-drug interactions — personalised against saved medications
+            const { matched: matchedMeds, unmatched: unmatchedInteractions } =
+                checkMedicationInteractions(familyMember.medications, data.interactions);
+
+            // Personalised: flag interactions with medications this person actually takes
+            for (const { medication, detail } of matchedMeds) {
+                addUnique(warnings, `💊 Medication alert: ${familyMember.name} takes ${medication} — ${detail}`);
+            }
+
+            // Generic: if no personal medications saved, show full list; otherwise show remainder as info
             if (data.interactions && data.interactions.length > 0) {
-                warnings.push(`💊 Drug Interactions: ${data.interactions.join(", ")}`);
+                if (matchedMeds.length === 0) {
+                    // No personal meds to match against — show generic list
+                    warnings.push(`💊 Drug Interactions: ${data.interactions.join(", ")}`);
+                } else if (unmatchedInteractions.length > 0) {
+                    // Show other known interactions as informational
+                    recommendations.push(`ℹ️ Other known interactions (not specific to saved medications): ${unmatchedInteractions.join(", ")}`);
+                }
             }
             
             // Check contraindications
