@@ -162,7 +162,15 @@ Rooted/
 │       │   ├── journal.routes.js      # Journal CRUD endpoints
 │       │   └── bookmark.routes.js     # Bookmark CRUD endpoints
 │       └── data/
-│           └── herbDrugInteractions.js  # 80+ plant safety database
+│           └── herbDrugInteractions.js  # 211-plant safety database
+│   └── tests/                     # AUTOMATED TESTS (Jest + Supertest)
+│       ├── auth.test.js               # Auth API (register, login, logout, reset)
+│       ├── healthProfiles.test.js     # Family profile CRUD
+│       ├── safety.test.js             # Safety engine + plant checks
+│       ├── bookmarks.test.js          # Bookmark CRUD
+│       ├── herbDatabase.test.js       # Plant database integrity
+│       ├── middleware.test.js         # JWT auth middleware
+│       └── healthEndpoint.test.js     # Health check endpoint
 │
 └── server/ml/                     # ML SERVICE (Python + FastAPI)
     ├── main.py                    # FastAPI server for CNN classification
@@ -321,7 +329,7 @@ The AI has context about the user's family profiles, recent scans, and the full 
 
 The safety engine (`safety.controller.js`) performs multi-layered checks:
 
-1. **Plant Database Lookup** - Matches plant name against 80+ entries (common names, scientific names, aliases)
+1. **Plant Database Lookup** - Matches plant name against 211 entries (common names, scientific names, aliases)
 2. **Condition Matching** - Maps user health conditions to known contraindications using synonym matching
 3. **Drug Interaction Check** - Cross-references plant with known herb-drug interactions
 4. **Vital Signs Analysis** - Checks blood pressure, heart rate, BMI against plant effects
@@ -438,7 +446,7 @@ server: {
 - [x] Family member CRUD with health data
 - [x] Live camera capture + Plant.id identification
 - [x] CNN classification via EfficientNet-B0 (Python microservice)
-- [x] Plant safety engine (80+ plants, drug interactions, vitals, BMI)
+- [x] Plant safety engine (211 plants, drug interactions, vitals, BMI)
 - [x] Plant search by name with safety check
 - [x] AI chat assistant (Claude-powered, context-aware)
 - [x] Plant usage journal (CRUD with ratings)
@@ -462,9 +470,49 @@ server: {
 - [x] Responsive mobile design (phone, tablet, desktop breakpoints)
 - [x] PDF export capability
 
+---
+
+## Testing
+
+The project includes **49 automated tests** across 7 test suites using **Jest** and **Supertest**.
+
+```bash
+cd server
+npm test
+```
+
+| Test Suite | Tests | DB Required | Coverage |
+|------------|-------|-------------|----------|
+| `herbDatabase.test.js` | 9 | No | Plant database integrity — 211+ count, map sync, toxic plant warnings, required fields |
+| `middleware.test.js` | 5 | No | JWT auth — no token, invalid, expired, wrong secret, valid |
+| `healthEndpoint.test.js` | 1 | No | `/api/health` status endpoint |
+| `auth.test.js` | 12 | Yes | Register, login, logout, forgot/reset password, validation |
+| `healthProfiles.test.js` | 7 | Yes | Family profile CRUD, validation, auth guard |
+| `safety.test.js` | 7 | Yes | Safety engine checks, pregnancy warnings, unknown plants, search |
+| `bookmarks.test.js` | 7 | Yes | Bookmark CRUD, duplicate rejection, auth guard |
+
+Tests requiring MongoDB will automatically skip if no database is configured.
+
+---
+
+## Deployment
+
+### Backend — Render (free)
+1. Create a **Web Service** on [render.com](https://render.com)
+2. Set **Root Directory** to `server`
+3. **Build Command**: `npm install` | **Start Command**: `node server.js`
+4. Add environment variables (see Environment Variables section)
+5. Set `NODE_ENV=production` and `APP_BASE_URL` to your Vercel frontend URL
+
+### Frontend — Vercel (free)
+1. Create a project on [vercel.com](https://vercel.com)
+2. Set **Root Directory** to `client`
+3. Update `client/vercel.json` — replace `YOUR_RENDER_URL` with your Render backend URL
+4. Deploy — share the Vercel URL with anyone to access the app
+
 ### Production Recommendations
-- [ ] Set `secure: true` for cookies (HTTPS)
-- [ ] Add rate limiting (express-rate-limit)
+- [x] Secure cookies (`secure: true`, `sameSite: "none"` in production)
+- [x] Rate limiting on auth endpoints (built-in middleware)
 - [ ] Add helmet.js for security headers
 - [ ] Configure production email service
 - [ ] Set up CI/CD pipeline
@@ -475,11 +523,13 @@ server: {
 
 - Password hashing with bcrypt (10 salt rounds)
 - JWT tokens in httpOnly cookies (XSS protection)
-- CORS configured for localhost origins
+- CORS configured with origin whitelist (localhost + production domain)
 - Input validation on all controllers
 - Protected API routes with JWT verification
 - MongoDB injection protection via Mongoose
 - API keys kept server-side (Ola Maps, Plant.id proxied)
+- Rate limiting on auth and password reset endpoints
+- 49 automated tests (Jest + Supertest)
 
 ---
 
